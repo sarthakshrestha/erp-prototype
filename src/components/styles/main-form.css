@@ -1,0 +1,43 @@
+.main-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    /* Add your styles for the main form container here */
+    outline: 2px solid black; /* Add a black outline to the form */
+}
+
+.main-form h1 {
+    text-align: center;
+    /* Add your styles for the heading here */
+}
+
+.main-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.main-form label {
+    text-align: center;
+    /* Add your styles for the labels here */
+}
+
+.main-form input {
+    text-align: center;
+    /* Add your styles for the input fields here */
+}
+
+.main-form button {
+    /* Add your styles for the button here */
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-btn{
+    color: white;
+}
