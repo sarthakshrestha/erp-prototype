@@ -66,7 +66,7 @@ export default function MainForm() {
 
   return (
     <div className="form-wrapper">
-      <h1>Place an Order</h1>
+            <h1 className="order-heading">Place an order through<br></br> <span className="red-text">/</span><span className="blue-text">/</span>Project-P</h1>
       <div className="form-container">
         <div className="input-form">
           <form onSubmit={handleSubmit}>
