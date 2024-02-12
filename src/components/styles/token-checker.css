@@ -1,0 +1,38 @@
+/* FILEPATH: /Users/sarthakshrestha/Documents/ERP-Project/erp-project/src/components/styles/token-checker.css */
+
+.token-checker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.token-checker h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.token-checker input[type="text"] {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.token-checker button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.token-checker button:hover {
+  background-color: #0056b3;
+}

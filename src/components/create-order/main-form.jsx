@@ -1,19 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/order-form.css";
-import { useState } from "react";
 
 const paperData = [
   { type: "Coated art paper" },
   { type: "Normal paper type" }
 ];
-const lengthData = [
-  { label: "5 inches", value: "Length" },
+
+const paperThickness = [
+  { type: "100 GSM "},
+  { type: "200 GSM"}
 ];
 
-const breadthData = [
-  { label: "10 inches", value: "Length" },
+const dimensionData = [
+  { label: "A4 - 8.3 x 11.7 inches", value: "a4" },
+  { label: "A5 - 5.8 x 8.3 inches", value: "a5"},
+  {label: "A6 - 4.1 x 5.8 inches", value: "a6"}
 ];
 
+const plateData = [
+  { label: "A4 - 20 x 30 inches", value: "p1"},
+  { label: "A5 - 20 x 30 inches", value: "p1"},
+  {label: "A6 - 20 x 30 inches", value: "p1"}
+];
+
+const layOut = [
+  {label: "Portrait", value: "portrait"},
+  {label: "Landscape", value:"landscape"}
+];
 
 export default function MainForm() {
   const [selectedPaper, setSelectedPaper] = useState("");
@@ -45,81 +58,86 @@ export default function MainForm() {
     setSelectedThickness(event.target.value);
   };
 
+  // Handle form submission
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Place your logic for form submission here
+  };
+
   return (
-    <div className="main-form">
+    <div className="form-wrapper">
       <h1>Place an Order</h1>
-      <div className="input-form">
-        <form>
-          {/* Existing fields */}
-          <label htmlFor="customer-name">Customer Name</label>
-          <input
-            type="text"
-            id="customer-name"
-            name="customer-name"
-            required
-          />
-          <label htmlFor="customer-name">Customer Email</label>
-          <input
-            type="email"
-            id="customer-email"
-            name="customer-email"
-            required
-          />
-          <label htmlFor="product-size">Size: Length </label>
-          <select
-            id="product-size"
-            name="productSize"
-            value={formData.productSize}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select Size</option>
-            {lengthData.map((item, index) => (
-              <option key={index} value={item.value}>{item.label}</option>
-            ))}
-          </select>
-          <label htmlFor="product-size">Size: Breadth </label>
-          <select
-            id="product-size"
-            name="productSize"
-            value={formData.productSize}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select Size</option>
-            {breadthData.map((item, index) => (
-              <option key={index} value={item.value}>{item.label}</option>
-            ))}
-          </select>
+      <div className="form-container">
+        <div className="input-form">
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="customer-name">Customer Name</label>
+            <input
+              type="text"
+              id="customer-name"
+              name="customer-name"
+              required
+            />
+            <label htmlFor="customer-email">Customer Email</label>
+            <input
+              type="email"
+              id="customer-email"
+              name="customer-email"
+              required
+            />
 
-
-
-          <label htmlFor="product-pages">Pages: Number of Pages</label>
-          <input
-            type="number"
-            id="product-pages"
-            name="product-pages"
-            required
-          />
-          <label htmlFor="product-quantity">Quantity: X Copies</label>
-          <input
-            type="number"
-            id="product-quantity"
-            name="product-quantity"
-            required
-          />
-          <label htmlFor="paper-type">Type of Paper</label>
-          <select id="paper-type" name="paper-type" onChange={handlePaperChange} required>
-            <option value="">Select Paper Type</option>
-            {paperData.map((item, index) => (
-              <option key={index} value={item.type}>{item.type}</option>
-            ))}
-          </select>
-          
-          <button className="order-btn" type="submit">
-            Create Order
-          </button>
-        </form>
+            <label htmlFor="product-size">Dimensions </label>
+            <select
+              id="product-size"
+              name="productSize"
+              value={formData.productSize}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select Size</option>
+              {dimensionData.map((item, index) => (
+                <option key={index} value={item.value}>{item.label}</option>
+              ))}
+            </select>
+                 
+            <div className="row-container">
+              <label htmlFor="product-pages">Pages: Number of Pages</label>
+              <input
+                type="number"
+                id="product-pages"
+                name="product-pages"
+                required
+              />
+              <label htmlFor="product-quantity">Quantity: X Copies</label>
+              <input
+                type="number"
+                id="product-quantity"
+                name="product-quantity"
+                required
+              />
+            </div>
+            <button className="order-btn" type="submit">
+              Place Order
+            </button>
+          </form>
+        </div>
+        <div className="row-form">
+          <form>
+            <label htmlFor="paper-type">Type of Paper</label>
+            <select id="paper-type" name="paper-type" onChange={handlePaperChange} required>
+              <option value="">Select Paper Type</option>
+              {paperData.map((item, index) => (
+                <option key={index} value={item.type}>{item.type}</option>
+              ))}
+            </select>
+            <label htmlFor="paper-thickness">Paper Thickness</label>
+            <select id="paper-thickness" name="paper-thickness" onChange={handleThicknessChange} required>
+              <option value="">Select Paper Thickness</option>
+              {paperThickness.map((item, index) => (
+                <option key={index} value={item.type}>{item.type}</option>
+              ))}
+            </select>
+          </form>
+        </div>
       </div>
     </div>
   );
