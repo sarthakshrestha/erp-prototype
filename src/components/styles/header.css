@@ -1,0 +1,48 @@
+
+header {
+  background-color: #2e2a2a;
+  color: #fff;
+  padding: 20px;
+  width: 60vw;
+}
+
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.left-menu {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.left-menu li {
+  cursor: pointer;
+}
+
+/* Right menu styles */
+.right-menu {
+  list-style: none;
+}
+
+.right-menu li {
+  cursor: pointer;
+}
+
+/* Styling for specific menu items */
+.left-menu li:first-child,
+.right-menu li:first-child {
+  font-weight: bold;
+}
+
+.left-menu li:last-child,
+.right-menu li:last-child {
+  color: #e54949;
+}
+
+/* Additional styles for the header component */
+/* Add your custom styles here */

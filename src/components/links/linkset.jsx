@@ -13,6 +13,7 @@ const Dropdown = () => {
         <h2><NavLink to="/order-item">Place an order</NavLink></h2>
         <h2><NavLink to="/token-order">Request order information</NavLink></h2>
         <h2>Help / Support</h2>
+        <h2><NavLink to="/test-job-card">Test Job Card</NavLink></h2>
       </ul>
     </div>
   );
