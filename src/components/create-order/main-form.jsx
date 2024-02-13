@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../styles/order-form.css";
+import CalculatePrice from "./calculate-price";
 
 const paperData = [
   { type: "Coated art paper" },
@@ -65,11 +66,12 @@ export default function MainForm() {
   };
 
   return (
+    <>
     <div className="form-wrapper">
             <h1 className="order-heading">Place an order through<br></br> <span className="red-text">/</span><span className="blue-text">/</span>Project-P</h1>
       <div className="form-container">
         <div className="input-form">
-          <form onSubmit={handleSubmit}>
+          <form className="first-column" onSubmit={handleSubmit}>
             <label htmlFor="customer-name">Customer Name</label>
             <input
               type="text"
@@ -105,6 +107,7 @@ export default function MainForm() {
                 type="number"
                 id="product-pages"
                 name="product-pages"
+                className="number-field"
                 required
               />
               <label htmlFor="product-quantity">Quantity: X Copies</label>
@@ -137,8 +140,11 @@ export default function MainForm() {
               ))}
             </select>
           </form>
+          
         </div>
+        <CalculatePrice/>
       </div>
     </div>
+    </>
   );
 }
