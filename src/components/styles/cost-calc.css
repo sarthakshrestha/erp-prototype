@@ -1,0 +1,43 @@
+.cost {
+    font-family: Arial, sans-serif;
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 600px;
+    flex: content;
+}
+
+.cost h2 {
+    font-size: 44px;
+    margin-bottom: 10px;
+}
+
+.cost form {
+    display: flex;
+    flex-direction: column;
+}
+
+.cost label {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.cost select,
+.cost input {
+    font-size: 16px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.cost-details {
+    margin-top: 20px;
+}
+
+.cost-details h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.cost-details p {
+    font-size: 16px;
+    margin-bottom: 5px;
+}

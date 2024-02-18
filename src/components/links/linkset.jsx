@@ -5,6 +5,17 @@ import { NavLink } from "react-router-dom";
 const Dropdown = () => {
   return (
     <div className="dropdown">
+    <div className="top-bar">
+      <ul>
+        <li> Home </li>
+      </ul>
+      <ul>
+        <li> About Project P </li>
+      </ul>
+      <ul>
+        <li><NavLink to="/sign-in">Sign In </NavLink> </li>
+      </ul>
+    </div>
       <div>
         <h1 className="main-heading"><span className="red-text">/</span><span className="blue-text">/</span>Project-P</h1>
       </div>

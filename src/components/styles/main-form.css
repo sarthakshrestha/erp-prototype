@@ -82,6 +82,32 @@
     transform: scale(1.1); 
 }
 
+.top-bar {
+  background-color: #f1f0ed;
+  border-radius: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.top-bar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.top-bar li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.top-bar li:last-child {
+  margin-right: 0;
+}
+
+
 
 
 
