@@ -123,14 +123,7 @@ const CostCalculation = () => {
           <option value="15x20">15x20</option>
           <option value="20x25">20x25</option>
         </select>
-        <label htmlFor="appropriate-plate">Appropriate Plate Size</label>
-        <p>
-          <i>
-            For the chosen paper dimension, the appropriate plates that will be
-            used is:{" "}
-          </i>
-        </p>
-
+        
         <label htmlFor="pages">Pages (Number of pages per copy):</label>
         <input
           type="number"
