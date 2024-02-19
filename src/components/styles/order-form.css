@@ -83,12 +83,13 @@
   .order-heading{
     background-color: #f1f0edbb;
     border-radius: 12px;
-    padding: 24px;
-    font-size: 2.5em;
+    padding: 30px;
+    font-size: 3.4em;
     line-height: 1.1em;
     bottom: 35px;
     position: relative;
     font-family: 'DM Sans', sans-serif;
+    text-align: left;
   }
 
   

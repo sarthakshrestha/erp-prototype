@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
+
 import "../styles/cost-calc.css"
+
 
 const CostCalculation = () => {
   const [paperSize, setPaperSize] = useState('');
   const [plateSize, setPlateSize] = useState('');
   const [plateCost, setPlateCost] = useState(0);
+  const [quantity, setQuantity] = useState(0);
+  const [pages, setPages] = useState(0);
   const [otherField, setOtherField] = useState('');
 
   const sizesAndCosts = [
-    { paperSize: 'A3', plateSize: '10x15', plateCost: 10 },
-    { paperSize: 'A4', plateSize: '15x20', plateCost: 15 },
+    { paperSize: 'A3', plateSize: '20x30', plateCost: 40 },
+    { paperSize: 'A4', plateSize: '24x36', plateCost: 15 },
     { paperSize: 'A5', plateSize: '20x25', plateCost: 20 },
   ];
+
+
+
 
   const handlePaperSizeChange = (e) => {
     const selectedSize = e.target.value;
@@ -21,14 +28,56 @@ const CostCalculation = () => {
     if (selectedSizeData) {
       setPlateSize(selectedSizeData.plateSize);
       setPlateCost(selectedSizeData.plateCost);
+      setPaperSize(selectedSizeData.paperSize);
     }
+  };
+
+  const paperType =[
+    {
+        paperType: 'Glossy', paperCost: 100
+    },
+    {
+        paperType: 'Art-style', paperCost: 100
+    },
+    {
+        paperType: 'Glossy', paperCost: 100
+    },
+  ]
+
+  const handleQuantityChange = (e) => {
+    const value = parseInt(e.target.value);
+    setQuantity(value);
+  };
+
+  function totalPages(quantity, pages){
+    return (Math.round(quantity*pages));
+  }
+
+  function totalSheets(quantity, pages){
+    return totalPages(quantity, pages)/16;
+  }
+
+  function totalReams(pages, quantity){
+    return Math.round((pages*quantity/16)/500);
+  }
+
+  function innerCost(quantity, pages){
+    return totalReams(pages, quantity)*4900;
+  }
+
+  function totalPacket(quantity){
+    return Math.ceil(totalSheets(quantity, 4)/100);
+  }
+
+  const handlePagesChange = (e) => {
+    const value = parseInt(e.target.value);
+    setPages(value);
   };
 
   const handlePlateSizeChange = (e) => {
     const selectedSize = e.target.value;
     setPlateSize(selectedSize);
 
-    // Find the corresponding plate cost
     const selectedSizeData = sizesAndCosts.find((data) => data.plateSize === selectedSize);
     if (selectedSizeData) {
       setPlateCost(selectedSizeData.plateCost);
@@ -59,19 +108,59 @@ const CostCalculation = () => {
                 <option value="15x20">15x20</option>
                 <option value="20x25">20x25</option>
             </select>
-            <label htmlFor='quantity'>Quantity (Number of copies)</label>
-            <input type='number' id='quantity' name='quantity' min='1' max='100' required></input>
+            <label htmlFor="appropriate-plate">Appropriate Plate Size</label>
+            <p><i>For the chosen paper dimension, the appropriate plates that will be used is: </i></p>
 
-            <label htmlFor="otherField">Other Field:</label>
+            <label htmlFor="pages">Pages (Number of pages per copy):</label>
+            <input type="number" id="pages" value={pages} onChange={handlePagesChange} min="8" max="500" required />
+
+            <label htmlFor="quantity">Quantity (Number of copies):</label>
+            <input type="number" id="quantity" value={quantity} onChange={handleQuantityChange} min="50" max="10000" required />
+
+            
+
+            <label htmlFor='paper-type'>Paper Type</label>
+            <select id="paper-type" name="paper-type" required>
+                <option value="">Select Paper Type</option>
+                <option value="paper-1">Art Paper</option>
+                <option value="paper-2">Art Board</option>
+                <option value="paper-3"></option>
+            </select>
+
+            <label htmlFor='paper-thickness'>Paper Thickness (in GSM)</label>
+            <select id="paper-thickness" name="paper-thickness" required>
+                <option value="">Thickness</option>
+                <option value="thick-1">100 GSM</option>
+                <option value="thick-2">150 GSM</option>
+                <option value="thick-3">200 GSM</option>
+                <option value="thick-4">300 GSM</option>
+            </select>
+
+
+            <label htmlFor="otherField">Notes:</label>
             <input type="text" id="otherField" value={otherField} onChange={handleOtherFieldChange} />
+            
 
             <div className="cost-details">
-                <h3>Cost Details:</h3>
+                <h3>Cost Breakdowm:</h3>
                 <p>Paper Size: {paperSize}</p>
                 <p>Plate Size: {plateSize}</p>
                 <p>Appropriate Plate size for the paper size: {plateSize}</p>
-                <p>Plate Cost: ${plateCost}</p>
-                <p>Other Field: {otherField}</p>
+                <p>Total Number of Pages: <b>{totalPages(quantity, pages)}</b></p>
+                <p>Total Sheets: <b>{totalSheets(quantity, pages)}</b></p>
+                <p>Total Reams: <b>{totalReams(quantity, pages)}</b></p>
+                <p>Total Packet: <b>{totalPacket(quantity)}</b></p>
+                <p>Total Outer Cost: <b>{Math.ceil(totalPacket(quantity)*2800)}</b></p>
+                <p>Cost of Packet: <b>Rs. 2800</b></p>
+                <p>Calculation of Inner Page: <b> Rs. {Math.round(innerCost(quantity, pages))}</b></p>
+                {/* <p>Calculation of Outer Page: Rs. <b>{outerCost(quantity)}</b></p> */}
+                <p>Cost of total reams: <b>Rs. {Math.round(((pages*quantity/16)/500*4900))}</b></p>
+                <p>Cost of per plate: <b>Rs. 400</b></p>
+                <p>Paper Type Cost: Rs. {}</p>
+                <p>Cost of Cover Paper: Rs. {}</p>
+                <p>Cost of Ream: <b>Rs. 4900</b></p>
+                <p>Number of reams: </p>
+                <p>Cost of Binding: Rs. {}</p>
             </div>
         </form>
     </div>

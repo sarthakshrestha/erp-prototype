@@ -9,7 +9,8 @@ const paperData = [
 
 const paperThickness = [
   { type: "100 GSM "},
-  { type: "200 GSM"}
+  { type: "200 GSM"},
+  { type: "300 GSM"}
 ];
 
 const dimensionData = [
@@ -87,7 +88,7 @@ export default function MainForm() {
               required
             />
 
-            <label htmlFor="product-size">Dimensions </label>
+            <label htmlFor="product-size">Paper Dimensions </label>
             <select
               id="product-size"
               name="productSize"
@@ -102,7 +103,7 @@ export default function MainForm() {
             </select>
                  
             <div className="row-container">
-              <label htmlFor="product-pages">Pages: Number of Pages</label>
+              <label htmlFor="product-pages">Pages: Number of pages</label>
               <input
                 type="number"
                 id="product-pages"
@@ -110,7 +111,7 @@ export default function MainForm() {
                 className="number-field"
                 required
               />
-              <label htmlFor="product-quantity">Quantity: X Copies</label>
+              <label htmlFor="product-quantity">Quantity: Number of copies</label>
               <input
                 type="number"
                 id="product-quantity"

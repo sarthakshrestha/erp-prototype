@@ -1,14 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
 .cost {
     font-family: Arial, sans-serif;
     margin: 0 auto;
     padding: 20px;
     max-width: 600px;
     flex: content;
+    top: -100px;
+    position: relative;
+    max-width: 1100px;
+    right: 200px;
 }
 
 .cost h2 {
-    font-size: 44px;
+    text-align: left;
+    top: 100px;
+    font-size: 72px;
+    width: 90%;
     margin-bottom: 10px;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    
 }
 
 .cost form {
@@ -18,23 +33,29 @@
 
 .cost label {
     font-size: 16px;
+    text-align: left;
     margin-bottom: 5px;
 }
 
 .cost select,
 .cost input {
-    font-size: 16px;
+    font-size: 12px;
     padding: 5px;
     margin-bottom: 10px;
+    
 }
 
 .cost-details {
     margin-top: 20px;
+    position: relative;
+    top: -800px;
+    left: 550px;
 }
 
 .cost-details h3 {
-    font-size: 20px;
+    font-size: 40px;
     margin-bottom: 10px;
+    font-family: "Playfair Display", serif;
 }
 
 .cost-details p {

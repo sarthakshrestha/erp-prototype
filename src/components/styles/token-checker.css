@@ -1,19 +1,23 @@
-/* FILEPATH: /Users/sarthakshrestha/Documents/ERP-Project/erp-project/src/components/styles/token-checker.css */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 .token-checker {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
-  background-color: #f2f2f2;
+  padding: 40px;
   border-radius: 8px;
+  background-color: rgba(193, 213, 240, 0.433);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .token-checker h1 {
-  font-size: 24px;
+  font-size: 3.7em;
+  text-align: left;
   margin-bottom: 20px;
+  font-weight: 800;
+  font-family: "Playfair Display", serif;
+  color: #de3f3f;
 }
 
 .token-checker input[type="text"] {
