@@ -48,8 +48,10 @@
 .cost-details {
     margin-top: 20px;
     position: relative;
-    top: -800px;
+    top: -865px;
     left: 550px;
+    text-align: left;
+    padding: 60px;
 }
 
 .cost-details h3 {
@@ -58,7 +60,25 @@
     font-family: "Playfair Display", serif;
 }
 
+.cost-details h2{
+    font-size: 24px;
+}
+
+
 .cost-details p {
-    font-size: 16px;
+    font-size: 17px;
     margin-bottom: 5px;
+    position: right;
+}
+
+.cost-details .sub-p{
+    font-size: 20px;
+    text-align: left;
+    font-family: "Playfair Display", serif;
+    font-weight: 400;
+    gap: 5px;
+}
+
+.m-p{
+    text-align: right;
 }
