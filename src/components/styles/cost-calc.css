@@ -1,84 +1,96 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
-
-.cost {
-    font-family: Arial, sans-serif;
-    margin: 0 auto;
+/* General styling */
+.cost, .cost-details {
+    margin-top: 40px;
     padding: 20px;
-    max-width: 600px;
-    flex: content;
-    top: -100px;
-    position: relative;
-    max-width: 1100px;
-    right: 300px;
-    padding: 50px;
-    bottom: -3px;
+    border-radius: 14px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.cost h2 {
-    text-align: left;
-    top: 100px;
+.cost {
+    margin: 0 auto;
+    max-width: 600px;
+    position: relative;
+    top: -60px;
+    left: -190px;
+    background-color: rgb(105, 108, 112);
+    color: white;
+    font-family: "Rubik", sans-serif;
+    display: flex;
+    width: 610px;
+    flex-direction: column; 
+}
+
+.cost-details {
+    position: absolute;
+    top: -116px; 
+    left: 640px;
+    background-color: rgba(0, 0, 0, 0.44);
+    color: white;
+    font-family: "Rubik", sans-serif;
+    width: 350px;
+    line-height: 0.8;
+    padding: 30px;
+}
+
+
+.cost .c-heading {
     font-size: 42px;
-    width: 90%;
-    margin-bottom: 10px;
-    font-family: "Playfair Display", serif;
-    font-optical-sizing: auto;
-    font-weight: 800;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: left;
+    position: relative;
+    bottom: 40px;
+}
+
+.cost-details h3 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    position: relative;
+    bottom: 40px;
 }
 
 .cost form {
     display: flex;
     flex-direction: column;
+    top: -60px;
+    position: relative;
 }
 
 .cost label {
     font-size: 16px;
-    text-align: left;
     margin-bottom: 5px;
+    text-align: left;
 }
 
 .cost select,
 .cost input {
-    font-size: 12px;
-    padding: 5px;
+    font-size: 14px;
+    padding: 10px;
     margin-bottom: 10px;
-    
+    border-radius: 8px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
-.cost-details {
-    position: relative;
-    top: -640px;
-    left: 550px;
-    bottom: 710px;
-    text-align: left;
-    padding: 60px;
-}
 
-.cost-details h3 {
-    font-size: 32px;
+.cost-details p,
+.cost-details .sub-p {
+    font-size: 16px;
     margin-bottom: 10px;
-    font-family: "Playfair Display", serif;
 }
 
-.cost-details h2{
-    font-size: 27px;
-}
-
-.cost-details p {
-    font-size: 15px;
-    margin-bottom: 5px;
-    position: right;
-}
-
-.cost-details .sub-p{
-    font-size: 18px;
-    text-align: left;
-    font-family: "Playfair Display", serif;
-    font-weight: 400;
-    gap: 5px;
-}
-
-.m-p{
+.m-p {
     text-align: right;
+    position: relative;
+    bottom: 40px;
+}
+
+.sub-p{
+    text-align: left;
+}
+
+.total-cost{
+    font-size: 32px;
+    text-align: left;
 }

@@ -14,6 +14,14 @@ const SignIn = () => {
   };
   return (
     <div className="signInContainer">
+      <div className="spinner">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
       <h2 className="sign-in-header">Manager Sign In</h2>
       <form>
         <div>
