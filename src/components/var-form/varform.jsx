@@ -5,6 +5,11 @@ function VarForm() {
     const [platePrice, setPlatePrice] = useState('');
     const [paperPrice, setPaperPrice] = useState('');
     const [dimensionPrice, setDimensionPrice] = useState('');
+    const [reamPrice, setReamPrice] = useState('');
+
+    const handleReamPriceChange = (event) =>{
+        setReamPrice(event.target.value);
+    }
 
     const handlePlatePriceChange = (event) => {
         setPlatePrice(event.target.value);
@@ -30,16 +35,20 @@ function VarForm() {
         <form onSubmit={handleSubmit} className='var-form'>
         <h1>Price Update Form</h1>
             <label className="var-label">
-                Plate Price:
+                Cost of packet (per unit):
                 <input className="var-input" type="number" value={platePrice} onChange={handlePlatePriceChange} required/>
             </label>
             <br />
             <label className="var-label">
-                Paper Price:
+                Cost of ream (per unit):
                 <input className="var-input" type="number" value={paperPrice} onChange={handlePaperPriceChange} required/>
             </label>
             <label className="var-label">
-                Dimension :
+                Cost of plate (per unit) :
+                <input className="var-input" type="number" value={dimensionPrice} onChange={handleDimensionPrice} required/>
+            </label>
+            <label className="var-label">
+                Cost of binding (per copy) :
                 <input className="var-input" type="number" value={dimensionPrice} onChange={handleDimensionPrice} required/>
             </label>
             <br />

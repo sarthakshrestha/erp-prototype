@@ -4,10 +4,21 @@
   margin-bottom: 10px;
 }
 
+.var-form h1{
+  font-size: 42px;
+  width: 340px;
+  font-family: "DM Sans", sans-serif;
+}
+
 .var-form{
     padding: 16%;
-    background-color: #d7e0ea;
+    background-color: #1f20217a;
     border-radius: 10px;
+    width: 340px;
+    color: white;
+    margin: 0 auto;
+    align-items: center;
+    align-content: center;
 }
 
 
@@ -27,7 +38,10 @@
     color: #fff;
     border: none;
     border-radius: 4px;
+    align-items: center;
+    align-content: center;
     cursor: pointer;
+    margin: 0 auto;
 }
 
 .var-button {

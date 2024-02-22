@@ -1,22 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import "../styles/cost-calc.css";
 import axios from "axios";
 import Header from "../resuable-comps/header";
 
-// useEffect(() => {
-//   axios
-//     .get("your-api-url")
-//     .then((response) => {
-//       const data = response.data;
-//       setReamCost(data.reamCost);
-//       setPlatePrice(data.platePrice);
-//       setPacketCost(data.packetCost);
-//     })
-//     .catch((error) => {
-//       console.error("Error fetching data:", error);
-//     });
-// }, []);
 
 const CostCalculation = () => {
   const [paperSize, setPaperSize] = useState("");
@@ -29,14 +16,34 @@ const CostCalculation = () => {
   const [selectedPaperType, setSelectedPaperType] = useState("");
   const [selectedPaperThickness, setSelectedPaperThickness] = useState("");
 
-  // Retrieving from database
+  // Retrieving from databasex
   const [reamCost, setReamCost] = useState(0);
-  const [plateCost, setPlateCost] = useState(0);
+  const [packetCost, setPacketCost] = useState(0);
+  const [plateCost, setPlateCost] = useState(0)
+  const [bindingCost, setBindingCost] = useState(0);
+
+  useEffect(() => {
+    axios
+      .get("//localhost:8081/cost")
+      .then((response) => {
+        const data = response.data;
+        setReamCost(data.find(cost => cost.name === "ream").price);
+        setPacketCost(data.find(cost => cost.name === "packet").price);
+        setPlateCost(data.find(cost => cost.name === "plate").price);
+        setBindingCost(data.find(cost => cost.name === "binding").price);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
 
   const sizesAndCosts = [
     { paperSize: "A3", plateSize: "20x30", plateCost: 40 },
     { paperSize: "A4", plateSize: "18x24", plateCost: 15 },
     { paperSize: "A5", plateSize: "18x24", plateCost: 20 },
+    { paperSize: "B5", plateSize: "20x30", plateCost: 40},
+    { paperSize: "Letter", plateSize: "30x30", plateCost: 30}
   ];
 
   const handlePaperThicknessChange = (e) => {
@@ -49,6 +56,11 @@ const CostCalculation = () => {
     setSelectedPaperType(selectedPaperType);
   };
 
+  const setBindingTypeChange = (e) =>{
+    const selectedBindingType = e.target.value;
+    setSelectedBindingCost(selectedBindingType);
+  }
+
   const handlePaperSizeChange = (e) => {
     const selectedSize = e.target.value;
     setPaperSize(selectedSize);
@@ -60,6 +72,7 @@ const CostCalculation = () => {
       setPlateSize(selectedSizeData.plateSize);
       setPlateCost(selectedSizeData.plateCost);
       setPaperSize(selectedSizeData.paperSize);
+      
     }
   };
 
@@ -205,6 +218,17 @@ const CostCalculation = () => {
             ))}
           </select>
 
+          <label htmlFor="binding-type">Binding Type</label>
+          <select
+            id="binding-type"
+            name="binding-type"
+            value={bindingCost}
+            onChange={setBindingTypeChange}
+            required
+          />
+            
+            
+
           <label htmlFor="otherField">Notes:</label>
           <input
             type="text"
@@ -235,10 +259,10 @@ const CostCalculation = () => {
               Total Packet: <b>{totalPacket(quantity)}</b>
             </p>
             <p className="m-p">
-              Cost of Packet: <b>Rs. 2800</b>
+              Cost of Packet: Rs. <b>{packetCost}</b>
             </p>
             <p className="m-p">
-              Cost of Ream: <b>Rs. 4900</b>
+              Cost of Ream: Rs. <b>{reamCost}</b>
             </p>
             {/* <p>Calculation of Outer Page: Rs. <b>{outerCost(quantity)}</b></p> */}
             <p className="m-p">
@@ -246,7 +270,10 @@ const CostCalculation = () => {
               <b>Rs. {Math.round(((pages * quantity) / 16 / 500) * 4900)}</b>
             </p>
             <p className="m-p">
-              Cost of per plate: <b>Rs. 400</b>
+              Cost of per plate: Rs. <b>{plateCost}</b>
+            </p>
+            <p className="m-p">
+              Cost of binding per copy: Rs. <b>{bindingCost}</b>
             </p>
             <p className="sub-p">
               Total Outer Cost (Cover Cost):{" "}
