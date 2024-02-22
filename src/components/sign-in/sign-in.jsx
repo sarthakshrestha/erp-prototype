@@ -21,7 +21,7 @@ const SignIn = () => {
         <div></div>
         <div></div>
         <div></div>
-      </div>
+      </div><br></br>
       <h2 className="sign-in-header">Manager Sign In</h2>
       <form>
         <div>

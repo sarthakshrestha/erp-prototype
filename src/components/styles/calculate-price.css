@@ -1,15 +1,5 @@
 
 
-.breakdown-container {
-  position: relative;
-  bottom: 4%;
-  left: 80px;
-  background-color: #fff;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
 
 
 .breakdown-container h2 {
@@ -50,15 +40,17 @@
 .checkout-btn:hover {
   background-color: #3d8c0a;
 }
+
 .breakdown-container {
   position: relative;
   bottom: 4%;
-  left: 80px;
+  right: -20px;
   background-color: #fff;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: 300px;
 }
 
 .breakdown-container h2 {

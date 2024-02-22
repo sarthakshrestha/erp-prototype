@@ -7,7 +7,7 @@
   justify-content: center;
   padding: 40px;
   border-radius: 8px;
-  background-color: rgba(193, 213, 240, 0.433);
+  background-color: rgb(53, 53, 58);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -16,8 +16,8 @@
   text-align: left;
   margin-bottom: 20px;
   font-weight: 800;
-  font-family: "Playfair Display", serif;
-  color: #de3f3f;
+  font-family: "DM Sans", serif;
+  color: #ffffff;
 }
 
 .token-checker input[type="text"] {
@@ -30,7 +30,7 @@
 
 .token-checker button {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #42474d;
   color: #fff;
   border: none;
   border-radius: 4px;
