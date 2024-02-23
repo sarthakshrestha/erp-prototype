@@ -15,7 +15,8 @@ const CostCalculation = () => {
   const [selectedPaperType, setSelectedPaperType] = useState("");
   const [outerSelectedPaperType, setOuterSelectedPaperType] = useState("");
   const [selectedPaperThickness, setSelectedPaperThickness] = useState("");
-  const [selectedOuterPaperThickness, setSelectedOuterPaperThickness] = useState("");
+  const [selectedOuterPaperThickness, setSelectedOuterPaperThickness] =
+    useState("");
 
   // Retrieving from databasex
   const [reamCost, setReamCost] = useState(0);
@@ -53,7 +54,7 @@ const CostCalculation = () => {
     const selectedPaperThickness = e.target.value;
     setSelectedPaperThickness(selectedPaperThickness);
   };
-  
+
   const handleOuterPaperThicknessChange = (e) => {
     const selectedOuterPaperThickness = e.target.value;
     setSelectedOuterPaperThickness(selectedOuterPaperThickness);
@@ -64,16 +65,15 @@ const CostCalculation = () => {
     setSelectedPaperType(selectedPaperType);
   };
 
-  const handleOuterPaperTypeChange = (e) =>{
+  const handleOuterPaperTypeChange = (e) => {
     const outerSelectedPaperType = e.target.value;
     setOuterSelectedPaperType(outerSelectedPaperType);
-  }
+  };
 
   const handleBindingTypeChange = (e) => {
     const selectedBindingType = e.target.value;
     setSelectedBindingType(selectedBindingType);
   };
-  
 
   const plateSizes = [
     { value: "19x25", label: "19x25" },
@@ -308,10 +308,6 @@ const CostCalculation = () => {
             ))}
           </select>
 
-
-
-          
-
           <label htmlFor="ink-type">Ink Type:</label>
           <select
             id="ink-type"
@@ -328,7 +324,9 @@ const CostCalculation = () => {
             ))}
           </select>
 
-          <label htmlFor="paper-thickness">Inner Paper Thickness (in GSM)</label>
+          <label htmlFor="paper-thickness">
+            Inner Paper Thickness (in GSM)
+          </label>
           <select
             id="paper-thickness"
             name="paper-thickness"
@@ -344,7 +342,9 @@ const CostCalculation = () => {
             ))}
           </select>
 
-          <label htmlFor="paper-thickness">Outer Paper Thickness (in GSM)</label>
+          <label htmlFor="paper-thickness">
+            Outer Paper Thickness (in GSM)
+          </label>
           <select
             id="paper-outer-thickness"
             name="paper-outer-thickness"
@@ -364,8 +364,8 @@ const CostCalculation = () => {
           <select
             id="binding-type"
             name="binding-type"
-            value={selectedBindingType} 
-            onChange={handleBindingTypeChange} 
+            value={selectedBindingType}
+            onChange={handleBindingTypeChange}
             required
           >
             <option value="">Select Binding Type</option>
@@ -402,66 +402,89 @@ const CostCalculation = () => {
 
           <div className="cost-details">
             <h3>Cost Breakdown:</h3>
-            <p className="m-p">Paper Size: {paperSize}</p>
-            <p className="m-p">Plate Size: {plateSize}</p>
-            <p className="m-p">Inner Paper Type: {selectedPaperType}</p>
-            <p className="m-p">Cover/Outer Paper Type: {outerSelectedPaperType}</p>
-            <p className="m-p">Inner Paper Thickness: {selectedPaperThickness}</p>
-            <p className="m-p">Outer Paper Thickness: {selectedOuterPaperThickness}</p>
-            <p className="m-p">Selected Binding Type: {selectedBindingType}</p>
-            <p className="m-p">Selected Ink Type: {selectedInkType}</p>
             <p className="m-p">
-              Selected Lamination Type: {selectedLaminationType}
+              Paper Size: <span className="bold-p">{paperSize}</span>
             </p>
             <p className="m-p">
-              Total Number of Pages: <b>{totalPages(quantity, pages)}</b>
+              Plate Size: <span className="bold-p">{plateSize}</span>
             </p>
             <p className="m-p">
-              Total Sheets: <b>{totalSheets(quantity, pages)}</b>
+              Inner Paper Type:{" "}
+              <span className="bold-p">{selectedPaperType}</span>
             </p>
             <p className="m-p">
-              Total Reams: <b>{totalReams(quantity, pages)}</b>
+              Cover/Outer Paper Type:{" "}
+              <span className="bold-p">{outerSelectedPaperType}</span>
             </p>
             <p className="m-p">
-              Total Packet: <b>{totalPacket(quantity)}</b>
+              Inner Paper Thickness:{" "}
+              <span className="bold-p">{selectedPaperThickness}</span>
             </p>
             <p className="m-p">
-              Cost of Packet: Rs. <b>{packetCost}</b>
+              Outer Paper Thickness:{" "}
+              <span className="bold-p">{selectedOuterPaperThickness}</span>
             </p>
             <p className="m-p">
-              Cost of Ream: Rs. <b>{reamCost}</b>
+              Selected Binding Type:{" "}
+              <span className="bold-p">{selectedBindingType}</span>
             </p>
-            {/* <p>Calculation of Outer Page: Rs. <b>{outerCost(quantity)}</b></p> */}
+            <p className="m-p">
+              Selected Ink Type:{" "}
+              <span className="bold-p">{selectedInkType}</span>
+            </p>
+            <p className="m-p">
+              Selected Lamination Type:{" "}
+              <span className="bold-p">{selectedLaminationType}</span>
+            </p>
+            <p className="m-p">
+              Total Number of Pages: <span className="bold-p">{totalPages(quantity, pages)}</span>
+            </p>
+            <p className="m-p">
+              Total Sheets: <span className="bold-p">{totalSheets(quantity, pages)}</span>
+            </p>
+            <p className="m-p">
+              Total Reams: <span className="bold-p">{totalReams(quantity, pages)}</span>
+            </p>
+            <p className="m-p">
+              Total Packet: <span className="bold-p">{totalPacket(quantity)}</span>
+            </p>
+            <p className="m-p">
+              Cost of Packet: Rs. <span className="bold-p">{packetCost}</span>
+            </p>
+            <p className="m-p">
+              Cost of Ream: Rs. <span className="bold-p">{reamCost}</span>
+            </p>
+            {/* <p>Calculation of Outer Page: Rs. <span className="bold-p">{outerCost(quantity)}</span></p> */}
             <p className="m-p">
               Cost of total reams:{" "}
-              <b>Rs. {Math.round(((pages * quantity) / 16 / 500) * 4900)}</b>
+              Rs. <span className="bold-p">{Math.round(((pages * quantity) / 16 / 500) * 4900)}</span>
             </p>
             <p className="m-p">
-              Cost of per plate: Rs. <b>{plateCost}</b>
+              Cost of per plate: Rs. <span className="bold-p">{plateCost}</span>
             </p>
             <p className="m-p">
-              Cost of binding per copy: Rs. <b>{bindingCost}</b>
+              Cost of binding per copy: Rs. <span className="bold-p">{bindingCost}</span>
             </p>
             <p className="sub-p">
               Total Outer Cost (Cover Cost):{" "}
-              <b>Rs. {Math.ceil(totalPacket(quantity) * 2800)}</b>
+              <span className="bold-p">Rs. {Math.ceil(totalPacket(quantity) * 2800)}</span>
             </p>
             <p className="sub-p">
               Cost of Inner Pages:{" "}
-              <b> Rs. {Math.round(innerCost(quantity, pages))}</b>
+              <span className="bold-p"> Rs. {Math.round(innerCost(quantity, pages))}</span>
             </p>
             <p className="sub-p">
-              Total Cost of Plate: <b>Rs. {platePrice(quantity, pages)}</b>
+              Total Cost of Plate: <span className="bold-p">Rs. {platePrice(quantity, pages)}</span>
             </p>
             <p className="sub-p">
-              Cost of Binding: <b>Rs. {Math.ceil(5 * quantity)}</b>
+              Cost of Binding: <span className="bold-p">Rs. {Math.ceil(5 * quantity)}</span>
             </p>
             <h2 className="total-cost">
-              Total: Rs:{" "}
+              <span className="tot">Total:</span> <span className="bold-p">Rs:{" "}
               {Math.ceil(totalPacket(quantity) * 2800) +
                 Math.round(innerCost(quantity, pages)) +
                 platePrice(quantity, pages) +
-                Math.ceil(5 * quantity)}{" "}
+                Math.ceil(5 * quantity)}{" "}</span>
             </h2>
           </div>
         </form>
