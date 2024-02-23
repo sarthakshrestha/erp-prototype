@@ -15,6 +15,7 @@ const CostCalculation = () => {
   const [selectedPaperType, setSelectedPaperType] = useState("");
   const [outerSelectedPaperType, setOuterSelectedPaperType] = useState("");
   const [selectedPaperThickness, setSelectedPaperThickness] = useState("");
+  const [selectedOuterPaperThickness, setSelectedOuterPaperThickness] = useState("");
 
   // Retrieving from databasex
   const [reamCost, setReamCost] = useState(0);
@@ -51,6 +52,11 @@ const CostCalculation = () => {
   const handlePaperThicknessChange = (e) => {
     const selectedPaperThickness = e.target.value;
     setSelectedPaperThickness(selectedPaperThickness);
+  };
+  
+  const handleOuterPaperThicknessChange = (e) => {
+    const selectedOuterPaperThickness = e.target.value;
+    setSelectedOuterPaperThickness(selectedOuterPaperThickness);
   };
 
   const handlePaperTypeChange = (e) => {
@@ -322,7 +328,7 @@ const CostCalculation = () => {
             ))}
           </select>
 
-          <label htmlFor="paper-thickness">Paper Thickness (in GSM)</label>
+          <label htmlFor="paper-thickness">Inner Paper Thickness (in GSM)</label>
           <select
             id="paper-thickness"
             name="paper-thickness"
@@ -338,12 +344,28 @@ const CostCalculation = () => {
             ))}
           </select>
 
+          <label htmlFor="paper-thickness">Outer Paper Thickness (in GSM)</label>
+          <select
+            id="paper-outer-thickness"
+            name="paper-outer-thickness"
+            value={selectedOuterPaperThickness}
+            onChange={handleOuterPaperThicknessChange}
+            required
+          >
+            <option value="">Set Paper Thickness</option>
+            {paperThicknesses.map((thickness, index) => (
+              <option key={index} value={thickness}>
+                {thickness}
+              </option>
+            ))}
+          </select>
+
           <label htmlFor="binding-type">Binding Type</label>
           <select
             id="binding-type"
             name="binding-type"
-            value={selectedBindingType} // Set value to the selectedBindingType state
-            onChange={handleBindingTypeChange} // Handle change event
+            value={selectedBindingType} 
+            onChange={handleBindingTypeChange} 
             required
           >
             <option value="">Select Binding Type</option>
@@ -383,8 +405,9 @@ const CostCalculation = () => {
             <p className="m-p">Paper Size: {paperSize}</p>
             <p className="m-p">Plate Size: {plateSize}</p>
             <p className="m-p">Inner Paper Type: {selectedPaperType}</p>
-            <p className="m-p">Outer Paper Type: {outerSelectedPaperType}</p>
-            <p className="m-p">Paper Thickness: {selectedPaperThickness}</p>
+            <p className="m-p">Cover/Outer Paper Type: {outerSelectedPaperType}</p>
+            <p className="m-p">Inner Paper Thickness: {selectedPaperThickness}</p>
+            <p className="m-p">Outer Paper Thickness: {selectedOuterPaperThickness}</p>
             <p className="m-p">Selected Binding Type: {selectedBindingType}</p>
             <p className="m-p">Selected Ink Type: {selectedInkType}</p>
             <p className="m-p">
