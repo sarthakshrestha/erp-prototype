@@ -43,7 +43,7 @@ const CostCalculation = () => {
     { paperSize: "A4", plateSize: "18x24", plateCost: 15 },
     { paperSize: "A5", plateSize: "18x24", plateCost: 20 },
     { paperSize: "B5", plateSize: "20x30", plateCost: 40},
-    { paperSize: "Letter", plateSize: "30x30", plateCost: 30}
+    { paperSize: "Letter", plateSize: "30x30", plateCost: 30},
   ];
 
   const handlePaperThicknessChange = (e) => {
@@ -76,7 +76,9 @@ const CostCalculation = () => {
     }
   };
 
-  const paperType = [{ type: "Art Paper" }, { type: "Art Board " }];
+  const paperType = [{ type: "Art Paper" }, { type: "Art Board " }, { type: "Ivory Board"}, { type: "Card Board"},
+{ type: "Colored Paper"}, {type: "Wood Free"}, { type: "Tough Coat"}, {type: "Matte Paper"}, { type: "Carbonless Paper"}, { type: "Off-white Paper"}
+];
   const paperThicknesses = ["100 GSM", "150 GSM", "200 GSM", "300 GSM"];
 
   const handleQuantityChange = (e) => {
