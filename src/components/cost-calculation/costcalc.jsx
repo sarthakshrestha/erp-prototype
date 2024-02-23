@@ -13,6 +13,7 @@ const CostCalculation = () => {
   const [pages, setPages] = useState("");
   const [otherField, setOtherField] = useState("");
   const [selectedPaperType, setSelectedPaperType] = useState("");
+  const [outerSelectedPaperType, setOuterSelectedPaperType] = useState("");
   const [selectedPaperThickness, setSelectedPaperThickness] = useState("");
 
   // Retrieving from databasex
@@ -40,11 +41,11 @@ const CostCalculation = () => {
   }, []);
 
   const sizesAndCosts = [
-    { paperSize: "A3", plateSize: "20x30", plateCost: 40 },
-    { paperSize: "A4", plateSize: "18x24", plateCost: 15 },
-    { paperSize: "A5", plateSize: "18x24", plateCost: 20 },
-    { paperSize: "B5", plateSize: "20x30", plateCost: 40 },
-    { paperSize: "Letter", plateSize: "30x30", plateCost: 30 },
+    { paperSize: "A3", plateSize: "19x25 or 20x30", plateCost: 40 },
+    { paperSize: "A4", plateSize: "19x25", plateCost: 15 },
+    { paperSize: "A5", plateSize: "19x25", plateCost: 20 },
+    { paperSize: "B5", plateSize: "15x20 or 20x30", plateCost: 40 },
+    { paperSize: "Letter", plateSize: "18x24", plateCost: 30 },
   ];
 
   const handlePaperThicknessChange = (e) => {
@@ -57,24 +58,22 @@ const CostCalculation = () => {
     setSelectedPaperType(selectedPaperType);
   };
 
+  const handleOuterPaperTypeChange = (e) =>{
+    const outerSelectedPaperType = e.target.value;
+    setOuterSelectedPaperType(outerSelectedPaperType);
+  }
+
   const handleBindingTypeChange = (e) => {
     const selectedBindingType = e.target.value;
     setSelectedBindingType(selectedBindingType);
   };
+  
 
-  const handlePaperSizeChange = (e) => {
-    const selectedSize = e.target.value;
-    setPaperSize(selectedSize);
-
-    const selectedSizeData = sizesAndCosts.find(
-      (data) => data.paperSize === selectedSize
-    );
-    if (selectedSizeData) {
-      setPlateSize(selectedSizeData.plateSize);
-      setPlateCost(selectedSizeData.plateCost);
-      setPaperSize(selectedSizeData.paperSize);
-    }
-  };
+  const plateSizes = [
+    { value: "19x25", label: "19x25" },
+    { value: "20x30", label: "20x30" },
+    { value: "15x20", label: "15x20" },
+  ];
 
   const paperSizes = [
     { value: "A3", label: "A3" },
@@ -174,11 +173,30 @@ const CostCalculation = () => {
   const handlePlateSizeChange = (e) => {
     const selectedSize = e.target.value;
     setPlateSize(selectedSize);
+  };
+
+  const handlePaperSizeChange = (e) => {
+    const selectedSize = e.target.value;
+    setPaperSize(selectedSize);
 
     const selectedSizeData = sizesAndCosts.find(
-      (data) => data.plateSize === selectedSize
+      (data) => data.paperSize === selectedSize
     );
     if (selectedSizeData) {
+      setPlateSize(selectedSizeData.plateSize);
+
+      // Add logic to recommend an appropriate plate size based on paper type
+      let recommendedPlateSize = selectedSizeData.plateSize;
+
+      // You can customize the logic to recommend a plate size based on paper type
+      if (selectedPaperType === "Art Paper") {
+        recommendedPlateSize = "20x30";
+      } else if (selectedPaperType === "Ivory Board") {
+        recommendedPlateSize = "19x25";
+      }
+      // Set the recommended plate size
+      setPlateSize(recommendedPlateSize);
+
       setPlateCost(selectedSizeData.plateCost);
     }
   };
@@ -223,9 +241,11 @@ const CostCalculation = () => {
             onChange={handlePlateSizeChange}
           >
             <option value="">Select Plate Size</option>
-            <option value="10x15">10x15</option>
-            <option value="15x20">15x20</option>
-            <option value="20x25">20x25</option>
+            {plateSizes.map((size, index) => (
+              <option key={index} value={size.value}>
+                {size.label}
+              </option>
+            ))}
           </select>
 
           <label htmlFor="pages">Pages (Number of pages per copy):</label>
@@ -250,7 +270,7 @@ const CostCalculation = () => {
             required
           />
 
-          <label htmlFor="paper-type">Paper Type</label>
+          <label htmlFor="paper-type">Inner Paper Type</label>
           <select
             id="paper-type"
             name="paper-type"
@@ -265,6 +285,26 @@ const CostCalculation = () => {
               </option>
             ))}
           </select>
+
+          <label htmlFor="paper-type">Cover Paper Type</label>
+          <select
+            id="paper-type"
+            name="paper-type"
+            value={outerSelectedPaperType} // Set value to the selectedPaperType state
+            onChange={handleOuterPaperTypeChange} // Handle change event
+            required
+          >
+            <option value="">Select Paper Type</option>
+            {paperType.map((paper, index) => (
+              <option key={index} value={paper.type}>
+                {paper.type}
+              </option>
+            ))}
+          </select>
+
+
+
+          
 
           <label htmlFor="ink-type">Ink Type:</label>
           <select
@@ -342,12 +382,14 @@ const CostCalculation = () => {
             <h3>Cost Breakdown:</h3>
             <p className="m-p">Paper Size: {paperSize}</p>
             <p className="m-p">Plate Size: {plateSize}</p>
-            <p className="m-p">Paper Type: {selectedPaperType}</p>
+            <p className="m-p">Inner Paper Type: {selectedPaperType}</p>
+            <p className="m-p">Outer Paper Type: {outerSelectedPaperType}</p>
             <p className="m-p">Paper Thickness: {selectedPaperThickness}</p>
-            <p className="m-p">Appropriate Plate size: {plateSize}</p>
             <p className="m-p">Selected Binding Type: {selectedBindingType}</p>
             <p className="m-p">Selected Ink Type: {selectedInkType}</p>
-            <p className="m-p">Selected Lamination Type: {selectedLaminationType}</p>
+            <p className="m-p">
+              Selected Lamination Type: {selectedLaminationType}
+            </p>
             <p className="m-p">
               Total Number of Pages: <b>{totalPages(quantity, pages)}</b>
             </p>
