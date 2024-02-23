@@ -22,6 +22,7 @@ const CostCalculation = () => {
   const [bindingCost, setBindingCost] = useState(0);
   const [selectedBindingType, setSelectedBindingType] = useState("");
   const [selectedInkType, setSelectedInkType] = useState("");
+  const [selectedLaminationType, setSelectedLaminationType] = useState("");
 
   useEffect(() => {
     axios
@@ -130,9 +131,15 @@ const CostCalculation = () => {
     "Clear Sheet",
   ];
 
+  const laminationType = ["Glossy", "Matte"];
+
   const handleQuantityChange = (e) => {
     const value = parseInt(e.target.value);
     setQuantity(value);
+  };
+
+  const handleLaminationTypeChange = (e) => {
+    setSelectedLaminationType(e.target.value);
   };
 
   function totalPages(quantity, pages) {
@@ -307,6 +314,22 @@ const CostCalculation = () => {
             ))}
           </select>
 
+          <label htmlFor="lamination-type">Lamination Type</label>
+          <select
+            id="lamination-type"
+            name="lamination-type"
+            value={selectedLaminationType}
+            onChange={handleLaminationTypeChange}
+            required
+          >
+            <option value="">Select Lamination Type</option>
+            {laminationType.map((type, index) => (
+              <option key={index} value={type}>
+                {type}
+              </option>
+            ))}
+          </select>
+
           <label htmlFor="otherField">Notes:</label>
           <input
             type="text"
@@ -324,6 +347,7 @@ const CostCalculation = () => {
             <p className="m-p">Appropriate Plate size: {plateSize}</p>
             <p className="m-p">Selected Binding Type: {selectedBindingType}</p>
             <p className="m-p">Selected Ink Type: {selectedInkType}</p>
+            <p className="m-p">Selected Lamination Type: {selectedLaminationType}</p>
             <p className="m-p">
               Total Number of Pages: <b>{totalPages(quantity, pages)}</b>
             </p>
