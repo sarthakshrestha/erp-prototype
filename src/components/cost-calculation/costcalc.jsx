@@ -4,7 +4,6 @@ import "../styles/cost-calc.css";
 import axios from "axios";
 import Header from "../resuable-comps/header";
 
-
 const CostCalculation = () => {
   const [paperSize, setPaperSize] = useState("");
 
@@ -19,31 +18,32 @@ const CostCalculation = () => {
   // Retrieving from databasex
   const [reamCost, setReamCost] = useState(0);
   const [packetCost, setPacketCost] = useState(0);
-  const [plateCost, setPlateCost] = useState(0)
+  const [plateCost, setPlateCost] = useState(0);
   const [bindingCost, setBindingCost] = useState(0);
+  const [selectedBindingType, setSelectedBindingType] = useState("");
+  const [selectedInkType, setSelectedInkType] = useState("");
 
   useEffect(() => {
     axios
       .get("//localhost:8081/cost")
       .then((response) => {
         const data = response.data;
-        setReamCost(data.find(cost => cost.name === "ream").price);
-        setPacketCost(data.find(cost => cost.name === "packet").price);
-        setPlateCost(data.find(cost => cost.name === "plate").price);
-        setBindingCost(data.find(cost => cost.name === "binding").price);
+        setReamCost(data.find((cost) => cost.name === "ream").price);
+        setPacketCost(data.find((cost) => cost.name === "packet").price);
+        setPlateCost(data.find((cost) => cost.name === "plate").price);
+        setBindingCost(data.find((cost) => cost.name === "binding").price);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
   }, []);
 
-
   const sizesAndCosts = [
     { paperSize: "A3", plateSize: "20x30", plateCost: 40 },
     { paperSize: "A4", plateSize: "18x24", plateCost: 15 },
     { paperSize: "A5", plateSize: "18x24", plateCost: 20 },
-    { paperSize: "B5", plateSize: "20x30", plateCost: 40},
-    { paperSize: "Letter", plateSize: "30x30", plateCost: 30},
+    { paperSize: "B5", plateSize: "20x30", plateCost: 40 },
+    { paperSize: "Letter", plateSize: "30x30", plateCost: 30 },
   ];
 
   const handlePaperThicknessChange = (e) => {
@@ -56,10 +56,10 @@ const CostCalculation = () => {
     setSelectedPaperType(selectedPaperType);
   };
 
-  const setBindingTypeChange = (e) =>{
+  const handleBindingTypeChange = (e) => {
     const selectedBindingType = e.target.value;
-    setSelectedBindingCost(selectedBindingType);
-  }
+    setSelectedBindingType(selectedBindingType);
+  };
 
   const handlePaperSizeChange = (e) => {
     const selectedSize = e.target.value;
@@ -72,14 +72,63 @@ const CostCalculation = () => {
       setPlateSize(selectedSizeData.plateSize);
       setPlateCost(selectedSizeData.plateCost);
       setPaperSize(selectedSizeData.paperSize);
-      
     }
   };
 
-  const paperType = [{ type: "Art Paper" }, { type: "Art Board " }, { type: "Ivory Board"}, { type: "Card Board"},
-{ type: "Colored Paper"}, {type: "Wood Free"}, { type: "Tough Coat"}, {type: "Matte Paper"}, { type: "Carbonless Paper"}, { type: "Off-white Paper"}
-];
-  const paperThicknesses = ["100 GSM", "150 GSM", "200 GSM", "300 GSM"];
+  const paperSizes = [
+    { value: "A3", label: "A3" },
+    { value: "A4", label: "A4" },
+    { value: "A5", label: "A5" },
+    { value: "B5", label: "B5" },
+    { value: "Letter", label: "Letter" },
+  ];
+
+  const paperType = [
+    { type: "Art Paper" },
+    { type: "Art Board " },
+    { type: "Ivory Board" },
+    { type: "Card Board" },
+    { type: "Colored Paper" },
+    { type: "Wood Free" },
+    { type: "Tough Coat" },
+    { type: "Matte Paper" },
+    { type: "Carbonless Paper" },
+    { type: "Off-white Paper" },
+  ];
+
+  const inkTypes = [
+    { value: "CMYK", label: "CMYK" },
+    { value: "Spot", label: "Spot" },
+  ];
+
+  const paperThicknesses = [
+    "60 GSM",
+    "70 GSM",
+    "80 GSM",
+    "90 GSM",
+    "100 GSM",
+    "115 GSM",
+    "120 GSM",
+    "128 GSM",
+    "150 GSM",
+    "200 GSM",
+    "250 GSM",
+    "300 GSM",
+  ];
+
+  const bindingType = [
+    "Center Stitch",
+    "Perfect Binding",
+    "Juju Binding",
+    "Metal-foiling",
+    "Diecuting",
+    "Perforation",
+    "Padding",
+    "Spot Vanishing",
+    "Wiro",
+    "Spiral",
+    "Clear Sheet",
+  ];
 
   const handleQuantityChange = (e) => {
     const value = parseInt(e.target.value);
@@ -132,6 +181,10 @@ const CostCalculation = () => {
     setOtherField(value);
   };
 
+  const handleInkTypeChange = (e) => {
+    setSelectedInkType(e.target.value);
+  };
+
   return (
     <>
       <Header />
@@ -149,9 +202,11 @@ const CostCalculation = () => {
             onChange={handlePaperSizeChange}
           >
             <option value="">Select Paper Size</option>
-            <option value="A3">A3</option>
-            <option value="A4">A4</option>
-            <option value="A5">A5</option>
+            {paperSizes.map((size, index) => (
+              <option key={index} value={size.value}>
+                {size.label}
+              </option>
+            ))}
           </select>
 
           <label htmlFor="plateSize">Plate Size:</label>
@@ -204,6 +259,22 @@ const CostCalculation = () => {
             ))}
           </select>
 
+          <label htmlFor="ink-type">Ink Type:</label>
+          <select
+            id="ink-type"
+            name="ink-type"
+            value={selectedInkType}
+            onChange={handleInkTypeChange}
+            required
+          >
+            <option value="">Select Ink Type</option>
+            {inkTypes.map((ink, index) => (
+              <option key={index} value={ink.value}>
+                {ink.label}
+              </option>
+            ))}
+          </select>
+
           <label htmlFor="paper-thickness">Paper Thickness (in GSM)</label>
           <select
             id="paper-thickness"
@@ -212,7 +283,7 @@ const CostCalculation = () => {
             onChange={handlePaperThicknessChange}
             required
           >
-            <option value="">Thickness</option>
+            <option value="">Set Paper Thickness</option>
             {paperThicknesses.map((thickness, index) => (
               <option key={index} value={thickness}>
                 {thickness}
@@ -224,12 +295,17 @@ const CostCalculation = () => {
           <select
             id="binding-type"
             name="binding-type"
-            value={bindingCost}
-            onChange={setBindingTypeChange}
+            value={selectedBindingType} // Set value to the selectedBindingType state
+            onChange={handleBindingTypeChange} // Handle change event
             required
-          />
-            
-            
+          >
+            <option value="">Select Binding Type</option>
+            {bindingType.map((binding, index) => (
+              <option key={index} value={binding}>
+                {binding}
+              </option>
+            ))}
+          </select>
 
           <label htmlFor="otherField">Notes:</label>
           <input
@@ -245,9 +321,9 @@ const CostCalculation = () => {
             <p className="m-p">Plate Size: {plateSize}</p>
             <p className="m-p">Paper Type: {selectedPaperType}</p>
             <p className="m-p">Paper Thickness: {selectedPaperThickness}</p>
-            <p className="m-p">
-              Appropriate Plate size: {plateSize}
-            </p>
+            <p className="m-p">Appropriate Plate size: {plateSize}</p>
+            <p className="m-p">Selected Binding Type: {selectedBindingType}</p>
+            <p className="m-p">Selected Ink Type: {selectedInkType}</p>
             <p className="m-p">
               Total Number of Pages: <b>{totalPages(quantity, pages)}</b>
             </p>
