@@ -180,8 +180,9 @@ const CostCalculation = () => {
     setSelectedLaminationType(e.target.value);
   };
 
-  function reamCalc(setSelectedPaperThickness, costPerKg) {
-    return (864 * setSelectedPaperThickness * costPerKg) / 3100;
+
+  function reamCalc(selectedPaperThickness, costPerKg) {
+    return (864 * selectedPaperThickness * costPerKg) / 3100;
   }
 
   function totalPages(quantity, pages) {
@@ -498,7 +499,7 @@ const CostCalculation = () => {
             <p className="m-p">
               Cost of Ream: Rs.{" "}
               <span className="bold-p">
-                {reamCalc(selectedPaperThickness, changeCostPerKg)}
+                {Math.ceil(reamCalc(selectedPaperThickness, changeCostPerKg))}
               </span>
             </p>
             <p className="m-p">
@@ -521,14 +522,14 @@ const CostCalculation = () => {
             <p className="sub-p">
               Total Outer Cost (Cover Cost):{" "}
               <span className="bold-p">
-                Rs. {Math.ceil(totalReams(quantity, 4) * reamCalc(selectedOuterPaperThickness, changeCostPerKg))}
+                Rs. {Math.ceil(totalPacket(quantity) * reamCalc(selectedOuterPaperThickness, changeCostPerKg))}
               </span>
             </p>
             <p className="sub-p">
               Cost of Inner Pages:{" "}
               <span className="bold-p">
                 {" "}
-                Rs. {Math.round(innerCost(quantity, pages))}
+                Rs. {Math.round(innerCost(quantity, pages, selectedPaperThickness, changeCostPerKg))}
               </span>
             </p>
             <p className="sub-p">
