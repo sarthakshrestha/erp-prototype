@@ -446,7 +446,7 @@ const CostCalculation = () => {
               Plate Size: <span className="bold-p">{plateSize}</span>
             </p>
             <p className="m-p">
-              Inner Paper Type:{" "}
+              Inner Paper Type:
               <span className="bold-p">{selectedPaperType}</span>
             </p>
             <p className="m-p">
