@@ -185,6 +185,11 @@ const CostCalculation = () => {
     return (864 * selectedPaperThickness * costPerKg) / 3100;
   }
 
+  function packetCalc(selectedPaperThickness, costPerKg){
+    return (reamCalc(selectedPaperThickness, costPerKg) / 5);
+  }
+    
+
   function totalPages(quantity, pages) {
     return Math.round(quantity * pages);
   }
@@ -201,7 +206,6 @@ const CostCalculation = () => {
     return totalReams(pages, quantity) * reamCalc(selectedPaperThickness, changeCostPerKg);
   }
 
-  // Change
 
   function totalPacket(quantity) {
     return Math.ceil(totalSheets(quantity, 4) / 100);
@@ -458,11 +462,11 @@ const CostCalculation = () => {
             </p>
             <p className="m-p">
               Inner Paper Thickness:{" "}
-              <span className="bold-p">{selectedPaperThickness}</span>
+              <span className="bold-p">{selectedPaperThickness} GSM</span>
             </p>
             <p className="m-p">
               Outer Paper Thickness:{" "}
-              <span className="bold-p">{selectedOuterPaperThickness}</span>
+              <span className="bold-p">{selectedOuterPaperThickness} GSM</span>
             </p>
             <p className="m-p">
               Selected Binding Type:{" "}
@@ -496,7 +500,7 @@ const CostCalculation = () => {
               Total Ream(outer): {totalReams(quantity, 4)}
             </p> */}
             <p className="m-p">
-              Cost of Packet: Rs. <span className="bold-p">{packetCost}</span>
+              Cost of Packet: Rs. <span className="bold-p">{Math.ceil(packetCalc(selectedPaperThickness, changeCostPerKg))}</span>
             </p>
             <p className="m-p">
               Cost of Ream: Rs.{" "}
