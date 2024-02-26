@@ -201,6 +201,8 @@ const CostCalculation = () => {
     return totalReams(pages, quantity) * reamCalc(selectedPaperThickness, changeCostPerKg);
   }
 
+  // Change
+
   function totalPacket(quantity) {
     return Math.ceil(totalSheets(quantity, 4) / 100);
   }
