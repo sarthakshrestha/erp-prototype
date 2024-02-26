@@ -21,7 +21,7 @@ const CalculatePrice = () => {
           </li>
         ))}
       </ul>
-      <p>Total Price: ${totalPrice}</p>
+      <p>Total Price: Rs. {totalPrice}</p>
       <button className="checkout-btn">Checkout</button>
     </div>
   );

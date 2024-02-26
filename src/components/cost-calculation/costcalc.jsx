@@ -17,6 +17,7 @@ const CostCalculation = () => {
   const [selectedPaperThickness, setSelectedPaperThickness] = useState("");
   const [selectedOuterPaperThickness, setSelectedOuterPaperThickness] =
     useState("");
+    const [changeCostPerKg, setChangeCostPerKg] = useState(0);
 
   // Retrieving from databasex
   const [reamCost, setReamCost] = useState(0);
@@ -27,20 +28,21 @@ const CostCalculation = () => {
   const [selectedInkType, setSelectedInkType] = useState("");
   const [selectedLaminationType, setSelectedLaminationType] = useState("");
 
-  useEffect(() => {
-    axios
-      .get("//localhost:8081/cost")
-      .then((response) => {
-        const data = response.data;
-        setReamCost(data.find((cost) => cost.name === "ream").price);
-        setPacketCost(data.find((cost) => cost.name === "packet").price);
-        setPlateCost(data.find((cost) => cost.name === "plate").price);
-        setBindingCost(data.find((cost) => cost.name === "binding").price);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("//localhost:8081/cost")
+  //     .then((response) => {
+  //       const data = response.data;
+  //       setReamCost(data.find((cost) => cost.name === "ream").price);
+  //       setPacketCost(data.find((cost) => cost.name === "packet").price);
+  //       setPlateCost(data.find((cost) => cost.name === "plate").price);
+  //       setBindingCost(data.find((cost) => cost.name === "binding").price);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching data:", error);
+  //     });
+  // }, []);
+
 
   const sizesAndCosts = [
     { paperSize: "A3", plateSize: "19x25 or 20x30", plateCost: 40 },
@@ -63,7 +65,28 @@ const CostCalculation = () => {
   const handlePaperTypeChange = (e) => {
     const selectedPaperType = e.target.value;
     setSelectedPaperType(selectedPaperType);
+  
+    // Fetch the paper cost data from the backend
+    axios
+      .get("http://localhost:8081/paperCost")
+      .then((response) => {
+        const paperCostData = response.data;
+        // Find the entry corresponding to the selected paper type
+        const selectedPaperCost = paperCostData.find(
+          (cost) => cost.paperType.toLowerCase().replace("_", " ") === selectedPaperType.toLowerCase()
+        );
+        if (selectedPaperCost) {
+          // Update the state with the fetched costPerKg value
+          setChangeCostPerKg(selectedPaperCost.costPerKg);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching paper cost data:", error);
+      });
   };
+  
+  
+  
 
   const handleOuterPaperTypeChange = (e) => {
     const outerSelectedPaperType = e.target.value;
@@ -92,7 +115,7 @@ const CostCalculation = () => {
   const paperType = [
     { type: "Art Paper" },
     { type: "Art Board " },
-    { type: "Ivory Board" },
+    { type: "Ivory" },
     { type: "Card Board" },
     { type: "Colored Paper" },
     { type: "Wood Free" },
@@ -102,25 +125,35 @@ const CostCalculation = () => {
     { type: "Off-white Paper" },
   ];
 
+  const sheetDimension = [
+    {
+      value: 864, // 24 x 36
+    },
+    {
+      value: 600, // 20 x 30
+    },
+  ];
+
   const inkTypes = [
     { value: "CMYK", label: "CMYK" },
     { value: "Spot", label: "Spot" },
   ];
 
   const paperThicknesses = [
-    "60 GSM",
-    "70 GSM",
-    "80 GSM",
-    "90 GSM",
-    "100 GSM",
-    "115 GSM",
-    "120 GSM",
-    "128 GSM",
-    "150 GSM",
-    "200 GSM",
-    "250 GSM",
-    "300 GSM",
+    60,
+    70,
+    80,
+    90,
+    100,
+    115,
+    120,
+    128,
+    150,
+    200,
+    250,
+    300,
   ];
+  
 
   const bindingType = [
     "Center Stitch",
@@ -147,6 +180,10 @@ const CostCalculation = () => {
     setSelectedLaminationType(e.target.value);
   };
 
+  function reamCalc(setSelectedPaperThickness, costPerKg) {
+    return (864 * setSelectedPaperThickness * costPerKg) / 3100;
+  }
+
   function totalPages(quantity, pages) {
     return Math.round(quantity * pages);
   }
@@ -159,8 +196,8 @@ const CostCalculation = () => {
     return Math.round((pages * quantity) / 16 / 500);
   }
 
-  function innerCost(quantity, pages) {
-    return totalReams(pages, quantity) * 4900;
+  function innerCost(quantity, pages, selectedPaperThickness, changeCostPerKg) {
+    return totalReams(pages, quantity) * reamCalc(selectedPaperThickness, changeCostPerKg);
   }
 
   function totalPacket(quantity) {
@@ -437,54 +474,80 @@ const CostCalculation = () => {
               <span className="bold-p">{selectedLaminationType}</span>
             </p>
             <p className="m-p">
-              Total Number of Pages: <span className="bold-p">{totalPages(quantity, pages)}</span>
+              Total Number of Pages:{" "}
+              <span className="bold-p">{totalPages(quantity, pages)}</span>
             </p>
             <p className="m-p">
-              Total Sheets: <span className="bold-p">{totalSheets(quantity, pages)}</span>
+              Total Sheets:{" "}
+              <span className="bold-p">{totalSheets(quantity, pages)}</span>
             </p>
             <p className="m-p">
-              Total Reams: <span className="bold-p">{totalReams(quantity, pages)}</span>
+              Total Reams (inner):{}
+              <span className="bold-p">{totalReams(quantity, pages)}</span>
             </p>
             <p className="m-p">
-              Total Packet: <span className="bold-p">{totalPacket(quantity)}</span>
+              Total Packet:{" "}
+              <span className="bold-p">{totalPacket(quantity)}</span>
             </p>
+            {/* <p className="m-p">
+              Total Ream(outer): {totalReams(quantity, 4)}
+            </p> */}
             <p className="m-p">
               Cost of Packet: Rs. <span className="bold-p">{packetCost}</span>
             </p>
             <p className="m-p">
-              Cost of Ream: Rs. <span className="bold-p">{reamCost}</span>
+              Cost of Ream: Rs.{" "}
+              <span className="bold-p">
+                {reamCalc(selectedPaperThickness, changeCostPerKg)}
+              </span>
+            </p>
+            <p className="m-p">
+              Unit cost: {changeCostPerKg}
             </p>
             {/* <p>Calculation of Outer Page: Rs. <span className="bold-p">{outerCost(quantity)}</span></p> */}
             <p className="m-p">
-              Cost of total reams:{" "}
-              Rs. <span className="bold-p">{Math.round(((pages * quantity) / 16 / 500) * 4900)}</span>
+              Cost of total reams: Rs.{" "}
+              <span className="bold-p">
+                {Math.round(((pages * quantity) / 16 / 500) * 4900)}
+              </span>
             </p>
             <p className="m-p">
               Cost of per plate: Rs. <span className="bold-p">{plateCost}</span>
             </p>
             <p className="m-p">
-              Cost of binding per copy: Rs. <span className="bold-p">{bindingCost}</span>
+              Cost of binding per copy: Rs.{" "}
+              <span className="bold-p">{bindingCost}</span>
             </p>
             <p className="sub-p">
               Total Outer Cost (Cover Cost):{" "}
-              <span className="bold-p">Rs. {Math.ceil(totalPacket(quantity) * 2800)}</span>
+              <span className="bold-p">
+                Rs. {Math.ceil(totalReams(quantity, 4) * reamCalc(selectedOuterPaperThickness, changeCostPerKg))}
+              </span>
             </p>
             <p className="sub-p">
               Cost of Inner Pages:{" "}
-              <span className="bold-p"> Rs. {Math.round(innerCost(quantity, pages))}</span>
+              <span className="bold-p">
+                {" "}
+                Rs. {Math.round(innerCost(quantity, pages))}
+              </span>
             </p>
             <p className="sub-p">
-              Total Cost of Plate: <span className="bold-p">Rs. {platePrice(quantity, pages)}</span>
+              Total Cost of Plate:{" "}
+              <span className="bold-p">Rs. {platePrice(quantity, pages)}</span>
             </p>
             <p className="sub-p">
-              Cost of Binding: <span className="bold-p">Rs. {Math.ceil(5 * quantity)}</span>
+              Cost of Binding:{" "}
+              <span className="bold-p">Rs. {Math.ceil(5 * quantity)}</span>
             </p>
             <h2 className="total-cost">
-              <span className="tot">Total:</span> <span className="bold-p">Rs:{" "}
-              {Math.ceil(totalPacket(quantity) * 2800) +
-                Math.round(innerCost(quantity, pages)) +
-                platePrice(quantity, pages) +
-                Math.ceil(5 * quantity)}{" "}</span>
+              <span className="tot">Total:</span>{" "}
+              <span className="bold-p">
+                Rs:{" "}
+                {Math.ceil(totalPacket(quantity) * 2800) +
+                  Math.round(innerCost(quantity, pages)) +
+                  platePrice(quantity, pages) +
+                  Math.ceil(5 * quantity)}{" "}
+              </span>
             </h2>
           </div>
         </form>
