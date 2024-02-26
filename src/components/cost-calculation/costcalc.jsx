@@ -497,7 +497,7 @@ const CostCalculation = () => {
                 {Math.ceil(reamCalc(selectedPaperThickness, changeCostPerKg))}
               </span>
             </p>
-            <p className="m-p">Unit cost: {changeCostPerKg}</p>
+            <p className="m-p">Unit cost: <span className="bold-p">{changeCostPerKg}</span></p>
             {/* <p>Calculation of Outer Page: Rs. <span className="bold-p">{outerCost(quantity)}</span></p> */}
             <p className="m-p">
               Cost of total reams: Rs.{" "}
