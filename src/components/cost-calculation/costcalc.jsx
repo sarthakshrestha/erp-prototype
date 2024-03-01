@@ -19,7 +19,7 @@ const CostCalculation = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [laminationPrice, setLaminationPrice] = useState("");
   const [plateSizes, setPlateSizes] = useState([]);
-  
+
   const [reamCost, setReamCost] = useState(0);
   const [packetCost, setPacketCost] = useState(0);
   const [plateCost, setPlateCost] = useState(0);
@@ -153,8 +153,6 @@ const CostCalculation = () => {
       });
   };
 
-  
-
   const paperSizes = [
     { value: "A3", label: "A3" },
     { value: "A4", label: "A4" },
@@ -234,7 +232,24 @@ const CostCalculation = () => {
     setIsLaminationSelected(requiresCustomPrice);
 
     if (requiresCustomPrice) {
-      setShowPopup(true);
+      // Fetch the lamination cost data from the backend
+      axios
+        .get("http://localhost:8081/laminationCost")
+        .then((response) => {
+          const laminationCostData = response.data;
+          // Find the entry corresponding to the selected lamination type
+          const selectedLaminationCost = laminationCostData.find(
+            (cost) => cost.laminationType === selectedLaminationType
+          );
+          if (selectedLaminationCost) {
+            // Update the state with the fetched lamination cost value
+            setLaminationPrice(selectedLaminationCost.laminationCost);
+            setShowPopup(true);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching lamination cost data:", error);
+        });
     } else {
       setShowPopup(false);
     }
@@ -333,7 +348,6 @@ const CostCalculation = () => {
       setPlateSize(recommendedPlateSize);
 
       setPlateCost(selectedSizeData.plateCost);
-      
     }
   };
 
