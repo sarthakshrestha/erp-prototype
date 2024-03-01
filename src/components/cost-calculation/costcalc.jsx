@@ -131,7 +131,7 @@ const CostCalculation = () => {
   const handleBindingTypeChange = (e) => {
     const selectedBindingType = e.target.value;
     setSelectedBindingType(selectedBindingType);
-
+  
     // Fetch the binding cost data from the backend
     axios
       .get("http://localhost:8081/bindingCost")
@@ -145,13 +145,22 @@ const CostCalculation = () => {
         if (selectedBindingCost) {
           // Update the state with the fetched binding cost value
           setBindingCost(selectedBindingCost.bindingCost);
-          console.log("Binding cost:", selectedBindingCost.bindingCost);
+          setIsLaminationSelected(false);
+          setShowPopup(false); // No need to show popup if data is available
+        } else {
+          // If data is not present, set flag to show popup for custom price
+          setIsLaminationSelected(true);
+          setShowPopup(true);
         }
       })
       .catch((error) => {
         console.error("Error fetching binding cost data:", error);
+        // If there's an error, assume custom price is required and show popup
+        setIsLaminationSelected(true);
+        setShowPopup(true);
       });
   };
+  
 
   const paperSizes = [
     { value: "A3", label: "A3" },
@@ -222,15 +231,15 @@ const CostCalculation = () => {
   const handleLaminationTypeChange = (e) => {
     const selectedLaminationType = e.target.value;
     setSelectedLaminationType(selectedLaminationType);
-
+  
     const requiresCustomPrice =
       selectedLaminationType === "Normal Glossy" ||
       selectedLaminationType === "Normal Matte" ||
       selectedLaminationType === "Thermal Glossy" ||
       selectedLaminationType === "Thermal Matte";
-
+  
     setIsLaminationSelected(requiresCustomPrice);
-
+  
     if (requiresCustomPrice) {
       // Fetch the lamination cost data from the backend
       axios
@@ -244,16 +253,16 @@ const CostCalculation = () => {
           if (selectedLaminationCost) {
             // Update the state with the fetched lamination cost value
             setLaminationPrice(selectedLaminationCost.laminationCost);
-            setShowPopup(true);
           }
         })
         .catch((error) => {
           console.error("Error fetching lamination cost data:", error);
         });
     } else {
-      setShowPopup(false);
+      setShowPopup(false); 
     }
   };
+  
 
   function reamCalc(selectedPaperThickness, costPerKg) {
     return (864 * selectedPaperThickness * costPerKg) / 3100;
@@ -539,12 +548,12 @@ const CostCalculation = () => {
           {showPopup && (
             <div className="popup">
               <div className="popup-inner">
-                <h3>Put up custom price for {selectedLaminationType}</h3>
+                <h3>Put up custom price for {selectedBindingType}</h3>
                 <input
                   type="number"
                   placeholder="Enter custom price"
-                  value={laminationPrice}
-                  onChange={(e) => setLaminationPrice(e.target.value)}
+                  value={""}
+                  onChange={(e) => setBindingCost(e.target.value)}
                 />
                 <button onClick={handleCustomPrice} className="submit-btn">
                   Submit
