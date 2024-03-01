@@ -18,6 +18,9 @@ const CostCalculation = () => {
   const [selectedOuterPaperThickness, setSelectedOuterPaperThickness] =
     useState("");
   const [changeCostPerKg, setChangeCostPerKg] = useState(0);
+  const [showPopup, setShowPopup] = useState(false);
+  const [laminationPrice, setLaminationPrice] = useState("");
+  
 
   // Retrieving from databasex
   const [reamCost, setReamCost] = useState(0);
@@ -27,6 +30,11 @@ const CostCalculation = () => {
   const [selectedBindingType, setSelectedBindingType] = useState("");
   const [selectedInkType, setSelectedInkType] = useState("");
   const [selectedLaminationType, setSelectedLaminationType] = useState("");
+
+  const handleCustomPrice = () => {
+    
+    console.log("Custom price submitted");
+  };
 
   // useEffect(() => {
   //   axios
@@ -51,10 +59,26 @@ const CostCalculation = () => {
     { paperSize: "Letter", plateSize: "18x24", plateCost: 30 },
   ];
 
+  const plateValue = [
+    {
+      value: 126,
+    },
+    {
+      value: 600,
+    },
+  ];
+
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
+
   const handlePaperThicknessChange = (e) => {
     const selectedPaperThickness = e.target.value;
     setSelectedPaperThickness(selectedPaperThickness);
   };
+
+  const [isLaminationSelected, setIsLaminationSelected] = useState(false);
+
 
   const handleOuterPaperThicknessChange = (e) => {
     const selectedOuterPaperThickness = e.target.value;
@@ -135,6 +159,7 @@ const CostCalculation = () => {
   const inkTypes = [
     { value: "CMYK", label: "CMYK" },
     { value: "Spot", label: "Spot" },
+    { value: "Black and White", label: "Black and White" },
   ];
 
   const paperThicknesses = [
@@ -155,7 +180,12 @@ const CostCalculation = () => {
     "Clear Sheet",
   ];
 
-  const laminationType = ["Glossy", "Matte"];
+  const laminationType = [
+    "Normal Glossy",
+    "Normal Matte",
+    "Thermal Glossy",
+    "Thermal Matte",
+  ];
 
   const handleQuantityChange = (e) => {
     const value = parseInt(e.target.value);
@@ -163,8 +193,24 @@ const CostCalculation = () => {
   };
 
   const handleLaminationTypeChange = (e) => {
-    setSelectedLaminationType(e.target.value);
+    const selectedLaminationType = e.target.value;
+    setSelectedLaminationType(selectedLaminationType);
+  
+    const requiresCustomPrice =
+      selectedLaminationType === "Normal Glossy" ||
+      selectedLaminationType === "Normal Matte" ||
+      selectedLaminationType === "Thermal Glossy" ||
+      selectedLaminationType === "Thermal Matte";
+  
+    setIsLaminationSelected(requiresCustomPrice);
+  
+    if (requiresCustomPrice) {
+      setShowPopup(true);
+    } else {
+      setShowPopup(false);
+    }
   };
+  
 
   function reamCalc(selectedPaperThickness, costPerKg) {
     return (864 * selectedPaperThickness * costPerKg) / 3100;
@@ -195,6 +241,11 @@ const CostCalculation = () => {
 
   function totalPacket(quantity) {
     return Math.ceil(totalSheets(quantity, 4) / 100);
+  }
+
+  function calculateLamination(plateSize) {
+    return 12 * 18 * 0.03;
+    // For two pages
   }
 
   function platePrice(quantity, pages) {
@@ -353,7 +404,6 @@ const CostCalculation = () => {
               </option>
             ))}
           </select>
-
           <label htmlFor="paper-thickness">
             Inner Paper Thickness (in GSM)
           </label>
@@ -422,7 +472,23 @@ const CostCalculation = () => {
             ))}
           </select>
 
-          <label htmlFor="otherField">Notes:</label>
+          {showPopup && (
+            <div className="popup">
+              <div className="popup-inner">
+                <h3>Put up custom price for {selectedLaminationType}</h3>
+                <input
+                  type="number"
+                  placeholder="Enter custom price"
+                  value={laminationPrice}
+                  onChange={(e) => setLaminationPrice(e.target.value)}
+                />
+                <button onClick={handleCustomPrice} className="submit-btn">Submit</button>
+                <button onClick={togglePopup} className="cancel-btn">Cancel</button>
+              </div>
+            </div>
+          )}
+
+          <label htmlFor="otherField">Extra Notes:</label>
           <input
             type="text"
             id="otherField"
@@ -430,7 +496,7 @@ const CostCalculation = () => {
             onChange={handleOtherFieldChange}
           />
 
-          <div className="cost-details">
+          <div className={`cost-details ${isLaminationSelected ? 'grey-out' : ''}`}>
             <h3>Cost Breakdown:</h3>
             <p className="m-p">
               Paper Size: <span className="bold-p">{paperSize}</span>
@@ -497,7 +563,10 @@ const CostCalculation = () => {
                 {Math.ceil(reamCalc(selectedPaperThickness, changeCostPerKg))}
               </span>
             </p>
-            <p className="m-p">Unit cost: <span className="bold-p">{changeCostPerKg}</span></p>
+            <p className="m-p">
+              Unit cost (per kg):{" "}
+              <span className="bold-p">{changeCostPerKg}</span>
+            </p>
             {/* <p>Calculation of Outer Page: Rs. <span className="bold-p">{outerCost(quantity)}</span></p> */}
             <p className="m-p">
               Cost of total reams: Rs.{" "}
