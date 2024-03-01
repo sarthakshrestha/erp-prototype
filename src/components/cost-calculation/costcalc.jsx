@@ -6,9 +6,7 @@ import Header from "../resuable-comps/header";
 
 const CostCalculation = () => {
   const [paperSize, setPaperSize] = useState("");
-
   const [plateSize, setPlateSize] = useState("");
-
   const [quantity, setQuantity] = useState("");
   const [pages, setPages] = useState("");
   const [otherField, setOtherField] = useState("");
@@ -21,8 +19,7 @@ const CostCalculation = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [laminationPrice, setLaminationPrice] = useState("");
   const [plateSizes, setPlateSizes] = useState([]);
-
-  // Retrieving from databasex
+  
   const [reamCost, setReamCost] = useState(0);
   const [packetCost, setPacketCost] = useState(0);
   const [plateCost, setPlateCost] = useState(0);
@@ -201,7 +198,7 @@ const CostCalculation = () => {
   const bindingType = [
     "Center Stitch",
     "Perfect Binding",
-    "Juju Binding",
+    "Juju",
     "Metal-foiling",
     "Diecuting",
     "Perforation",
@@ -274,10 +271,10 @@ const CostCalculation = () => {
     return Math.ceil(totalSheets(quantity, 4) / 100);
   }
 
-  function calculateLamination(plateSize) {
-    return 12 * 18 * 0.03; // Changes;
-    // For two pages
-  }
+  // function calculateLamination(plateSize) {
+  //   return 12 * 18 * 0.03; // Changes;
+  //   // For two pages
+  // }
 
   function platePrice(quantity, pages) {
     return pages * 400;
@@ -326,7 +323,7 @@ const CostCalculation = () => {
       // Add logic to recommend an appropriate plate size based on paper type
       let recommendedPlateSize = selectedSizeData.plateSize;
 
-      // You can customize the logic to recommend a plate size based on paper type
+      // Logic to recommend a plate size based on paper type
       if (selectedPaperType === "Art Paper") {
         recommendedPlateSize = "20x30";
       } else if (selectedPaperType === "Ivory Board") {
@@ -336,6 +333,7 @@ const CostCalculation = () => {
       setPlateSize(recommendedPlateSize);
 
       setPlateCost(selectedSizeData.plateCost);
+      
     }
   };
 
