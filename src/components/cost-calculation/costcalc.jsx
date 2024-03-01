@@ -17,6 +17,10 @@ const CostCalculation = () => {
   const [selectedPaperThickness, setSelectedPaperThickness] = useState("");
   const [selectedOuterPaperThickness, setSelectedOuterPaperThickness] =
     useState("");
+  const [changeCostPerKg, setChangeCostPerKg] = useState(0);
+  const [showPopup, setShowPopup] = useState(false);
+  const [laminationPrice, setLaminationPrice] = useState("");
+  
 
   // Retrieving from databasex
   const [reamCost, setReamCost] = useState(0);
@@ -27,20 +31,25 @@ const CostCalculation = () => {
   const [selectedInkType, setSelectedInkType] = useState("");
   const [selectedLaminationType, setSelectedLaminationType] = useState("");
 
-  useEffect(() => {
-    axios
-      .get("//localhost:8081/cost")
-      .then((response) => {
-        const data = response.data;
-        setReamCost(data.find((cost) => cost.name === "ream").price);
-        setPacketCost(data.find((cost) => cost.name === "packet").price);
-        setPlateCost(data.find((cost) => cost.name === "plate").price);
-        setBindingCost(data.find((cost) => cost.name === "binding").price);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
+  const handleCustomPrice = () => {
+    
+    console.log("Custom price submitted");
+  };
+
+  // useEffect(() => {
+  //   axios
+  //     .get("//localhost:8081/cost")
+  //     .then((response) => {
+  //       const data = response.data;
+  //       setReamCost(data.find((cost) => cost.name === "ream").price);
+  //       setPacketCost(data.find((cost) => cost.name === "packet").price);
+  //       setPlateCost(data.find((cost) => cost.name === "plate").price);
+  //       setBindingCost(data.find((cost) => cost.name === "binding").price);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching data:", error);
+  //     });
+  // }, []);
 
   const sizesAndCosts = [
     { paperSize: "A3", plateSize: "19x25 or 20x30", plateCost: 40 },
@@ -50,10 +59,26 @@ const CostCalculation = () => {
     { paperSize: "Letter", plateSize: "18x24", plateCost: 30 },
   ];
 
+  const plateValue = [
+    {
+      value: 126,
+    },
+    {
+      value: 600,
+    },
+  ];
+
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
+
   const handlePaperThicknessChange = (e) => {
     const selectedPaperThickness = e.target.value;
     setSelectedPaperThickness(selectedPaperThickness);
   };
+
+  const [isLaminationSelected, setIsLaminationSelected] = useState(false);
+
 
   const handleOuterPaperThicknessChange = (e) => {
     const selectedOuterPaperThickness = e.target.value;
@@ -63,6 +88,26 @@ const CostCalculation = () => {
   const handlePaperTypeChange = (e) => {
     const selectedPaperType = e.target.value;
     setSelectedPaperType(selectedPaperType);
+
+    // Fetch the paper cost data from the backend
+    axios
+      .get("http://localhost:8081/paperCost")
+      .then((response) => {
+        const paperCostData = response.data;
+        // Find the entry corresponding to the selected paper type
+        const selectedPaperCost = paperCostData.find(
+          (cost) =>
+            cost.paperType.toLowerCase().replace("_", " ") ===
+            selectedPaperType.toLowerCase()
+        );
+        if (selectedPaperCost) {
+          // Update the state with the fetched costPerKg value
+          setChangeCostPerKg(selectedPaperCost.costPerKg);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching paper cost data:", error);
+      });
   };
 
   const handleOuterPaperTypeChange = (e) => {
@@ -92,7 +137,7 @@ const CostCalculation = () => {
   const paperType = [
     { type: "Art Paper" },
     { type: "Art Board " },
-    { type: "Ivory Board" },
+    { type: "Ivory" },
     { type: "Card Board" },
     { type: "Colored Paper" },
     { type: "Wood Free" },
@@ -102,24 +147,23 @@ const CostCalculation = () => {
     { type: "Off-white Paper" },
   ];
 
+  const sheetDimension = [
+    {
+      value: 864, // 24 x 36
+    },
+    {
+      value: 600, // 20 x 30
+    },
+  ];
+
   const inkTypes = [
     { value: "CMYK", label: "CMYK" },
     { value: "Spot", label: "Spot" },
+    { value: "Black and White", label: "Black and White" },
   ];
 
   const paperThicknesses = [
-    "60 GSM",
-    "70 GSM",
-    "80 GSM",
-    "90 GSM",
-    "100 GSM",
-    "115 GSM",
-    "120 GSM",
-    "128 GSM",
-    "150 GSM",
-    "200 GSM",
-    "250 GSM",
-    "300 GSM",
+    60, 70, 80, 90, 100, 115, 120, 128, 150, 200, 250, 300,
   ];
 
   const bindingType = [
@@ -136,7 +180,12 @@ const CostCalculation = () => {
     "Clear Sheet",
   ];
 
-  const laminationType = ["Glossy", "Matte"];
+  const laminationType = [
+    "Normal Glossy",
+    "Normal Matte",
+    "Thermal Glossy",
+    "Thermal Matte",
+  ];
 
   const handleQuantityChange = (e) => {
     const value = parseInt(e.target.value);
@@ -144,8 +193,32 @@ const CostCalculation = () => {
   };
 
   const handleLaminationTypeChange = (e) => {
-    setSelectedLaminationType(e.target.value);
+    const selectedLaminationType = e.target.value;
+    setSelectedLaminationType(selectedLaminationType);
+  
+    const requiresCustomPrice =
+      selectedLaminationType === "Normal Glossy" ||
+      selectedLaminationType === "Normal Matte" ||
+      selectedLaminationType === "Thermal Glossy" ||
+      selectedLaminationType === "Thermal Matte";
+  
+    setIsLaminationSelected(requiresCustomPrice);
+  
+    if (requiresCustomPrice) {
+      setShowPopup(true);
+    } else {
+      setShowPopup(false);
+    }
   };
+  
+
+  function reamCalc(selectedPaperThickness, costPerKg) {
+    return (864 * selectedPaperThickness * costPerKg) / 3100;
+  }
+
+  function packetCalc(selectedPaperThickness, costPerKg) {
+    return reamCalc(selectedPaperThickness, costPerKg) / 5;
+  }
 
   function totalPages(quantity, pages) {
     return Math.round(quantity * pages);
@@ -159,12 +232,20 @@ const CostCalculation = () => {
     return Math.round((pages * quantity) / 16 / 500);
   }
 
-  function innerCost(quantity, pages) {
-    return totalReams(pages, quantity) * 4900;
+  function innerCost(quantity, pages, selectedPaperThickness, changeCostPerKg) {
+    return (
+      totalReams(pages, quantity) *
+      reamCalc(selectedPaperThickness, changeCostPerKg)
+    );
   }
 
   function totalPacket(quantity) {
     return Math.ceil(totalSheets(quantity, 4) / 100);
+  }
+
+  function calculateLamination(plateSize) {
+    return 12 * 18 * 0.03;
+    // For two pages
   }
 
   function platePrice(quantity, pages) {
@@ -323,7 +404,6 @@ const CostCalculation = () => {
               </option>
             ))}
           </select>
-
           <label htmlFor="paper-thickness">
             Inner Paper Thickness (in GSM)
           </label>
@@ -392,7 +472,23 @@ const CostCalculation = () => {
             ))}
           </select>
 
-          <label htmlFor="otherField">Notes:</label>
+          {showPopup && (
+            <div className="popup">
+              <div className="popup-inner">
+                <h3>Put up custom price for {selectedLaminationType}</h3>
+                <input
+                  type="number"
+                  placeholder="Enter custom price"
+                  value={laminationPrice}
+                  onChange={(e) => setLaminationPrice(e.target.value)}
+                />
+                <button onClick={handleCustomPrice} className="submit-btn">Submit</button>
+                <button onClick={togglePopup} className="cancel-btn">Cancel</button>
+              </div>
+            </div>
+          )}
+
+          <label htmlFor="otherField">Extra Notes:</label>
           <input
             type="text"
             id="otherField"
@@ -400,7 +496,7 @@ const CostCalculation = () => {
             onChange={handleOtherFieldChange}
           />
 
-          <div className="cost-details">
+          <div className={`cost-details ${isLaminationSelected ? 'grey-out' : ''}`}>
             <h3>Cost Breakdown:</h3>
             <p className="m-p">
               Paper Size: <span className="bold-p">{paperSize}</span>
@@ -409,7 +505,7 @@ const CostCalculation = () => {
               Plate Size: <span className="bold-p">{plateSize}</span>
             </p>
             <p className="m-p">
-              Inner Paper Type:{" "}
+              Inner Paper Type:
               <span className="bold-p">{selectedPaperType}</span>
             </p>
             <p className="m-p">
@@ -418,11 +514,11 @@ const CostCalculation = () => {
             </p>
             <p className="m-p">
               Inner Paper Thickness:{" "}
-              <span className="bold-p">{selectedPaperThickness}</span>
+              <span className="bold-p">{selectedPaperThickness} GSM</span>
             </p>
             <p className="m-p">
               Outer Paper Thickness:{" "}
-              <span className="bold-p">{selectedOuterPaperThickness}</span>
+              <span className="bold-p">{selectedOuterPaperThickness} GSM</span>
             </p>
             <p className="m-p">
               Selected Binding Type:{" "}
@@ -437,54 +533,103 @@ const CostCalculation = () => {
               <span className="bold-p">{selectedLaminationType}</span>
             </p>
             <p className="m-p">
-              Total Number of Pages: <span className="bold-p">{totalPages(quantity, pages)}</span>
+              Total Number of Pages:{" "}
+              <span className="bold-p">{totalPages(quantity, pages)}</span>
             </p>
             <p className="m-p">
-              Total Sheets: <span className="bold-p">{totalSheets(quantity, pages)}</span>
+              Total Sheets:{" "}
+              <span className="bold-p">{totalSheets(quantity, pages)}</span>
             </p>
             <p className="m-p">
-              Total Reams: <span className="bold-p">{totalReams(quantity, pages)}</span>
+              Total Reams (inner):{}
+              <span className="bold-p">{totalReams(quantity, pages)}</span>
             </p>
             <p className="m-p">
-              Total Packet: <span className="bold-p">{totalPacket(quantity)}</span>
+              Total Packet:{" "}
+              <span className="bold-p">{totalPacket(quantity)}</span>
+            </p>
+            {/* <p className="m-p">
+              Total Ream(outer): {totalReams(quantity, 4)}
+            </p> */}
+            <p className="m-p">
+              Cost of Packet: Rs.{" "}
+              <span className="bold-p">
+                {Math.ceil(packetCalc(selectedPaperThickness, changeCostPerKg))}
+              </span>
             </p>
             <p className="m-p">
-              Cost of Packet: Rs. <span className="bold-p">{packetCost}</span>
+              Cost of Ream: Rs.{" "}
+              <span className="bold-p">
+                {Math.ceil(reamCalc(selectedPaperThickness, changeCostPerKg))}
+              </span>
             </p>
             <p className="m-p">
-              Cost of Ream: Rs. <span className="bold-p">{reamCost}</span>
+              Unit cost (per kg):{" "}
+              <span className="bold-p">{changeCostPerKg}</span>
             </p>
             {/* <p>Calculation of Outer Page: Rs. <span className="bold-p">{outerCost(quantity)}</span></p> */}
             <p className="m-p">
-              Cost of total reams:{" "}
-              Rs. <span className="bold-p">{Math.round(((pages * quantity) / 16 / 500) * 4900)}</span>
+              Cost of total reams: Rs.{" "}
+              <span className="bold-p">
+                {Math.round(((pages * quantity) / 16 / 500) * 4900)}
+              </span>
             </p>
             <p className="m-p">
               Cost of per plate: Rs. <span className="bold-p">{plateCost}</span>
             </p>
             <p className="m-p">
-              Cost of binding per copy: Rs. <span className="bold-p">{bindingCost}</span>
+              Cost of binding per copy: Rs.{" "}
+              <span className="bold-p">{bindingCost}</span>
             </p>
             <p className="sub-p">
               Total Outer Cost (Cover Cost):{" "}
-              <span className="bold-p">Rs. {Math.ceil(totalPacket(quantity) * 2800)}</span>
+              <span className="bold-p">
+                Rs.{" "}
+                {Math.ceil(
+                  totalPacket(quantity) *
+                    reamCalc(selectedOuterPaperThickness, changeCostPerKg)
+                )}
+              </span>
             </p>
             <p className="sub-p">
               Cost of Inner Pages:{" "}
-              <span className="bold-p"> Rs. {Math.round(innerCost(quantity, pages))}</span>
+              <span className="bold-p">
+                {" "}
+                Rs.{" "}
+                {Math.round(
+                  innerCost(
+                    quantity,
+                    pages,
+                    selectedPaperThickness,
+                    changeCostPerKg
+                  )
+                )}
+              </span>
             </p>
             <p className="sub-p">
-              Total Cost of Plate: <span className="bold-p">Rs. {platePrice(quantity, pages)}</span>
+              Total Cost of Plate:{" "}
+              <span className="bold-p">Rs. {platePrice(quantity, pages)}</span>
             </p>
             <p className="sub-p">
-              Cost of Binding: <span className="bold-p">Rs. {Math.ceil(5 * quantity)}</span>
+              Cost of Binding:{" "}
+              <span className="bold-p">Rs. {Math.ceil(5 * quantity)}</span>
             </p>
             <h2 className="total-cost">
-              <span className="tot">Total:</span> <span className="bold-p">Rs:{" "}
-              {Math.ceil(totalPacket(quantity) * 2800) +
-                Math.round(innerCost(quantity, pages)) +
-                platePrice(quantity, pages) +
-                Math.ceil(5 * quantity)}{" "}</span>
+              <span className="tot">Total:</span>{" "}
+              <span className="bold-p">
+                Rs:{" "}
+                {Math.ceil(totalPacket(quantity) * 2800) +
+                  Math.round(
+                    innerCost(
+                      quantity,
+                      pages,
+                      selectedPaperThickness,
+                      changeCostPerKg
+                    )
+                  ) +
+                  platePrice(quantity, pages) +
+                  Math.ceil(5 * quantity)}{" "}
+              </span>
             </h2>
           </div>
         </form>
