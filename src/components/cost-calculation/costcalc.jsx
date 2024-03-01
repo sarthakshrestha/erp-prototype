@@ -20,7 +20,7 @@ const CostCalculation = () => {
   const [changeCostPerKg, setChangeCostPerKg] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
   const [laminationPrice, setLaminationPrice] = useState("");
-  
+  const [plateSizes, setPlateSizes] = useState([]);
 
   // Retrieving from databasex
   const [reamCost, setReamCost] = useState(0);
@@ -32,9 +32,26 @@ const CostCalculation = () => {
   const [selectedLaminationType, setSelectedLaminationType] = useState("");
 
   const handleCustomPrice = () => {
-    
     console.log("Custom price submitted");
   };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8081/plateCost")
+      .then((response) => {
+        const plateCostData = response.data;
+        // Map plateCostData to plateSizes format
+        const mappedPlateSizes = plateCostData.map((plate) => ({
+          value: plate.plateSize,
+          label: plate.plateSize,
+        }));
+        // Update state with fetched plate sizes
+        setPlateSizes(mappedPlateSizes);
+      })
+      .catch((error) => {
+        console.error("Error fetching plate sizes:", error);
+      });
+  }, []);
 
   // useEffect(() => {
   //   axios
@@ -79,7 +96,6 @@ const CostCalculation = () => {
 
   const [isLaminationSelected, setIsLaminationSelected] = useState(false);
 
-
   const handleOuterPaperThicknessChange = (e) => {
     const selectedOuterPaperThickness = e.target.value;
     setSelectedOuterPaperThickness(selectedOuterPaperThickness);
@@ -118,13 +134,29 @@ const CostCalculation = () => {
   const handleBindingTypeChange = (e) => {
     const selectedBindingType = e.target.value;
     setSelectedBindingType(selectedBindingType);
+
+    // Fetch the binding cost data from the backend
+    axios
+      .get("http://localhost:8081/bindingCost")
+      .then((response) => {
+        const bindingCostData = response.data;
+        // Find the entry corresponding to the selected binding type
+        const selectedBindingCost = bindingCostData.find(
+          (cost) =>
+            cost.bindingType.toLowerCase() === selectedBindingType.toLowerCase()
+        );
+        if (selectedBindingCost) {
+          // Update the state with the fetched binding cost value
+          setBindingCost(selectedBindingCost.bindingCost);
+          console.log("Binding cost:", selectedBindingCost.bindingCost);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching binding cost data:", error);
+      });
   };
 
-  const plateSizes = [
-    { value: "19x25", label: "19x25" },
-    { value: "20x30", label: "20x30" },
-    { value: "15x20", label: "15x20" },
-  ];
+  
 
   const paperSizes = [
     { value: "A3", label: "A3" },
@@ -195,22 +227,21 @@ const CostCalculation = () => {
   const handleLaminationTypeChange = (e) => {
     const selectedLaminationType = e.target.value;
     setSelectedLaminationType(selectedLaminationType);
-  
+
     const requiresCustomPrice =
       selectedLaminationType === "Normal Glossy" ||
       selectedLaminationType === "Normal Matte" ||
       selectedLaminationType === "Thermal Glossy" ||
       selectedLaminationType === "Thermal Matte";
-  
+
     setIsLaminationSelected(requiresCustomPrice);
-  
+
     if (requiresCustomPrice) {
       setShowPopup(true);
     } else {
       setShowPopup(false);
     }
   };
-  
 
   function reamCalc(selectedPaperThickness, costPerKg) {
     return (864 * selectedPaperThickness * costPerKg) / 3100;
@@ -244,7 +275,7 @@ const CostCalculation = () => {
   }
 
   function calculateLamination(plateSize) {
-    return 12 * 18 * 0.03 // Changes;
+    return 12 * 18 * 0.03; // Changes;
     // For two pages
   }
 
@@ -259,7 +290,27 @@ const CostCalculation = () => {
 
   const handlePlateSizeChange = (e) => {
     const selectedSize = e.target.value;
+    console.log("Selected Plate Size:", selectedSize); // Add console logging here
     setPlateSize(selectedSize);
+
+    // Fetch the plate cost data from the backend
+    axios
+      .get("http://localhost:8081/plateCost")
+      .then((response) => {
+        const plateCostData = response.data;
+        // Find the entry corresponding to the selected plate size
+        const selectedPlateCost = plateCostData.find(
+          (cost) => cost.plateSize.toLowerCase() === selectedSize.toLowerCase()
+        );
+        if (selectedPlateCost) {
+          // Update the state with the fetched plate cost value
+          setPlateCost(selectedPlateCost.plateCost);
+          console.log("Plate cost:", selectedPlateCost.plateCost);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching plate cost data:", error);
+      });
   };
 
   const handlePaperSizeChange = (e) => {
@@ -328,6 +379,7 @@ const CostCalculation = () => {
             onChange={handlePlateSizeChange}
           >
             <option value="">Select Plate Size</option>
+            {/* Mapping over plateSizes directly */}
             {plateSizes.map((size, index) => (
               <option key={index} value={size.value}>
                 {size.label}
@@ -482,8 +534,12 @@ const CostCalculation = () => {
                   value={laminationPrice}
                   onChange={(e) => setLaminationPrice(e.target.value)}
                 />
-                <button onClick={handleCustomPrice} className="submit-btn">Submit</button>
-                <button onClick={togglePopup} className="cancel-btn">Cancel</button>
+                <button onClick={handleCustomPrice} className="submit-btn">
+                  Submit
+                </button>
+                <button onClick={togglePopup} className="cancel-btn">
+                  Cancel
+                </button>
               </div>
             </div>
           )}
@@ -496,7 +552,9 @@ const CostCalculation = () => {
             onChange={handleOtherFieldChange}
           />
 
-          <div className={`cost-details ${isLaminationSelected ? 'grey-out' : ''}`}>
+          <div
+            className={`cost-details ${isLaminationSelected ? "grey-out" : ""}`}
+          >
             <h3>Cost Breakdown:</h3>
             <p className="m-p">
               Paper Size: <span className="bold-p">{paperSize}</span>
@@ -511,7 +569,7 @@ const CostCalculation = () => {
             <p className="m-p">
               Cover/Outer Paper Type:{" "}
               <span className="bold-p">{outerSelectedPaperType}</span>
-            </p> 
+            </p>
             <p className="m-p">
               Inner Paper Thickness:{" "}
               <span className="bold-p">{selectedPaperThickness} GSM</span>
