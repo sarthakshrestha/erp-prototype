@@ -244,7 +244,7 @@ const CostCalculation = () => {
   }
 
   function calculateLamination(plateSize) {
-    return 12 * 18 * 0.03;
+    return 12 * 18 * 0.03 // Changes;
     // For two pages
   }
 
@@ -511,7 +511,7 @@ const CostCalculation = () => {
             <p className="m-p">
               Cover/Outer Paper Type:{" "}
               <span className="bold-p">{outerSelectedPaperType}</span>
-            </p>
+            </p> 
             <p className="m-p">
               Inner Paper Thickness:{" "}
               <span className="bold-p">{selectedPaperThickness} GSM</span>
