@@ -283,8 +283,8 @@ const CostCalculation = () => {
     return (864 * selectedPaperThickness * costPerKg) / 3100;
   }
 
-  function packetCalc(selectedPaperThickness, costPerKg) {
-    return reamCalc(selectedPaperThickness, costPerKg) / 5;
+  function packetCalc(selectedOuterPaperThickness, costPerKg) {
+    return reamCalc(selectedOuterPaperThickness, costPerKg) / 5;
   }
 
   function totalPages(quantity, pages) {
@@ -648,7 +648,9 @@ const CostCalculation = () => {
             <p className="m-p">
               Cost of Packet: Rs.{" "}
               <span className="bold-p">
-                {Math.ceil(packetCalc(selectedPaperThickness, changeCostPerKg))}
+                {Math.ceil(
+                  packetCalc(selectedOuterPaperThickness, changeCostPerKg)
+                )}
               </span>
             </p>
             <p className="m-p">
@@ -712,7 +714,10 @@ const CostCalculation = () => {
               <span className="tot">Total:</span>{" "}
               <span className="bold-p">
                 Rs:{" "}
-                {Math.ceil(totalPacket(quantity) * 2800) +
+                {Math.ceil(
+                  totalPacket(quantity) *
+                    packetCalc(selectedOuterPaperThickness, changeCostPerKg)
+                ) +
                   Math.round(
                     innerCost(
                       quantity,
@@ -722,7 +727,7 @@ const CostCalculation = () => {
                     )
                   ) +
                   platePrice(quantity, pages) +
-                  Math.ceil(5 * quantity)}{" "}
+                  Math.ceil(bindingCost * quantity)}
               </span>
             </h2>
           </div>
