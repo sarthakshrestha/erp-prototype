@@ -279,8 +279,8 @@ const CostCalculation = () => {
     }
   };
 
-  function reamCalc(selectedPaperThickness, costPerKg) {
-    return (864 * selectedPaperThickness * costPerKg) / 3100;
+  function reamCalc(plateCost, costPerKg) {
+    return (plateCost * selectedPaperThickness * costPerKg) / 3100;
   }
 
   function packetCalc(selectedOuterPaperThickness, costPerKg) {
