@@ -727,7 +727,7 @@ const CostCalculation = () => {
             <p className="m-p">
               Cost of Ink: Rs. {" "}
               <span className="bold-p">
-                {inkCost}
+                {inkCost*4}
               </span>
             </p>
 
