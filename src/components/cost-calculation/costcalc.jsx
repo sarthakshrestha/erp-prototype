@@ -19,10 +19,12 @@ const CostCalculation = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [laminationPrice, setLaminationPrice] = useState("");
   const [plateSizes, setPlateSizes] = useState([]);
+  const [outerChangeCostPerKg, setOuterChangeCostPerKg] = useState(0);
 
   const [reamCost, setReamCost] = useState(0);
   const [packetCost, setPacketCost] = useState(0);
   const [plateCost, setPlateCost] = useState(0);
+  const [inkCost, setInkCost] = useState(0);
   const [bindingCost, setBindingCost] = useState(0);
   const [selectedBindingType, setSelectedBindingType] = useState("");
   const [selectedInkType, setSelectedInkType] = useState("");
@@ -115,6 +117,31 @@ const CostCalculation = () => {
     setSelectedOuterPaperThickness(selectedOuterPaperThickness);
   };
 
+  const handleOuterPaperTypeChange = (e) => {
+    const outerSelectedPaperType = e.target.value;
+    setOuterSelectedPaperType(outerSelectedPaperType);
+
+    // Fetch the paper cost data from the backend
+    axios
+      .get("http://localhost:8081/paperCost")
+      .then((response) => {
+        const paperCostData = response.data;
+        // Find the entry corresponding to the selected outer paper type
+        const selectedOuterPaperCost = paperCostData.find(
+          (cost) =>
+            cost.paperType.toLowerCase().replace("_", " ") ===
+            outerSelectedPaperType.toLowerCase()
+        );
+        if (selectedOuterPaperCost) {
+          // Update the state with the fetched costPerKg value for outer paper type
+          setOuterChangeCostPerKg(selectedOuterPaperCost.costPerKg);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching outer paper cost data:", error);
+      });
+  };
+
   const handlePaperTypeChange = (e) => {
     const selectedPaperType = e.target.value;
     setSelectedPaperType(selectedPaperType);
@@ -138,11 +165,6 @@ const CostCalculation = () => {
       .catch((error) => {
         console.error("Error fetching paper cost data:", error);
       });
-  };
-
-  const handleOuterPaperTypeChange = (e) => {
-    const outerSelectedPaperType = e.target.value;
-    setOuterSelectedPaperType(outerSelectedPaperType);
   };
 
   const handleBindingTypeChange = (e) => {
@@ -279,12 +301,12 @@ const CostCalculation = () => {
     }
   };
 
-  function reamCalc(plateCost, costPerKg) {
-    return (plateCost * selectedPaperThickness * costPerKg) / 3100;
+  function reamCalc(selectedPaperThickness, costPerKg) {
+    return (864 * selectedPaperThickness * costPerKg) / 3100;
   }
 
-  function packetCalc(selectedOuterPaperThickness, costPerKg) {
-    return reamCalc(selectedOuterPaperThickness, costPerKg) / 5;
+  function packetCalc(selectedOuterPaperThickness, outerChangeCostPerKg) {
+    return reamCalc(selectedOuterPaperThickness, outerChangeCostPerKg) / 5;
   }
 
   function totalPages(quantity, pages) {
@@ -310,13 +332,14 @@ const CostCalculation = () => {
     return Math.ceil(totalSheets(quantity, 4) / 100);
   }
 
-  // function calculateLamination(plateSize) {
-  //   return 12 * 18 * 0.03; // Changes;
-  //   // For two pages
-  // }
+  function calculateLamination(laminationPrice, quantity, pages) {
+    return Math.ceil(
+      ((12 * 18 * laminationPrice) / 2) * totalPages(quantity, pages)
+    );
+  }
 
-  function platePrice(quantity, pages) {
-    return pages * 400;
+  function platePrice(pages, plateCost) {
+    return pages * plateCost;
   }
 
   const handlePagesChange = (e) => {
@@ -326,22 +349,26 @@ const CostCalculation = () => {
 
   const handlePlateSizeChange = (e) => {
     const selectedSize = e.target.value;
-    console.log("Selected Plate Size:", selectedSize); // Add console logging here
+    console.log("Selected Plate Size:", selectedSize);
     setPlateSize(selectedSize);
 
-    // Fetch the plate cost data from the backend
+    // Fetch the plate cost data
     axios
       .get("http://localhost:8081/plateCost")
       .then((response) => {
         const plateCostData = response.data;
-        // Find the entry corresponding to the selected plate size
+        // Selected plate size
         const selectedPlateCost = plateCostData.find(
           (cost) => cost.plateSize.toLowerCase() === selectedSize.toLowerCase()
         );
         if (selectedPlateCost) {
-          // Update the state with the fetched plate cost value
+          // Fetched plate cost value
           setPlateCost(selectedPlateCost.plateCost);
           console.log("Plate cost:", selectedPlateCost.plateCost);
+
+          setInkCost(selectedPlateCost.inkCost);
+          // Log out the ink cost for the selected plate size
+          console.log("Ink cost:", selectedPlateCost.inkCost);
         }
       })
       .catch((error) => {
@@ -383,6 +410,18 @@ const CostCalculation = () => {
   const handleInkTypeChange = (e) => {
     setSelectedInkType(e.target.value);
   };
+
+  const totalCost =
+    Math.ceil(
+      totalPacket(quantity) *
+        packetCalc(selectedOuterPaperThickness, outerChangeCostPerKg)
+    ) +
+    Math.round(
+      innerCost(quantity, pages, selectedPaperThickness, changeCostPerKg)
+    ) +
+    platePrice(pages, plateCost) +
+    Math.ceil(bindingCost * quantity) +
+    calculateLamination(laminationPrice, quantity, pages);
 
   return (
     <>
@@ -461,15 +500,15 @@ const CostCalculation = () => {
             ))}
           </select>
 
-          <label htmlFor="paper-type">Cover Paper Type</label>
+          <label htmlFor="outer-paper-type">Cover Paper Type</label>
           <select
-            id="paper-type"
-            name="paper-type"
-            value={outerSelectedPaperType} // Set value to the selectedPaperType state
-            onChange={handleOuterPaperTypeChange} // Handle change event
+            id="outer-paper-type"
+            name="outer-paper-type"
+            value={outerSelectedPaperType}
+            onChange={handleOuterPaperTypeChange}
             required
           >
-            <option value="">Select Paper Type</option>
+            <option value="">Select Outer Paper Type</option>
             {paperType.map((paper, index) => (
               <option key={index} value={paper.type}>
                 {paper.type}
@@ -567,7 +606,6 @@ const CostCalculation = () => {
                 <input
                   type="number"
                   placeholder="Enter custom price"
-                  value={bindingCost}
                   onChange={(e) => setBindingCost(e.target.value)}
                 />
                 <button onClick={handleCustomPrice} className="submit-btn">
@@ -597,6 +635,9 @@ const CostCalculation = () => {
             </p>
             <p className="m-p">
               Plate Size: <span className="bold-p">{plateSize}</span>
+            </p>
+            <p className="m-p">
+              Cost of per plate: Rs. <span className="bold-p">{plateCost}</span>
             </p>
             <p className="m-p">
               Inner Paper Type:
@@ -654,14 +695,27 @@ const CostCalculation = () => {
               </span>
             </p>
             <p className="m-p">
+              Cost of Lamination: Rs.{" "}
+              <span className="bold-p">
+                {Math.ceil(
+                  calculateLamination(laminationPrice, quantity, pages)
+                )}
+              </span>
+            </p>
+
+            <p className="m-p">
               Cost of Ream: Rs.{" "}
               <span className="bold-p">
                 {Math.ceil(reamCalc(selectedPaperThickness, changeCostPerKg))}
               </span>
             </p>
             <p className="m-p">
-              Unit cost (per kg):{" "}
+              Unit cost for inner paper (per kg):{" "}
               <span className="bold-p">{changeCostPerKg}</span>
+            </p>
+            <p className="m-p">
+              Unit cost for outer paper (per kg):{" "}
+              <span className="bold-p">{outerChangeCostPerKg}</span>
             </p>
             {/* <p>Calculation of Outer Page: Rs. <span className="bold-p">{outerCost(quantity)}</span></p> */}
             <p className="m-p">
@@ -671,8 +725,12 @@ const CostCalculation = () => {
               </span>
             </p>
             <p className="m-p">
-              Cost of per plate: Rs. <span className="bold-p">{plateCost}</span>
+              Cost of Ink: Rs. {" "}
+              <span className="bold-p">
+                {inkCost}
+              </span>
             </p>
+
             <p className="m-p">
               Cost of binding per copy: Rs.{" "}
               <span className="bold-p">{bindingCost}</span>
@@ -704,7 +762,9 @@ const CostCalculation = () => {
             </p>
             <p className="sub-p">
               Total Cost of Plate:{" "}
-              <span className="bold-p">Rs. {platePrice(quantity, pages)}</span>
+              <span className="bold-p">
+                Rs. {platePrice(quantity, plateCost)}
+              </span>
             </p>
             <p className="sub-p">
               Cost of Binding:{" "}
@@ -712,23 +772,7 @@ const CostCalculation = () => {
             </p>
             <h2 className="total-cost">
               <span className="tot">Total:</span>{" "}
-              <span className="bold-p">
-                Rs:{" "}
-                {Math.ceil(
-                  totalPacket(quantity) *
-                    packetCalc(selectedOuterPaperThickness, changeCostPerKg)
-                ) +
-                  Math.round(
-                    innerCost(
-                      quantity,
-                      pages,
-                      selectedPaperThickness,
-                      changeCostPerKg
-                    )
-                  ) +
-                  platePrice(quantity, pages) +
-                  Math.ceil(bindingCost * quantity)}
-              </span>
+              <span className="bold-p">Rs: {totalCost}</span>
             </h2>
           </div>
         </form>
