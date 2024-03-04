@@ -2,12 +2,30 @@
 
 .det{
   display: flex;
+
+}
+
+.det-1{
+  display: flex;
+  
 }
 
 .det-col{
   flex: 1;
   padding: 0 20px;
+  flex-direction: column;
 }
+
+.det-col-1{
+  flex: 1;
+  padding: 0 20px;
+}
+
+.paper-type-select{
+  width: 250px;
+}
+
+
 
 .cost,
 .cost-details {
@@ -29,7 +47,7 @@
   display: flex;
   width: 610px;
   flex-direction: column;
-  max-height: 1505px;
+  max-height: 1460px;
 
 }
 

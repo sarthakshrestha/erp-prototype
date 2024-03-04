@@ -509,19 +509,21 @@ const CostCalculation = () => {
               </option>
             ))}
           </select>
-
           <br></br>
-          
+
+       
           <p className="divider-p">Material Detail</p>
           <div className="det">
           <div className="det-col">
-          <label htmlFor="paper-type">Inner Paper Type</label>
+          <label htmlFor="paper-type">Inner Paper Type</label><p>  </p>
           <select
             id="paper-type"
             name="paper-type"
             value={selectedPaperType} // Set value to the selectedPaperType state
             onChange={handlePaperTypeChange} // Handle change event
+            className="paper-type-select"
             required
+            
           >
             <option value="">Select Paper Type</option>
             {paperType.map((paper, index) => (
@@ -534,12 +536,13 @@ const CostCalculation = () => {
           <div className="det-col">
           <label htmlFor="paper-thickness">
             Inner Paper Thickness (in GSM)
-          </label>
+          </label><p>  </p>
           <select
             id="paper-thickness"
             name="paper-thickness"
             value={selectedPaperThickness}
             onChange={handlePaperThicknessChange}
+            className="paper-type-select"
             required
           >
             <option value="">Set Paper Thickness</option>
@@ -551,13 +554,19 @@ const CostCalculation = () => {
           </select>
           </div>
           </div>
+         
+         
 
-          <label htmlFor="outer-paper-type">Cover Paper Type</label>
+          
+          <div className="det-1">
+          <div className="det-col-1">
+          <label htmlFor="outer-paper-type">Cover Paper Type</label><p>  </p>
           <select
             id="outer-paper-type"
             name="outer-paper-type"
             value={outerSelectedPaperType}
             onChange={handleOuterPaperTypeChange}
+            className="paper-type-select"
             required
           >
             <option value="">Select Outer Paper Type</option>
@@ -567,15 +576,17 @@ const CostCalculation = () => {
               </option>
             ))}
           </select>
-
+          </div>
+          <div className="det-col-1">
           <label htmlFor="paper-thickness">
             Outer Paper Thickness (in GSM)
-          </label>
+          </label><p>  </p>
           <select
             id="paper-outer-thickness"
             name="paper-outer-thickness"
             value={selectedOuterPaperThickness}
             onChange={handleOuterPaperThicknessChange}
+            className="paper-type-select"
             required
           >
             <option value="">Set Paper Thickness</option>
@@ -585,7 +596,10 @@ const CostCalculation = () => {
               </option>
             ))}
           </select>
-
+          </div>
+          </div>
+         
+          <p> </p>
           <label htmlFor="lamination-type">Lamination Type</label>
           <select
             id="lamination-type"
@@ -654,13 +668,14 @@ const CostCalculation = () => {
           )}
 
           <label htmlFor="otherField">Extra Notes:</label>
-          <input
+          <textarea
+            rows={5}
             type="text"
             id="otherField"
             value={otherField}
+            className="other-field"
             onChange={handleOtherFieldChange}
           />
-
           <div
             className={`cost-details ${isLaminationSelected ? "grey-out" : ""}`}
           >
