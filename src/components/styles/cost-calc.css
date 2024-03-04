@@ -1,177 +1,200 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 
-.cost, .cost-details {
-    margin-top: 40px;
-    padding: 32px;
-    border-radius: 14px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.det{
+  display: flex;
+}
+
+.det-col{
+  flex: 1;
+  padding: 0 20px;
+}
+
+.cost,
+.cost-details {
+  margin-top: 40px;
+  padding: 32px;
+  border-radius: 14px;
+  box-shadow: 1px 5px 4px rgba(37, 34, 34, 0.5);
 }
 
 .cost {
-    margin: 0 auto;
-    max-width: 600px;
-    position: relative;
-    top: -60px;
-    left: -245px;
-    background-color: rgb(56, 119, 164);
-    color: #c6e5d9;
-    font-family: "Rubik", sans-serif;
-    display: flex;
-    width: 610px;
-    flex-direction: column; 
-    max-height: 980px;
+  margin: 0 auto;
+  max-width: 600px;
+  position: relative;
+  top: -60px;
+  left: -245px;
+  background-color: rgb(56, 119, 164);
+  color: #c6e5d9;
+  font-family: "Rubik", sans-serif;
+  display: flex;
+  width: 610px;
+  flex-direction: column;
+  max-height: 1505px;
+
 }
 
 .cost-details {
-    position: absolute;
-    top: -132px; 
-    left: 650px;
-    background-color: #579278;
-    color: #fffcf0;
-    font-family: "Rubik", sans-serif;
-    width: 350px;
-    line-height: 0.9;
-    padding: 41px;
+  position: absolute;
+  top: -130px;
+  margin-top: 40px;
+  left: 650px;
+  background-color: #579278;
+  color: #fffcf0;
+  font-family: "Rubik", sans-serif;
+  width: 350px;
+  line-height: 0.9;
+  height: 1020px;
+  padding: 41px;
 }
 
-
 .cost .c-heading {
-    font-size: 42px;
-    font-weight: 700;
-    margin-bottom: 20px;
-    text-align: center;
-    position: relative;
-    bottom: 40px;
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+  position: relative;
+  bottom: 40px;
 }
 
 .cost-details h3 {
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 20px;
-    position: relative;
-    bottom: 40px;
+  font-size: 42px;
+  text-align: right;
+  font-weight: 700;
+  margin-top: 52px;
+  margin-bottom: 20px;
+  
+  position: relative;
+  bottom: 40px;
 }
 
 .cost form {
-    display: flex;
-    flex-direction: column;
-    top: -60px;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  top: -60px;
+  position: relative;
+}
+
+.cost form .divider-p{
+  text-align: left;
+  font-weight: 450;
+  font-size: 27px;
 }
 
 .cost label {
-    font-size: 16px;
-    margin-bottom: 5px;
-    text-align: left;
+  font-size: 16px;
+  margin-bottom: 5px;
+  text-align: left;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .cost select,
 .cost input {
-    font-size: 14px;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    border: none;
-    background-color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.8);
 }
-
 
 .cost-details p,
 .cost-details .sub-p {
-    font-size: 16px;
-    margin-bottom: 10px;
+  font-size: 16px;
+  margin-bottom: 10px;
 }
 
 .m-p {
-    text-align: right;
-    position: relative;
-    bottom: 40px;
-    font-family: "Rubik", sans-serif;
+  text-align: right;
+  position: relative;
+  bottom: 40px;
+  /* font-family: "Rubik", sans-serif; */
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-.sub-p{
-    text-align: left;
+.divider-p{
+  font-align: left;
 }
 
-.total-cost{
-    font-size: 32px;
-    text-align: left;
+.sub-p {
+  text-align: left;
 }
 
-.bold-p{
-    font-weight: 600;
-    font-optical-sizing: auto;
+.total-cost {
+  font-size: 32px;
+  text-align: left;
 }
 
-.tot{
-    font-weight: 400;
+.bold-p {
+  font-weight: 600;
+  font-optical-sizing: auto;
+}
+
+.tot {
+  font-weight: 400;
 }
 
 .popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .popup-inner {
-    background-color: white;
-    color: black;
-    padding: 20px;
-    border-radius: 14px;
-    font-family: "Rubik", sans-serif;
-  }
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
 
-  .grey-out {
-    filter: grayscale(100%);
-    pointer-events: none;
-  }
-  
-  
-  .popup-inner h3 {
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 20px;
-  }
-  
-  .popup-inner input[type="number"] {
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 5px;
-    border-radius: 8px;
-    border: none;
-    background-color: rgba(255, 255, 255, 0.8);
-  }
+.popup-inner {
+  background-color: white;
+  color: black;
+  padding: 20px;
+  border-radius: 14px;
+  font-family: "Rubik", sans-serif;
+}
+
+.grey-out {
+  filter: grayscale(100%);
+  pointer-events: none;
+}
+
+.popup-inner h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.popup-inner input[type="number"] {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 8px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.8);
+}
 
 .popup-inner input[type="number"]::placeholder {
-    color: grey;
-    font: 16px "Rubik", sans-serif;
-   
+  color: grey;
+  font: 16px "Rubik", sans-serif;
 }
-  
-  .popup-inner .submit-btn,
-  .popup-inner .cancel-btn {
-    padding: 10px 20px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .popup-inner .submit-btn {
-    background-color: rgb(105, 108, 112);
-    color: white;
-  }
-  
-  .popup-inner .cancel-btn {
-    background-color: rgb(215, 64, 64);
-    color: rgb(225, 225, 225);
-    margin-left: 10px;
-  }
-  
+
+.popup-inner .submit-btn,
+.popup-inner .cancel-btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.popup-inner .submit-btn {
+  background-color: rgb(105, 108, 112);
+  color: white;
+}
+
+.popup-inner .cancel-btn {
+  background-color: rgb(215, 64, 64);
+  color: rgb(225, 225, 225);
+  margin-left: 10px;
+}

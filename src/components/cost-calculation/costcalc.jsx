@@ -431,9 +431,12 @@ const CostCalculation = () => {
       <br></br>
       <br></br>
       <div className="cost">
-        <h2 className="c-heading">Customize Details</h2>
+        <h2 className="c-heading">Calculate Specs</h2>
         <form>
-          <label htmlFor="paperSize">Paper Size:</label>
+          <p className="divider-p">Product Specs</p>
+          <label htmlFor="paperSize">
+            <b>Paper Size:</b>
+          </label>
           <select
             id="paperSize"
             value={paperSize}
@@ -447,22 +450,9 @@ const CostCalculation = () => {
             ))}
           </select>
 
-          <label htmlFor="plateSize">Plate Size:</label>
-          <select
-            id="plateSize"
-            value={plateSize}
-            onChange={handlePlateSizeChange}
-          >
-            <option value="">Select Plate Size</option>
-            {/* Mapping over plateSizes directly */}
-            {plateSizes.map((size, index) => (
-              <option key={index} value={size.value}>
-                {size.label}
-              </option>
-            ))}
-          </select>
-
-          <label htmlFor="pages">Pages (Number of pages per copy):</label>
+          <label htmlFor="pages">
+            <b>Pages</b> (Number of pages per copy):
+          </label>
           <input
             type="number"
             id="pages"
@@ -473,7 +463,9 @@ const CostCalculation = () => {
             required
           />
 
-          <label htmlFor="quantity">Quantity (Number of copies):</label>
+          <label htmlFor="quantity">
+            <b>Quantity</b> (Number of copies):
+          </label>
           <input
             type="number"
             id="quantity"
@@ -484,6 +476,45 @@ const CostCalculation = () => {
             required
           />
 
+          <br></br>
+          <p className="divider-p">Product Detail</p>
+          <label htmlFor="binding-type">Binding Type</label>
+          <select
+            id="binding-type"
+            name="binding-type"
+            value={selectedBindingType}
+            onChange={handleBindingTypeChange}
+            required
+          >
+            <option value="">Select Binding Type</option>
+            {bindingType.map((binding, index) => (
+              <option key={index} value={binding}>
+                {binding}
+              </option>
+            ))}
+          </select>
+
+          <label htmlFor="binding-type">Cover Treatment</label>
+          <select
+            id="binding-type"
+            name="binding-type"
+            value={selectedBindingType}
+            onChange={handleBindingTypeChange}
+            required
+          >
+            <option value="">Select Binding Type</option>
+            {bindingType.map((binding, index) => (
+              <option key={index} value={binding}>
+                {binding}
+              </option>
+            ))}
+          </select>
+
+          <br></br>
+          
+          <p className="divider-p">Material Detail</p>
+          <div className="det">
+          <div className="det-col">
           <label htmlFor="paper-type">Inner Paper Type</label>
           <select
             id="paper-type"
@@ -499,38 +530,8 @@ const CostCalculation = () => {
               </option>
             ))}
           </select>
-
-          <label htmlFor="outer-paper-type">Cover Paper Type</label>
-          <select
-            id="outer-paper-type"
-            name="outer-paper-type"
-            value={outerSelectedPaperType}
-            onChange={handleOuterPaperTypeChange}
-            required
-          >
-            <option value="">Select Outer Paper Type</option>
-            {paperType.map((paper, index) => (
-              <option key={index} value={paper.type}>
-                {paper.type}
-              </option>
-            ))}
-          </select>
-
-          <label htmlFor="ink-type">Ink Type:</label>
-          <select
-            id="ink-type"
-            name="ink-type"
-            value={selectedInkType}
-            onChange={handleInkTypeChange}
-            required
-          >
-            <option value="">Select Ink Type</option>
-            {inkTypes.map((ink, index) => (
-              <option key={index} value={ink.value}>
-                {ink.label}
-              </option>
-            ))}
-          </select>
+          </div>
+          <div className="det-col">
           <label htmlFor="paper-thickness">
             Inner Paper Thickness (in GSM)
           </label>
@@ -545,6 +546,24 @@ const CostCalculation = () => {
             {paperThicknesses.map((thickness, index) => (
               <option key={index} value={thickness}>
                 {thickness}
+              </option>
+            ))}
+          </select>
+          </div>
+          </div>
+
+          <label htmlFor="outer-paper-type">Cover Paper Type</label>
+          <select
+            id="outer-paper-type"
+            name="outer-paper-type"
+            value={outerSelectedPaperType}
+            onChange={handleOuterPaperTypeChange}
+            required
+          >
+            <option value="">Select Outer Paper Type</option>
+            {paperType.map((paper, index) => (
+              <option key={index} value={paper.type}>
+                {paper.type}
               </option>
             ))}
           </select>
@@ -567,22 +586,6 @@ const CostCalculation = () => {
             ))}
           </select>
 
-          <label htmlFor="binding-type">Binding Type</label>
-          <select
-            id="binding-type"
-            name="binding-type"
-            value={selectedBindingType}
-            onChange={handleBindingTypeChange}
-            required
-          >
-            <option value="">Select Binding Type</option>
-            {bindingType.map((binding, index) => (
-              <option key={index} value={binding}>
-                {binding}
-              </option>
-            ))}
-          </select>
-
           <label htmlFor="lamination-type">Lamination Type</label>
           <select
             id="lamination-type"
@@ -595,6 +598,38 @@ const CostCalculation = () => {
             {laminationType.map((type, index) => (
               <option key={index} value={type}>
                 {type}
+              </option>
+            ))}
+          </select>
+
+          <br></br>
+          <p className="divider-p">Process Detail</p>
+          <label htmlFor="plateSize">Plate Size:</label>
+          <select
+            id="plateSize"
+            value={plateSize}
+            onChange={handlePlateSizeChange}
+          >
+            <option value="">Select Plate Size</option>
+            {/* Mapping over plateSizes directly */}
+            {plateSizes.map((size, index) => (
+              <option key={index} value={size.value}>
+                {size.label}
+              </option>
+            ))}
+          </select>
+          <label htmlFor="ink-type">Ink Type:</label>
+          <select
+            id="ink-type"
+            name="ink-type"
+            value={selectedInkType}
+            onChange={handleInkTypeChange}
+            required
+          >
+            <option value="">Select Ink Type</option>
+            {inkTypes.map((ink, index) => (
+              <option key={index} value={ink.value}>
+                {ink.label}
               </option>
             ))}
           </select>
@@ -647,6 +682,7 @@ const CostCalculation = () => {
               Cover/Outer Paper Type:{" "}
               <span className="bold-p">{outerSelectedPaperType}</span>
             </p>
+            <br></br>
             <p className="m-p">
               Inner Paper Thickness:{" "}
               <span className="bold-p">{selectedPaperThickness} GSM</span>
@@ -655,6 +691,7 @@ const CostCalculation = () => {
               Outer Paper Thickness:{" "}
               <span className="bold-p">{selectedOuterPaperThickness} GSM</span>
             </p>
+            <br></br>
             <p className="m-p">
               Selected Binding Type:{" "}
               <span className="bold-p">{selectedBindingType}</span>
@@ -725,10 +762,7 @@ const CostCalculation = () => {
               </span>
             </p>
             <p className="m-p">
-              Cost of Ink: Rs. {" "}
-              <span className="bold-p">
-                {inkCost*4}
-              </span>
+              Cost of Ink: Rs. <span className="bold-p">{inkCost * 4}</span>
             </p>
 
             <p className="m-p">

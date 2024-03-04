@@ -260,8 +260,6 @@ function VarForm() {
     setAdditionalCost(event.target.value);
   };
 
-  
-
   const handleCustomPaperCostChange = (event) => {
     const { name, value } = event.target;
     setCustomPaperTypeCost((prevCosts) => ({
