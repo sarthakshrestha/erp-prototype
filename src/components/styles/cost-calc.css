@@ -2,7 +2,7 @@
 
 .cost, .cost-details {
     margin-top: 40px;
-    padding: 20px;
+    padding: 32px;
     border-radius: 14px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -12,8 +12,8 @@
     max-width: 600px;
     position: relative;
     top: -60px;
-    left: -190px;
-    background-color: #1f4e5f;
+    left: -245px;
+    background-color: rgb(56, 119, 164);
     color: #c6e5d9;
     font-family: "Rubik", sans-serif;
     display: flex;
@@ -24,9 +24,9 @@
 
 .cost-details {
     position: absolute;
-    top: -116px; 
-    left: 640px;
-    background-color: #6d9d88;
+    top: -132px; 
+    left: 650px;
+    background-color: #579278;
     color: #fffcf0;
     font-family: "Rubik", sans-serif;
     width: 350px;

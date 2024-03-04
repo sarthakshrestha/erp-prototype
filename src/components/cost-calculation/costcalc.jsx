@@ -431,7 +431,7 @@ const CostCalculation = () => {
       <br></br>
       <br></br>
       <div className="cost">
-        <h2 className="c-heading">Cost Calculation</h2>
+        <h2 className="c-heading">Customize Details</h2>
         <form>
           <label htmlFor="paperSize">Paper Size:</label>
           <select

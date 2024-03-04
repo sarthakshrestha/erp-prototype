@@ -7,7 +7,7 @@ export default function Header() {
     <>
       <div className="header-bar">
         
-          <h2> Project P </h2>
+          <h2> Cost Calculator  </h2>
         
       </div>
     </>
