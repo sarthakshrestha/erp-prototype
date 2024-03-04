@@ -13,8 +13,8 @@
     position: relative;
     top: -60px;
     left: -190px;
-    background-color: rgb(66, 137, 232);
-    color: white;
+    background-color: #1f4e5f;
+    color: #c6e5d9;
     font-family: "Rubik", sans-serif;
     display: flex;
     width: 610px;
@@ -26,8 +26,8 @@
     position: absolute;
     top: -116px; 
     left: 640px;
-    background-color: rgb(24, 52, 84);
-    color: white;
+    background-color: #6d9d88;
+    color: #fffcf0;
     font-family: "Rubik", sans-serif;
     width: 350px;
     line-height: 0.9;
