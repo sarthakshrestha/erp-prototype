@@ -13,24 +13,25 @@
     position: relative;
     top: -60px;
     left: -190px;
-    background-color: rgb(105, 108, 112);
+    background-color: rgb(66, 137, 232);
     color: white;
     font-family: "Rubik", sans-serif;
     display: flex;
     width: 610px;
     flex-direction: column; 
+    max-height: 980px;
 }
 
 .cost-details {
     position: absolute;
     top: -116px; 
     left: 640px;
-    background-color: rgba(0, 0, 0, 0.44);
+    background-color: rgb(24, 52, 84);
     color: white;
     font-family: "Rubik", sans-serif;
     width: 350px;
-    line-height: 0.8;
-    padding: 30px;
+    line-height: 0.9;
+    padding: 41px;
 }
 
 
@@ -38,7 +39,7 @@
     font-size: 42px;
     font-weight: 700;
     margin-bottom: 20px;
-    text-align: left;
+    text-align: center;
     position: relative;
     bottom: 40px;
 }
