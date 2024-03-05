@@ -2,7 +2,33 @@
 
 .det{
   display: flex;
+}
 
+.cost-box{
+  display: flex;
+  flex-direction: column;
+  height: 340px;
+  margin-bottom: -40px;
+  background-color: rgb(50, 88, 144);
+  padding: 40px;
+  border-radius: 36px;
+}
+
+.cost-box-m{
+  display: flex;
+  flex-direction: column;
+  height: 390px;
+  margin: 0 auto 0 auto;
+  right: 22px;
+  position: relative;
+  width: 535px;
+  background-color: rgb(50, 88, 144);
+  padding: 55px;
+  border-radius: 36px;
+}
+
+.gap{
+  height: 70px;
 }
 
 .det-1{
@@ -18,7 +44,7 @@
 
 .det-col-1{
   flex: 1;
-  padding: 0 20px;
+  padding: 0 20px;;
 }
 
 .paper-type-select{
@@ -47,13 +73,12 @@
   display: flex;
   width: 610px;
   flex-direction: column;
-  max-height: 1460px;
-
+  max-height: 1960px;
 }
 
 .cost-details {
   position: absolute;
-  top: -130px;
+  top: -154px;
   margin-top: 40px;
   left: 650px;
   background-color: #579278;
@@ -95,7 +120,9 @@
 .cost form .divider-p{
   text-align: left;
   font-weight: 450;
-  font-size: 27px;
+  font-size: 34px;
+  position: relative;
+  bottom: 15px;
 }
 
 .cost label {

@@ -432,7 +432,9 @@ const CostCalculation = () => {
       <br></br>
       <div className="cost">
         <h2 className="c-heading">Calculate Specs</h2>
+        <br></br>
         <form>
+          <div className="cost-box">
           <p className="divider-p">Product Specs</p>
           <label htmlFor="paperSize">
             <b>Paper Size:</b>
@@ -475,8 +477,12 @@ const CostCalculation = () => {
             max="10000"
             required
           />
+          </div>
+          <div className="gap">
 
-          <br></br>
+          </div>
+        
+          <div className="cost-box">
           <p className="divider-p">Product Detail</p>
           <label htmlFor="binding-type">Binding Type</label>
           <select
@@ -509,9 +515,11 @@ const CostCalculation = () => {
               </option>
             ))}
           </select>
-          <br></br>
+          
+          </div>
 
-       
+          <div className="gap"></div>
+          <div className="cost-box-m">
           <p className="divider-p">Material Detail</p>
           <div className="det">
           <div className="det-col">
@@ -554,9 +562,6 @@ const CostCalculation = () => {
           </select>
           </div>
           </div>
-         
-         
-
           
           <div className="det-1">
           <div className="det-col-1">
@@ -598,6 +603,9 @@ const CostCalculation = () => {
           </select>
           </div>
           </div>
+          
+          
+
          
           <p> </p>
           <label htmlFor="lamination-type">Lamination Type</label>
@@ -615,6 +623,7 @@ const CostCalculation = () => {
               </option>
             ))}
           </select>
+          </div>
 
           <br></br>
           <p className="divider-p">Process Detail</p>
