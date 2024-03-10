@@ -131,7 +131,8 @@
   display: flex;
   width: 610px;
   flex-direction: column;
-  max-height: 1960px;
+  height: 40vh;
+  
 }
 
 .cost-details {
@@ -144,7 +145,7 @@
   font-family: "Rubik", sans-serif;
   width: 350px;
   line-height: 0.9;
-  height: 1090px;
+  
   padding: 41px;
 }
 
