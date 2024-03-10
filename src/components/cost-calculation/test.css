@@ -1,0 +1,22 @@
+@import "rsuite/dist/rsuite.css";
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,107,100..900;1,107,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+.btn-open{
+    height: 40px;
+    font-size: 22px;
+    padding: 32px;
+}
+
+.cost-container{
+    font-family: "Archivo", sans-serif;
+    font-variation-settings:
+    "wdth" 107;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.cost-container h1 {
+    font-size: 52px;
+}

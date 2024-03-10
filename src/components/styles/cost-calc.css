@@ -1,64 +1,122 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 
-.det{
+.det {
   display: flex;
+  margin-bottom: 10px;
+  right: 20px;
+  position: relative;
+  bottom: 30px;
 }
 
-.cost-box{
+.open-box{
+  position: relative;
+  top: 50px;
+  padding: 30px;
+  left: 245px;
+}
+  
+.cost-box {
   display: flex;
   flex-direction: column;
-  height: 340px;
+  height: 310px;
   margin-bottom: -40px;
   background-color: rgb(50, 88, 144);
-  padding: 40px;
+  padding: 80px;
   border-radius: 36px;
+  position: relative;
+  top: 70px;
+  right: 185px;
+  width: 530px;
 }
 
-.cost-box-m{
+.cost-box-1 {
   display: flex;
   flex-direction: column;
-  height: 390px;
-  margin: 0 auto 0 auto;
-  right: 22px;
-  position: relative;
-  width: 535px;
+  flex: 1;
+  max-height: 430px;
+  margin-bottom: -40px;
   background-color: rgb(50, 88, 144);
-  padding: 55px;
+  padding: 110px;
+  border-radius: 36px;
+  position: relative;
+  left: 540px;
+  top: -355px;
+}
+
+.cost-box-2 {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-bottom: -40px;
+  background-color: rgb(50, 88, 144);
+  padding: 90px;
+  border-radius: 36px;
+  position: relative;
+  left: 550px;
+  top: -815px;
+}
+
+.cost-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-top: 40px;
+}
+
+.cost-box-m {
+  display: flex;
+  flex-direction: column;
+  height: 350px;
+  margin: 0 auto 0 auto;
+  right: 185px;
+  position: relative;
+  width: 530px;
+  background-color: rgb(50, 88, 144);
+  padding: 85px;
+  top: -275px;
   border-radius: 36px;
 }
 
-.gap{
+.gap {
   height: 70px;
 }
 
-.det-1{
+.l-container{
   display: flex;
-  
+  flex-direction: column;
+  position: relative;
+  bottom: 20px;
+  top: 10px;
 }
 
-.det-col{
+.det-1 {
+  display: flex;
+  margin-bottom: 10px;
+  right: 20px;
+  position: relative;
+}
+
+.det-col {
   flex: 1;
   padding: 0 20px;
   flex-direction: column;
 }
 
-.det-col-1{
+.det-col-1 {
   flex: 1;
-  padding: 0 20px;;
+  padding: 0 20px;
 }
 
-.paper-type-select{
+.paper-type-select {
   width: 250px;
 }
-
-
 
 .cost,
 .cost-details {
   margin-top: 40px;
   padding: 32px;
   border-radius: 14px;
-  box-shadow: 1px 5px 4px rgba(37, 34, 34, 0.5);
+  /* box-shadow: 1px 5px 4px rgba(37, 34, 34, 0.5); */
 }
 
 .cost {
@@ -67,7 +125,7 @@
   position: relative;
   top: -60px;
   left: -245px;
-  background-color: rgb(56, 119, 164);
+  /* background-color: rgb(56, 119, 164); */
   color: #c6e5d9;
   font-family: "Rubik", sans-serif;
   display: flex;
@@ -78,7 +136,7 @@
 
 .cost-details {
   position: absolute;
-  top: -154px;
+  top: -42px;
   margin-top: 40px;
   left: 650px;
   background-color: #579278;
@@ -86,16 +144,17 @@
   font-family: "Rubik", sans-serif;
   width: 350px;
   line-height: 0.9;
-  height: 1020px;
+  height: 1090px;
   padding: 41px;
 }
 
 .cost .c-heading {
-  font-size: 42px;
-  font-weight: 700;
+  font-size: 55px;
+  font-weight: 630;
   margin-bottom: 20px;
   text-align: center;
   position: relative;
+  /* font-family: -apple-system, BlinkMacSystemFont, sans-serif; */
   bottom: 40px;
 }
 
@@ -105,7 +164,7 @@
   font-weight: 700;
   margin-top: 52px;
   margin-bottom: 20px;
-  
+
   position: relative;
   bottom: 40px;
 }
@@ -117,12 +176,18 @@
   position: relative;
 }
 
-.cost form .divider-p{
-  text-align: left;
+.cost form .divider-p {
+  text-align: center;
   font-weight: 450;
-  font-size: 34px;
+  font-size: 33px;
   position: relative;
-  bottom: 15px;
+  bottom: 20px;
+  top: -40px;
+}
+
+.divider-p-1{
+  font-weight: 450;
+  font-size: 33px;
 }
 
 .cost label {
@@ -140,6 +205,7 @@
   border-radius: 8px;
   border: none;
   background-color: rgba(255, 255, 255, 0.8);
+  color: black;
 }
 
 .cost-details p,
@@ -154,10 +220,6 @@
   bottom: 40px;
   /* font-family: "Rubik", sans-serif; */
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-.divider-p{
-  font-align: left;
 }
 
 .sub-p {
