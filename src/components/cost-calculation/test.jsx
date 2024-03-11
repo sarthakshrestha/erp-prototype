@@ -12,32 +12,40 @@ const DrawerOpen = ({
   quantity,
   setQuantity,
   pages,
+  selectedLaminationType,
   setPages,
   otherField,
   setOtherField,
   selectedPaperType,
   selectedBindingType,
   setSelectedPaperType,
+  selectedInkType,
   outerSelectedPaperType,
   setOuterSelectedPaperType,
   selectedPaperThickness,
   setSelectedPaperThickness,
   selectedOuterPaperThickness,
   setSelectedOuterPaperThickness,
+  outerCost,
   changeCostPerKg,
   setChangeCostPerKg,
   showPopup,
+  inkCost,
+  totalCost,
   setShowPopup,
   laminationPrice,
   setLaminationPrice,
+  totalSheets,
   plateSizes,
+  costReam,
+  totalReams,
   setPlateSizes,
   outerChangeCostPerKg,
-  setOuterChangeCostPerKg
+  totalPacket,
+  setOuterChangeCostPerKg,
 }) => {
-//   const [open, setOpen] = React.useState(false);
+  //   const [open, setOpen] = React.useState(false);
   const [openWithHeader, setOpenWithHeader] = React.useState(false);
-  
 
   return (
     <>
@@ -47,7 +55,7 @@ const DrawerOpen = ({
           Open Cost Breakdown
         </Button>
       </ButtonToolbar>
-{/* 
+      {/* 
       <Drawer open={open} onClose={() => setOpen(false)}>
         <Drawer.Body>
           <Placeholder.Paragraph />
@@ -68,30 +76,79 @@ const DrawerOpen = ({
           </Drawer.Actions>
         </Drawer.Header>
         <Drawer.Body>
-        <div className="cost-container">
-        <h1>Cost Breakdown</h1>
-        <br></br>
-        <br></br>
-        <h3>Plate Size</h3>
-        <p>Chosen plate size: {plateSize}</p>
-        <br></br>
-        <h3>Paper Size</h3>
-        <p>Chosen paper size: {paperSize}</p> 
-        <br></br>
-        <h3>Total Pages</h3>
-        <p> Pages: {pages}</p>
-        <br></br>
-        <h3>Selected Binding Type</h3>
-        <p> Selected binding type: {selectedBindingType}</p>
-        <br></br>
-        <h3>Selected Inner Paper Type</h3>
-        <p> Selected inner type: {selectedPaperType}</p>
-        <p> Selected inner paper thickness: {selectedPaperThickness} </p>
-        <br></br>
-        <h3> Plate Size </h3>
-        <p> Selected plate size: {}</p>
-        </div>
-          
+          <div className="cost-heading">
+            <h2>Cost Breakdown</h2>
+          </div>
+          <div className="cost-container">
+            <h3>Paper</h3>
+            <br></br>
+            <p>
+              {" "}
+              Total Number of Pages: <b>{pages}</b>
+            </p>
+            <p>
+              Paper size: <b>{paperSize}</b>
+            </p>
+            <p>
+              {" "}
+              Inner type: <b>{selectedPaperType}</b>
+            </p>
+            <p>
+              {" "}
+              Inner paper thickness: <b>{selectedPaperThickness}</b>
+            </p>
+            <p>
+              Total Sheets: <b>{totalSheets}</b>
+            </p>
+            <p>
+              Total Reams: <b>{totalReams}</b>
+            </p>
+            <p>
+              Cost of Reams: <b>{costReam}</b>
+            </p>
+            <p>Unit cost for inner paper (per kg): <b>{changeCostPerKg}</b></p>
+            <br></br>
+            <br></br>
+            <p></p>
+            <h3>Cover Paper</h3>
+            <p>
+              Cover paper type: <b>{outerSelectedPaperType}</b>
+            </p>
+            <p>
+              Cover paper thickness: <b>{selectedOuterPaperThickness}</b>
+            </p>
+            <p>
+              Outer paper cost (per kg): <b>{outerCost}</b>
+            </p>
+            <p>
+              Total packet: <b>{totalPacket}</b>
+            </p>
+            <br></br>
+            <h3>Plate Details</h3>
+            <p>
+              Chosen plate size: <b>{plateSize}</b>
+            </p>
+            <p>
+              Ink Details: <b>{selectedInkType}</b>
+            </p>
+            <p>
+              Cost of Ink: <b>{inkCost * 4}</b>
+            </p>
+            <br></br>
+            <br></br>
+            <h3>Binding </h3>
+            <p>
+              {" "}
+              Selected binding type: <b>{selectedBindingType}</b>
+            </p>
+            <br></br>
+            <br></br>
+            <h3>Lamination</h3>
+            <p>Type of Lamination: {selectedLaminationType}</p>
+            <br></br>
+            <h1>Total Cost: </h1>
+            <p>Total cost: {totalCost}</p>
+          </div>
         </Drawer.Body>
       </Drawer>
     </>

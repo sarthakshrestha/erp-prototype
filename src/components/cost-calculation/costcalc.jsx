@@ -5,7 +5,6 @@ import axios from "axios";
 import Header from "../resuable-comps/header";
 import DrawerOpen from "./test";
 
-
 const CostCalculation = () => {
   const [paperSize, setPaperSize] = useState("");
   const [plateSize, setPlateSize] = useState("");
@@ -429,281 +428,299 @@ const CostCalculation = () => {
     <>
       <Header />
       <div className="open-box">
-      <DrawerOpen plateSizes={plateSizes} paperSize={paperSize} selectedBindingType={selectedBindingType}
-        pages = {totalPages(quantity, pages)} selectedPaperType={selectedPaperType} selectedPaperThickness={selectedPaperThickness}
-      />
-      
-      <br></br>
-      <br></br>
-      <br></br>
-     
+        <DrawerOpen
+          plateSize={plateSize}
+          selectedLaminationType = {selectedLaminationType}
+          inkCost = {inkCost}
+          outerCost = {Math.ceil(
+                  totalPacket(quantity) *
+                    reamCalc(selectedOuterPaperThickness, changeCostPerKg)
+                )}
+          outerSelectedPaperType = {outerSelectedPaperType}
+          paperSize={paperSize}
+          selectedBindingType={selectedBindingType}
+          changeCostPerKg={changeCostPerKg}
+          pages={totalPages(quantity, pages)}
+          selectedPaperType={selectedPaperType}
+          selectedPaperThickness={selectedPaperThickness}
+          totalSheets={totalSheets(quantity, pages)}
+          totalReams={totalReams(quantity, pages)}
+          totalPacket = {totalPacket(quantity)}
+          selectedInkType = {selectedInkType}
+          totalCost = {totalCost}
+          costReam={Math.ceil(
+            reamCalc(selectedPaperThickness, changeCostPerKg)
+          )}
+        />
+
+        <br></br>
+        <br></br>
+        <br></br>
       </div>
       <div className="cost">
-      
         {/* <h2 className="c-heading">Calculate Specs</h2> */}
         <br></br>
-        
+
         <form>
           <div className="cost-box">
-          <p className="divider-p-1">Product Specs</p>
-          <div className="cost-container">
-            
-          <label htmlFor="paperSize">
-            <b>Paper Size:</b>
-          </label>
-          <select
-            id="paperSize"
-            value={paperSize}
-            onChange={handlePaperSizeChange}
-          >
-            <option value="">Select Paper Size</option>
-            {paperSizes.map((size, index) => (
-              <option key={index} value={size.value}>
-                {size.label}
-              </option>
-            ))}
-          </select>
+            <p className="divider-p-1">Product Specs</p>
+            <div className="cost-container">
+              <label htmlFor="paperSize">
+                <b>Paper Size:</b>
+              </label>
+              <select
+                id="paperSize"
+                value={paperSize}
+                onChange={handlePaperSizeChange}
+              >
+                <option value="">Select Paper Size</option>
+                {paperSizes.map((size, index) => (
+                  <option key={index} value={size.value}>
+                    {size.label}
+                  </option>
+                ))}
+              </select>
 
-          <label htmlFor="pages">
-            <b>Pages</b> (Number of pages per copy):
-          </label>
-          <input
-            type="number"
-            id="pages"
-            value={pages}
-            onChange={handlePagesChange}
-            min="8"
-            max="500"
-            required
-          />
+              <label htmlFor="pages">
+                <b>Pages</b> (Number of pages per copy):
+              </label>
+              <input
+                type="number"
+                id="pages"
+                value={pages}
+                onChange={handlePagesChange}
+                min="8"
+                max="500"
+                required
+              />
 
-          <label htmlFor="quantity">
-            <b>Quantity</b> (Number of copies):
-          </label>
-          <input
-            type="number"
-            id="quantity"
-            value={quantity}
-            onChange={handleQuantityChange}
-            min="50"
-            max="10000"
-            required
-          />
+              <label htmlFor="quantity">
+                <b>Quantity</b> (Number of copies):
+              </label>
+              <input
+                type="number"
+                id="quantity"
+                value={quantity}
+                onChange={handleQuantityChange}
+                min="50"
+                max="10000"
+                required
+              />
+            </div>
           </div>
-          </div>
-         
+
           <div className="cost-box-1">
-          <p className="divider-p">Product Detail</p>
-          <div className="cost-container">
-          <label htmlFor="binding-type">Binding Type</label>
-          <select
-            id="binding-type"
-            name="binding-type"
-            value={selectedBindingType}
-            onChange={handleBindingTypeChange}
-            required
-          >
-            <option value="">Select Binding Type</option>
-            {bindingType.map((binding, index) => (
-              <option key={index} value={binding}>
-                {binding}
-              </option>
-            ))}
-          </select>
-          
+            <p className="divider-p">Product Detail</p>
+            <div className="cost-container">
+              <label htmlFor="binding-type">Binding Type</label>
+              <select
+                id="binding-type"
+                name="binding-type"
+                value={selectedBindingType}
+                onChange={handleBindingTypeChange}
+                required
+              >
+                <option value="">Select Binding Type</option>
+                {bindingType.map((binding, index) => (
+                  <option key={index} value={binding}>
+                    {binding}
+                  </option>
+                ))}
+              </select>
 
-          <label htmlFor="binding-type">Cover Treatment</label>
-          <select
-            id="binding-type"
-            name="binding-type"
-            value={selectedBindingType}
-            onChange={handleBindingTypeChange}
-            required
-          >
-            <option value="">Select Binding Type</option>
-            {bindingType.map((binding, index) => (
-              <option key={index} value={binding}>
-                {binding}
-              </option>
-            ))}
-          </select>
-          </div>
-          
+              <label htmlFor="binding-type">Cover Treatment</label>
+              <select
+                id="binding-type"
+                name="binding-type"
+                value={selectedBindingType}
+                onChange={handleBindingTypeChange}
+                required
+              >
+                <option value="">Select Binding Type</option>
+                {bindingType.map((binding, index) => (
+                  <option key={index} value={binding}>
+                    {binding}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
-         
           <div className="cost-box-m">
-          <br></br><br></br>
-          <p className="divider-p">Material Detail</p>
-          
-          <br></br><br></br>
-          <div className="det">
-          <div className="det-col">
-          <label htmlFor="paper-type">Inner Paper Type</label><p>  </p>
-          <select
-            id="paper-type"
-            name="paper-type"
-            value={selectedPaperType} // Set value to the selectedPaperType state
-            onChange={handlePaperTypeChange} // Handle change event
-            className="paper-type-select"
-            required
-            
-          >
-            <option value="">Select Paper Type</option>
-            {paperType.map((paper, index) => (
-              <option key={index} value={paper.type}>
-                {paper.type}
-              </option>
-            ))}
-          </select>
-          </div>
-          <div className="det-col">
-          <label htmlFor="paper-thickness">
-            Inner Paper Thickness (in GSM)
-          </label><p>  </p>
-          <select
-            id="paper-thickness"
-            name="paper-thickness"
-            value={selectedPaperThickness}
-            onChange={handlePaperThicknessChange}
-            className="paper-type-select"
-            required
-          >
-            <option value="">Set Paper Thickness</option>
-            {paperThicknesses.map((thickness, index) => (
-              <option key={index} value={thickness}>
-                {thickness}
-              </option>
-            ))}
-          </select>
-          </div>
-          </div>
-          
-          <div className="det-1">
-          <div className="det-col-1">
-          <label htmlFor="outer-paper-type">Cover Paper Type</label><p>  </p>
-          <select
-            id="outer-paper-type"
-            name="outer-paper-type"
-            value={outerSelectedPaperType}
-            onChange={handleOuterPaperTypeChange}
-            className="paper-type-select"
-            required
-          >
-            <option value="">Select Outer Paper Type</option>
-            {paperType.map((paper, index) => (
-              <option key={index} value={paper.type}>
-                {paper.type}
-              </option>
-            ))}
-          </select>
-          </div>
-          <div className="det-col-1">
-          <label htmlFor="paper-thickness">
-            Outer Paper Thickness (in GSM)
-          </label><p>  </p>
-          <select
-            id="paper-outer-thickness"
-            name="paper-outer-thickness"
-            value={selectedOuterPaperThickness}
-            onChange={handleOuterPaperThicknessChange}
-            className="paper-type-select"
-            required
-          >
-            <option value="">Set Paper Thickness</option>
-            {paperThicknesses.map((thickness, index) => (
-              <option key={index} value={thickness}>
-                {thickness}
-              </option>
-            ))}
-          </select>
-          </div>
-          </div>
-        
-          <p> </p>
-          <div className="l-container">
-          <label htmlFor="lamination-type">Lamination Type</label>
-          <select
-            id="lamination-type"
-            name="lamination-type"
-            value={selectedLaminationType}
-            onChange={handleLaminationTypeChange}
-            required
-          >
-            <option value="">Select Lamination Type</option>
-            {laminationType.map((type, index) => (
-              <option key={index} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
-          </div>
+            <br></br>
+            <br></br>
+            <p className="divider-p">Material Detail</p>
+
+            <br></br>
+            <br></br>
+            <div className="det">
+              <div className="det-col">
+                <label htmlFor="paper-type">Inner Paper Type</label>
+                <p> </p>
+                <select
+                  id="paper-type"
+                  name="paper-type"
+                  value={selectedPaperType} // Set value to the selectedPaperType state
+                  onChange={handlePaperTypeChange} // Handle change event
+                  className="paper-type-select"
+                  required
+                >
+                  <option value="">Select Paper Type</option>
+                  {paperType.map((paper, index) => (
+                    <option key={index} value={paper.type}>
+                      {paper.type}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="det-col">
+                <label htmlFor="paper-thickness">
+                  Inner Paper Thickness (in GSM)
+                </label>
+                <p> </p>
+                <select
+                  id="paper-thickness"
+                  name="paper-thickness"
+                  value={selectedPaperThickness}
+                  onChange={handlePaperThicknessChange}
+                  className="paper-type-select"
+                  required
+                >
+                  <option value="">Set Paper Thickness</option>
+                  {paperThicknesses.map((thickness, index) => (
+                    <option key={index} value={thickness}>
+                      {thickness}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div className="det-1">
+              <div className="det-col-1">
+                <label htmlFor="outer-paper-type">Cover Paper Type</label>
+                <p> </p>
+                <select
+                  id="outer-paper-type"
+                  name="outer-paper-type"
+                  value={outerSelectedPaperType}
+                  onChange={handleOuterPaperTypeChange}
+                  className="paper-type-select"
+                  required
+                >
+                  <option value="">Select Outer Paper Type</option>
+                  {paperType.map((paper, index) => (
+                    <option key={index} value={paper.type}>
+                      {paper.type}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="det-col-1">
+                <label htmlFor="paper-thickness">
+                  Outer Paper Thickness (in GSM)
+                </label>
+                <p> </p>
+                <select
+                  id="paper-outer-thickness"
+                  name="paper-outer-thickness"
+                  value={selectedOuterPaperThickness}
+                  onChange={handleOuterPaperThicknessChange}
+                  className="paper-type-select"
+                  required
+                >
+                  <option value="">Set Paper Thickness</option>
+                  {paperThicknesses.map((thickness, index) => (
+                    <option key={index} value={thickness}>
+                      {thickness}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <p> </p>
+            <div className="l-container">
+              <label htmlFor="lamination-type">Lamination Type</label>
+              <select
+                id="lamination-type"
+                name="lamination-type"
+                value={selectedLaminationType}
+                onChange={handleLaminationTypeChange}
+                required
+              >
+                <option value="">Select Lamination Type</option>
+                {laminationType.map((type, index) => (
+                  <option key={index} value={type}>
+                    {type}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
           <br></br>
           <div className="cost-box-2">
-          <p className="divider-p">Process Detail</p>
-          <label htmlFor="plateSize">Plate Size:</label>
-          <select
-            id="plateSize"
-            value={plateSize}
-            onChange={handlePlateSizeChange}
-          >
-            <option value="">Select Plate Size</option>
-            {/* Mapping over plateSizes directly */}
-            {plateSizes.map((size, index) => (
-              <option key={index} value={size.value}>
-                {size.label}
-              </option>
-            ))}
-          </select>
-          <label htmlFor="ink-type">Ink Type:</label>
-          <select
-            id="ink-type"
-            name="ink-type"
-            value={selectedInkType}
-            onChange={handleInkTypeChange}
-            required
-          >
-            <option value="">Select Ink Type</option>
-            {inkTypes.map((ink, index) => (
-              <option key={index} value={ink.value}>
-                {ink.label}
-              </option>
-            ))}
-          </select>
+            <p className="divider-p">Process Detail</p>
+            <label htmlFor="plateSize">Plate Size:</label>
+            <select
+              id="plateSize"
+              value={plateSize}
+              onChange={handlePlateSizeChange}
+            >
+              <option value="">Select Plate Size</option>
+              {/* Mapping over plateSizes directly */}
+              {plateSizes.map((size, index) => (
+                <option key={index} value={size.value}>
+                  {size.label}
+                </option>
+              ))}
+            </select>
+            <label htmlFor="ink-type">Ink Type:</label>
+            <select
+              id="ink-type"
+              name="ink-type"
+              value={selectedInkType}
+              onChange={handleInkTypeChange}
+              required
+            >
+              <option value="">Select Ink Type</option>
+              {inkTypes.map((ink, index) => (
+                <option key={index} value={ink.value}>
+                  {ink.label}
+                </option>
+              ))}
+            </select>
 
-          {showPopup && (
-            <div className="popup">
-              <div className="popup-inner">
-                <h3>Put up custom price for {selectedBindingType}</h3>
-                <input
-                  type="number"
-                  placeholder="Enter custom price"
-                  onChange={(e) => setBindingCost(e.target.value)}
-                />
-                <button onClick={handleCustomPrice} className="submit-btn">
-                  Submit
-                </button>
-                <button onClick={togglePopup} className="cancel-btn">
-                  Cancel
-                </button>
+            {showPopup && (
+              <div className="popup">
+                <div className="popup-inner">
+                  <h3>Put up custom price for {selectedBindingType}</h3>
+                  <input
+                    type="number"
+                    placeholder="Enter custom price"
+                    onChange={(e) => setBindingCost(e.target.value)}
+                  />
+                  <button onClick={handleCustomPrice} className="submit-btn">
+                    Submit
+                  </button>
+                  <button onClick={togglePopup} className="cancel-btn">
+                    Cancel
+                  </button>
+                </div>
               </div>
-            </div>
-          )}
-         
-         
+            )}
 
-          <label htmlFor="otherField">Extra Notes:</label>
-          <textarea
-            rows={5}
-            type="text"
-            id="otherField"
-            value={otherField}
-            className="other-field"
-            onChange={handleOtherFieldChange}
-          />
-           </div>
+            <label htmlFor="otherField">Extra Notes:</label>
+            <textarea
+              rows={5}
+              type="text"
+              id="otherField"
+              value={otherField}
+              className="other-field"
+              onChange={handleOtherFieldChange}
+            />
+          </div>
           {/* <div
             className={`cost-details ${isLaminationSelected ? "grey-out" : ""}`}
           >
@@ -711,9 +728,7 @@ const CostCalculation = () => {
             
           </div> */}
         </form>
-      
       </div>
-      
     </>
   );
 };

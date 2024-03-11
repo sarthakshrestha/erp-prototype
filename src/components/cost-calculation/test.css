@@ -17,6 +17,19 @@
     font-weight: 400;
 }
 
+.cost-heading{
+    font-family: "Archivo", sans-serif;
+}
+
 .cost-container h1 {
     font-size: 52px;
+    width: 400px;
+}
+
+.cost-container h3{
+    font-size: 31px;
+}
+
+.cost-container p{
+    font-size: 20px;
 }
