@@ -10,6 +10,7 @@ const DrawerOpen = ({
   plateSize,
   setPlateSize,
   quantity,
+  laminationCost,
   setQuantity,
   pages,
   selectedLaminationType,
@@ -95,7 +96,7 @@ const DrawerOpen = ({
             </p>
             <p>
               {" "}
-              Inner paper thickness: <b>{selectedPaperThickness}</b>
+              Inner paper thickness: <b>{selectedPaperThickness} gsm </b>
             </p>
             <p>
               Total Sheets: <b>{totalSheets}</b>
@@ -104,9 +105,9 @@ const DrawerOpen = ({
               Total Reams: <b>{totalReams}</b>
             </p>
             <p>
-              Cost of Reams: <b>{costReam}</b>
+              Cost of Reams: Rs. <b>{costReam}</b>
             </p>
-            <p>Unit cost for inner paper (per kg): <b>{changeCostPerKg}</b></p>
+            <p>Unit cost for paper type (per kg): Rs. <b>{changeCostPerKg}</b></p>
             <br></br>
             <br></br>
             <p></p>
@@ -115,11 +116,9 @@ const DrawerOpen = ({
               Cover paper type: <b>{outerSelectedPaperType}</b>
             </p>
             <p>
-              Cover paper thickness: <b>{selectedOuterPaperThickness}</b>
+              Cover paper thickness: <b>{selectedOuterPaperThickness} gsm</b>
             </p>
-            <p>
-              Outer paper cost (per kg): <b>{outerCost}</b>
-            </p>
+           
             <p>
               Total packet: <b>{totalPacket}</b>
             </p>
@@ -132,22 +131,24 @@ const DrawerOpen = ({
               Ink Details: <b>{selectedInkType}</b>
             </p>
             <p>
-              Cost of Ink: <b>{inkCost * 4}</b>
+              Cost of Ink: Rs. <b>{inkCost * 4}</b>
             </p>
             <br></br>
             <br></br>
             <h3>Binding </h3>
             <p>
               {" "}
-              Selected binding type: <b>{selectedBindingType}</b>
+              Selected binding type: Rs. <b>{selectedBindingType}</b>
             </p>
             <br></br>
             <br></br>
             <h3>Lamination</h3>
             <p>Type of Lamination: {selectedLaminationType}</p>
+            <p>Cost of Lamination: Rs. <b>{laminationCost}</b></p>
             <br></br>
-            <h1>Total Cost: </h1>
-            <p>Total cost: {totalCost}</p>
+            <h1>Total Cost:</h1>
+            <h3> Rs. <b> {totalCost} </b></h3>
+            
           </div>
         </Drawer.Body>
       </Drawer>

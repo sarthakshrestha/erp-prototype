@@ -10,13 +10,26 @@
 
 .open-box{
   position: relative;
-  top: -60px;
+  top: -90px;
   padding: 30px;
-  left: 140px;
+  left: 180px;
   margin: 0 auto;
   margin-bottom: -120px;
 }
-  
+
+.total-box{
+  padding: 40px;
+  font-family: "Rubik", sans-serif;
+  position: relative;
+  left: -195px;
+}
+
+.total-box h3{
+  font-size: 32px;
+  font-weight: 400;
+}
+
+
 .cost-box {
   display: flex;
   flex-direction: column;
@@ -175,8 +188,9 @@
 .cost form {
   display: flex;
   flex-direction: column;
-  top: -60px;
+  top: -90px;
   position: relative;
+  height: 1100px;
 }
 
 .cost form .divider-p {
