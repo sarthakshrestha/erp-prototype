@@ -96,7 +96,7 @@ const DrawerOpen = ({
             </p>
             <p>
               {" "}
-              Inner paper thickness: <b>{selectedPaperThickness} gsm </b>
+              Inner paper thickness: <b>{selectedPaperThickness} </b> gsm
             </p>
             <p>
               Total Sheets: <b>{totalSheets}</b>
@@ -143,10 +143,10 @@ const DrawerOpen = ({
             <br></br>
             <br></br>
             <h3>Lamination</h3>
-            <p>Type of Lamination: {selectedLaminationType}</p>
+            <p>Type of Lamination: <b>{selectedLaminationType}</b></p>
             <p>Cost of Lamination: Rs. <b>{laminationCost}</b></p>
-            <br></br>
-            <h1>Total Cost:</h1>
+            <br></br><br></br>
+            <h1 className="cost-t">Total Cost:</h1>
             <h3> Rs. <b> {totalCost} </b></h3>
             
           </div>

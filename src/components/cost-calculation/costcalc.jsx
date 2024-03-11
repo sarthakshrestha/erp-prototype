@@ -161,6 +161,7 @@ const CostCalculation = () => {
         if (selectedPaperCost) {
           // Update the state with the fetched costPerKg value
           setChangeCostPerKg(selectedPaperCost.costPerKg);
+          console.log(changeCostPerKg);
         }
       })
       .catch((error) => {
@@ -292,8 +293,11 @@ const CostCalculation = () => {
           if (selectedLaminationCost) {
             // Update the state with the fetched lamination cost value
             setLaminationPrice(selectedLaminationCost.laminationCost);
-            console.log("Lamination cost:", selectedLaminationCost.laminationCost);
-            console.log(laminationPrice)
+            console.log(
+              "Lamination cost:",
+              selectedLaminationCost.laminationCost
+            );
+            console.log(laminationPrice);
           }
         })
         .catch((error) => {
@@ -432,15 +436,15 @@ const CostCalculation = () => {
       <div className="open-box">
         <DrawerOpen
           plateSize={plateSize}
-          outerChangeCostPerKg = {outerChangeCostPerKg}
-          selectedLaminationType = {selectedLaminationType}
-          inkCost = {inkCost}
-          selectedOuterPaperThickness = {selectedOuterPaperThickness}
-          outerCost = {Math.ceil(
-                  totalPacket(quantity) *
-                    reamCalc(selectedOuterPaperThickness, changeCostPerKg)
-                )}
-          outerSelectedPaperType = {outerSelectedPaperType}
+          outerChangeCostPerKg={outerChangeCostPerKg}
+          selectedLaminationType={selectedLaminationType}
+          inkCost={inkCost}
+          selectedOuterPaperThickness={selectedOuterPaperThickness}
+          outerCost={Math.ceil(
+            totalPacket(quantity) *
+              reamCalc(selectedOuterPaperThickness, changeCostPerKg)
+          )}
+          outerSelectedPaperType={outerSelectedPaperType}
           paperSize={paperSize}
           selectedBindingType={selectedBindingType}
           changeCostPerKg={changeCostPerKg}
@@ -449,22 +453,22 @@ const CostCalculation = () => {
           selectedPaperThickness={selectedPaperThickness}
           totalSheets={totalSheets(quantity, pages)}
           totalReams={totalReams(quantity, pages)}
-          totalPacket = {totalPacket(quantity)}
-          laminationCost = {Math.ceil(
-                  calculateLamination(laminationPrice, quantity, pages)
-                )}
-          selectedInkType = {selectedInkType}
-          totalCost = {totalCost}
+          totalPacket={totalPacket(quantity)}
+          laminationCost={Math.ceil(
+            calculateLamination(laminationPrice, quantity, pages)
+          )}
+          selectedInkType={selectedInkType}
+          totalCost={totalCost}
           costReam={Math.ceil(
             reamCalc(selectedPaperThickness, changeCostPerKg)
           )}
-        /> 
+        />
         <br></br>
         <div className="total-box">
-          <h3>Your total will roughly be: Rs. <b>{totalCost}</b></h3>
+          <h3>
+            Your total will roughly be: Rs. <b>{totalCost}</b>
+          </h3>
         </div>
-        
-
         <br></br>
         <br></br>
         <br></br>

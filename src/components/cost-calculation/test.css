@@ -19,11 +19,13 @@
 
 .cost-heading{
     font-family: "Archivo", sans-serif;
+    color: #4886dd;
 }
 
 .cost-container h1 {
     font-size: 52px;
     width: 400px;
+   
 }
 
 .cost-container h3{
@@ -32,4 +34,8 @@
 
 .cost-container p{
     font-size: 20px;
+}
+
+.cost-t{
+    color: #4886dd;
 }
