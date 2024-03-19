@@ -436,6 +436,7 @@ const CostCalculation = () => {
       {/* <Header /> */}
       <div className="test-box">
         <div className="open-box">
+        <h1 className="heading-c">Cost Calculator</h1>
           <DrawerOpen
             plateSize={plateSize}
             outerChangeCostPerKg={outerChangeCostPerKg}

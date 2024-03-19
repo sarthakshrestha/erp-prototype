@@ -11,6 +11,11 @@
     align-content: center;
 }
 
+.heading-c{
+    font-family: 'Satoshi-Bold', sans-serif;
+    font-size: 52px;
+}
+
 .test-box select{
     padding: 5px;
 }
@@ -58,6 +63,7 @@
 
 .cost-container{
     padding: 15px;
+    
 }
 
 
