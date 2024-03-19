@@ -25,7 +25,6 @@
 .cost-container h1 {
     font-size: 52px;
     width: 400px;
-   
 }
 
 .cost-container h3{
@@ -39,3 +38,37 @@
 .cost-t{
     color: #4886dd;
 }
+
+@media only screen and (max-width: 480px) {
+    .rs-drawer-open.rs-drawer-has-backdrop{
+        margin-left: 220px;
+        overflow: hidden;
+        /* text-align: center; */
+        justify-content: center;
+    }
+
+    .cost-container h1 {
+        font-size: 32px;
+        width: 400px;
+    }
+
+    .quota-btn{
+        margin-right: 140px;
+    }
+
+    .cost-container h3{
+        font-size: 24px;
+    }
+
+    .cost-container p{
+        font-size: 16px;
+    }
+    
+
+
+}
+/* 
+.rs-drawer-open.rs-drawer-has-backdrop{
+    margin-left: 220px;
+} */
+

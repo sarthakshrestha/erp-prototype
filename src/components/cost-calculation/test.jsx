@@ -69,6 +69,7 @@ const DrawerOpen = ({
           <Drawer.Actions>
             <Button onClick={() => setOpenWithHeader(false)}>Cancel</Button>
             <Button
+              className="quota-btn"
               onClick={() => setOpenWithHeader(false)}
               appearance="primary"
             >
@@ -148,7 +149,6 @@ const DrawerOpen = ({
             <br></br><br></br>
             <h1 className="cost-t">Total Cost:</h1>
             <h3> Rs. <b> {totalCost} </b></h3>
-            
           </div>
         </Drawer.Body>
       </Drawer>

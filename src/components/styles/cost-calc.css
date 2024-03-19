@@ -1,24 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 
+input {
+  display: block;
+}
+
 .det {
-  display: flex;
-  margin-bottom: 10px;
-  right: 20px;
+  /* display: flex; */
+  /* margin-bottom: 10px; */
+  /* right: 20px; */
   position: relative;
-  bottom: 30px;
+  justify-content: stretch;
+  /* bottom: 30px; */
 }
 
 .open-box{
   position: relative;
-  top: -90px;
-  padding: 30px;
+  /* top: -90px; */
+  /* padding: 30px; */
   left: 180px;
   margin: 0 auto;
   margin-bottom: -120px;
 }
 
 .total-box{
-  padding: 40px;
+  /* padding: 40px; */
   font-family: "Rubik", sans-serif;
   position: relative;
   left: -195px;
@@ -31,64 +36,61 @@
 
 
 .cost-box {
-  display: flex;
-  flex-direction: column;
-  height: 310px;
-  margin-bottom: -40px;
+  display: block;
+  /* flex-direction: column;
+  /* height: 310px; */
+  margin: 50px auto;
+  /* margin-bottom: -40px; */
   background-color: rgb(50, 88, 144);
-  padding: 80px;
+  /* padding: 80px; */
   border-radius: 36px;
-  position: relative;
-  top: 70px;
-  right: 185px;
-  width: 530px;
+  /* position: relative; */
+  /* top: 70px;
+  right: 185px; */
+  /* width: 530px; */
 }
 
 .cost-box-1 {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+  /* display: flex;
+  flex-direction: column; */
+  /* flex: 1; */
+  margin: 50px auto;
   max-height: 430px;
-  margin-bottom: -40px;
+  
   background-color: rgb(50, 88, 144);
-  padding: 110px;
+  /* padding: 110px; */
   border-radius: 36px;
-  position: relative;
-  left: 540px;
-  top: -355px;
+  /* position: relative; */
+  /* left: 540px;
+  top: -355px; */
 }
 
 .cost-box-2 {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  margin-bottom: -40px;
+  /* display: flex;
+  flex-direction: column; */
+  /* flex: 1; */
+  margin: 50px auto;
   background-color: rgb(50, 88, 144);
-  padding: 90px;
+  /* padding: 90px; */
   border-radius: 36px;
-  position: relative;
-  left: 550px;
-  top: -815px;
+  /* position: relative; */
+  /* left: 550px;
+  top: -815px; */
 }
 
-.cost-container {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  margin-top: 40px;
-}
+
 
 .cost-box-m {
-  display: flex;
-  flex-direction: column;
-  height: 350px;
+  /* display: flex;
+  flex-direction: column; */
+  /* height: 350px; */
   margin: 0 auto 0 auto;
-  right: 185px;
+  /* right: 185px; */
   position: relative;
-  width: 530px;
+  /* width: 530px; */
   background-color: rgb(50, 88, 144);
-  padding: 85px;
-  top: -275px;
+  /* padding: 85px; */
+  /* top: -275px; */
   border-radius: 36px;
 }
 
@@ -97,71 +99,75 @@
 }
 
 .l-container{
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  bottom: 20px;
-  top: 10px;
+  /* display: flex;
+  flex-direction: column; */
+  /* position: relative; */
+  /* bottom: 20px;
+  top: 10px; */
 }
 
 .det-1 {
-  display: flex;
-  margin-bottom: 10px;
-  right: 20px;
-  position: relative;
+  /* display: flex; */
+  /* margin-bottom: 10px;
+  right: 20px; */
+  /* position: relative; */
+  
 }
 
 .det-col {
   flex: 1;
-  padding: 0 20px;
-  flex-direction: column;
+  /* padding: 0 20px; */
+  /* flex-direction: column; */
+  /* justify-content: stretch;
+  display: flex; */
 }
 
 .det-col-1 {
   flex: 1;
-  padding: 0 20px;
+  /* padding: 0 20px; */
 }
 
 .paper-type-select {
-  width: 250px;
+  /* width: 250px; */
 }
 
 .cost,
 .cost-details {
   margin-top: 40px;
-  padding: 32px;
+
+  /* padding: 32px; */
   border-radius: 14px;
   /* box-shadow: 1px 5px 4px rgba(37, 34, 34, 0.5); */
 }
 
 .cost {
-  margin: 0 auto;
-  max-width: 600px;
-  position: relative;
-  top: -60px;
-  left: -245px;
+  margin: 30px auto;
+  /* max-width: 600px; */
+  /* position: relative; */
+  /* top: -60px;
+  left: -245px; */
   /* background-color: rgb(56, 119, 164); */
   color: #c6e5d9;
   font-family: "Rubik", sans-serif;
-  display: flex;
-  width: 610px;
-  flex-direction: column;
-  height: 40vh;
-  
+  /* display: flex; */
+  /* width: 610px; */
+  /* flex-direction: column; */
+  /* height: 40vh; */
+  /* display: flex; */
 }
 
 .cost-details {
-  position: absolute;
-  top: -42px;
-  margin-top: 40px;
-  left: 650px;
+  /* position: absolute; */
+  /* top: -42px;
+  margin-top: 40px; */
+  /* left: 650px; */
   background-color: #579278;
   color: #fffcf0;
   font-family: "Rubik", sans-serif;
-  width: 350px;
+  /* width: 350px; */
   line-height: 0.9;
   
-  padding: 41px;
+  /* padding: 41px; */
 }
 
 .cost .c-heading {
@@ -169,7 +175,7 @@
   font-weight: 630;
   margin-bottom: 20px;
   text-align: center;
-  position: relative;
+  /* position: relative; */
   /* font-family: -apple-system, BlinkMacSystemFont, sans-serif; */
   bottom: 40px;
 }
@@ -181,16 +187,17 @@
   margin-top: 52px;
   margin-bottom: 20px;
 
-  position: relative;
+  /* position: relative; */
   bottom: 40px;
 }
 
 .cost form {
-  display: flex;
-  flex-direction: column;
-  top: -90px;
-  position: relative;
-  height: 1100px;
+  /* display: contents; */
+  color: #fffcf0;
+  /* flex-direction: column; */ 
+  /* top: -90px; */
+  /* position: relative; */
+  /* height: 1100px; */
 }
 
 .cost form .divider-p {
@@ -198,8 +205,8 @@
   font-weight: 450;
   font-size: 33px;
   position: relative;
-  bottom: 20px;
-  top: -40px;
+  /* bottom: 20px;
+  top: -40px; */
 }
 
 .divider-p-1{
@@ -221,6 +228,7 @@
   margin-bottom: 10px;
   border-radius: 8px;
   border: none;
+  /* width: 100%; */
   background-color: rgba(255, 255, 255, 0.8);
   color: black;
 }
@@ -230,6 +238,7 @@
   font-size: 16px;
   margin-bottom: 10px;
 }
+
 
 .m-p {
   text-align: right;
@@ -263,7 +272,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: rgba(0, 0, 0, 0.5);
-  width: 100%;
+  /* width: 100%; */
   height: 100%;
   display: flex;
   justify-content: center;
@@ -274,9 +283,13 @@
 .popup-inner {
   background-color: white;
   color: black;
-  padding: 20px;
+  /* padding: 20px; */
   border-radius: 14px;
   font-family: "Rubik", sans-serif;
+}
+
+.cost-container{
+  display: grid;
 }
 
 .grey-out {
@@ -291,7 +304,7 @@
 }
 
 .popup-inner input[type="number"] {
-  width: 100%;
+  /* width: 100%; */
   margin-bottom: 10px;
   padding: 5px;
   border-radius: 8px;
@@ -322,3 +335,5 @@
   color: rgb(225, 225, 225);
   margin-left: 10px;
 }
+
+

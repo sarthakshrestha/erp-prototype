@@ -1,8 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
 .form {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 20px;
 }
+
+.title-h{
+    font-family: 'DM Sans', sans-serif;
+}
+
+.form label{
+    font-family: 'Rubik', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+
 .fullwidth {
     grid-column: span 2;
 }
@@ -12,11 +26,58 @@
     padding: 10px;
 }
 
-
 .container {
-    margin: 5vw 10vw;
+    margin: 2vw 4vw;
 }
 
 input, textarea {
     padding: 5px;
 }
+
+.size-tbl td{
+    padding: 5px 10px;
+}
+
+.container p{
+    font-size: 19px;
+}
+
+.paper-table-1 {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .paper-table-1 th,
+  .paper-table-1 td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .paper-table-1 th {
+    background-color: #f2f2f2;
+  }
+  
+  .paper-table-1 tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .paper-table-1 tbody tr:hover {
+    background-color: #ddd;
+  }
+  
+  .paper-table-1 input[type="text"] {
+    width: 100%; /* Adjust this width as needed */
+    box-sizing: border-box;
+  }
+  
+
+
+.paper-table {
+    padding: 20px; 
+  }
+  
+  .paper-table td input {
+    padding: 5px 10px;
+    margin: 7px;
+  }

@@ -1,0 +1,113 @@
+/* .cost form{
+    display: grid;
+} */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+.open-box button{
+    top: 40px;
+    margin: 4px auto;
+    align-content: center;
+}
+
+.test-box select{
+    padding: 5px;
+}
+
+.cost-main{
+    width: 100%;
+    font-family: 'DM Sans', sans-serif;
+    margin: 0 auto;
+}
+
+.divider-p{
+    font-family: Rubik, sans-serif;
+    font-size: 23px;
+    font-weight: 450;
+}
+
+.divider-p-1{
+    font-weight: 450;
+    font-size: 23px;
+}
+
+.cost-box-m{
+    width: 100%;
+    margin: 0 auto;
+    padding: 15px;
+
+}
+
+.cost-box-m .divider-p{
+    font-size: 22px;
+}
+
+.divider-p p{
+    font-size: 24px;
+}
+
+.total-box{
+    width: 100%;
+
+}
+
+.total-b h3{
+    text-wrap: wrap;
+    font-size: 22px;
+    text-align: center;
+}
+
+.cost-container{
+    padding: 15px;
+}
+
+
+.det-col select{
+    width: 100%;
+    margin: 5px auto;
+}
+
+.paper-type-select::placeholder {
+    color: gray;
+    padding: 2px;
+  }
+
+.det-col-1 select{
+    width: 100%;
+}
+
+.cost-box{
+    margin-bottom: 30px;
+}
+
+
+.l-container{
+   margin: 10px auto;
+}
+
+.cost{
+    display: flex;
+}
+
+
+/* .cost-main form .divider-p{
+    text-align: center;
+    font-weight: 450;
+    font-size: 33px;
+    position: relative;
+    bottom: 20px;
+    top: -40px;
+} */
+
+
+
+.test-box{
+    width: 100%;
+}
+
+.cost-container{
+    display: grid;
+  }
+
+
+
