@@ -3,6 +3,7 @@
 } */
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+@import url('../fonts/satoshi.css');
 
 .open-box button{
     top: 40px;
@@ -16,7 +17,7 @@
 
 .cost-main{
     width: 100%;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Satoshi-Medium', sans-serif;
     margin: 0 auto;
 }
 
@@ -34,8 +35,6 @@
 .cost-box-m{
     width: 100%;
     margin: 0 auto;
-    padding: 15px;
-
 }
 
 .cost-box-m .divider-p{

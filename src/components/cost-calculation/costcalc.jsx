@@ -479,11 +479,11 @@ const CostCalculation = () => {
           </h3><br></br>
           <form>
             <div className="cost-box">
-              <p className="divider-p-1">Product Specs</p>
+              <p className="divider-p-1">Product Specs</p><br></br>
               <div className="cost-container">
                 <label htmlFor="paperSize">
                   <b>Paper Size:</b>
-                </label>
+                </label><br></br>
                 <select
                   id="paperSize"
                   value={paperSize}
@@ -496,10 +496,11 @@ const CostCalculation = () => {
                     </option>
                   ))}
                 </select>
+                <br></br>
 
                 <label htmlFor="pages">
                   <b>Pages</b> (Number of pages per copy):
-                </label>
+                </label><br></br>
                 <input
                   type="number"
                   id="pages"
@@ -508,11 +509,11 @@ const CostCalculation = () => {
                   min="8"
                   max="500"
                   required
-                />
+                /><br></br>
 
                 <label htmlFor="quantity">
                   <b>Quantity</b> (Number of copies):
-                </label>
+                </label><br></br>
                 <input
                   type="number"
                   id="quantity"
@@ -528,7 +529,7 @@ const CostCalculation = () => {
             <div className="cost-box-1">
               <p className="divider-p">Product Detail</p>
               <div className="cost-container">
-                <label htmlFor="binding-type">Binding Type</label>
+                <label htmlFor="binding-type">Binding Type</label><br></br>
                 <select
                   id="binding-type"
                   name="binding-type"
@@ -543,8 +544,9 @@ const CostCalculation = () => {
                     </option>
                   ))}
                 </select>
-
-                <label htmlFor="binding-type">Cover Treatment</label>
+                
+                <br></br>
+                <label htmlFor="binding-type">Cover Treatment</label><br></br>
                 <select
                   id="binding-type"
                   name="binding-type"
@@ -561,6 +563,7 @@ const CostCalculation = () => {
                 </select>
               </div>
             </div>
+            <br></br>
 
             <div className="cost-box-m">
              
@@ -570,8 +573,9 @@ const CostCalculation = () => {
          
               <div className="det">
                 <div className="det-col">
+                <br></br>
                   <label htmlFor="paper-type">Inner Paper Type</label>
-                  <p> </p>
+                  <br></br><br></br>
                   <select
                     id="paper-type"
                     name="paper-type"
@@ -586,13 +590,13 @@ const CostCalculation = () => {
                         {paper.type}
                       </option>
                     ))}
-                  </select>
-                </div>
+                  </select><br></br>
+                </div><br></br>
                 <div className="det-col">
                   <label htmlFor="paper-thickness">
                     Inner Paper Thickness (in GSM)
                   </label>
-                  <p> </p>
+                  <p> </p><br></br>
                   <select
                     id="paper-thickness"
                     name="paper-thickness"
@@ -609,12 +613,13 @@ const CostCalculation = () => {
                     ))}
                   </select>
                 </div>
+                <br></br>
               </div>
 
               <div className="det-1">
                 <div className="det-col-1">
-                  <label htmlFor="outer-paper-type">Cover Paper Type</label>
-                  <p> </p>
+                  <label htmlFor="outer-paper-type">Cover Paper Type</label><br></br>
+                  <p> </p><br></br>
                   <select
                     id="outer-paper-type"
                     name="outer-paper-type"
@@ -632,10 +637,11 @@ const CostCalculation = () => {
                   </select>
                 </div>
                 <div className="det-col-1">
+                <br></br>
                   <label htmlFor="paper-thickness">
                     Outer Paper Thickness (in GSM)
-                  </label>
-                  <p> </p>
+                  </label> 
+                  <p> </p><br></br>
                   <select
                     id="paper-outer-thickness"
                     name="paper-outer-thickness"
@@ -651,9 +657,10 @@ const CostCalculation = () => {
                       </option>
                     ))}
                   </select>
-                </div>
+                  <br></br>
+                </div><br></br>
                 <div className="l-container">
-                  <label htmlFor="lamination-type">Lamination Type</label>
+                  <label htmlFor="lamination-type">Lamination Type   </label>
                   <select
                     id="lamination-type"
                     name="lamination-type"
@@ -673,7 +680,6 @@ const CostCalculation = () => {
 
               <p> </p>
             </div>
-
             <br></br>
             <div className="cost-box-2">
               <div className="det-col">
@@ -741,6 +747,7 @@ const CostCalculation = () => {
                 />
               </div>
             </div>
+            <br></br>
             {/* <div
             className={`cost-details ${isLaminationSelected ? "grey-out" : ""}`}
           >
