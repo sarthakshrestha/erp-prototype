@@ -31,6 +31,8 @@ const CostCalculation = () => {
   const [selectedBindingType, setSelectedBindingType] = useState("");
   const [selectedInkType, setSelectedInkType] = useState("");
   const [selectedLaminationType, setSelectedLaminationType] = useState("");
+  const [coverTreatmentTypes, setCoverTreatmentTypes] = useState([]);
+  const [covertreatmentType, setCovertreatmentType] = useState("");
 
   const handleCustomPrice = () => {
     // Make a POST request to your endpoint
@@ -52,6 +54,20 @@ const CostCalculation = () => {
         console.error("Error submitting custom price:", error);
       });
   };
+
+  const handleCovertreatmentTypeChange = (event) => {
+    setCovertreatmentType(event.target.value);
+  };
+
+  useEffect(() => {
+    axios.get('http://localhost:8081/coverTreatmentCost')
+      .then(response => {
+        setCoverTreatmentTypes(response.data.map(item => item.coverTreatmentType));
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
 
   useEffect(() => {
     axios
@@ -102,6 +118,10 @@ const CostCalculation = () => {
       value: 600,
     },
   ];
+
+  // const handleCovertreatmentTypeChange = (event) => {
+  //   setCovertreatmentType(event.target.value);
+  // };
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
@@ -432,11 +452,14 @@ const CostCalculation = () => {
     calculateLamination(laminationPrice, quantity, pages);
 
   return (
-    <>
-      {/* <Header /> */}
+    <div className="cost-calc-container">
+    <div className="empty-box">
       <div className="test-box">
         <div className="open-box">
-        <h1 className="heading-c">Cost Calculator</h1>
+          <br></br>
+          <h1 className="heading-c">
+            <b>Cost</b> Calculator
+          </h1>
           <DrawerOpen
             plateSize={plateSize}
             outerChangeCostPerKg={outerChangeCostPerKg}
@@ -477,14 +500,17 @@ const CostCalculation = () => {
           <br></br>
           <h3>
             Total Estimate: Rs.<b>{totalCost}</b>
-          </h3><br></br>
+          </h3>
+          <br></br>
           <form>
             <div className="cost-box">
-              <p className="divider-p-1">Product Specs</p><br></br>
+              <p className="divider-p-1">Product Specs</p>
+              <br></br>
               <div className="cost-container">
                 <label htmlFor="paperSize">
                   <b>Paper Size:</b>
-                </label><br></br>
+                </label>
+                <br></br>
                 <select
                   id="paperSize"
                   value={paperSize}
@@ -501,7 +527,8 @@ const CostCalculation = () => {
 
                 <label htmlFor="pages">
                   <b>Pages</b> (Number of pages per copy):
-                </label><br></br>
+                </label>
+                <br></br>
                 <input
                   type="number"
                   id="pages"
@@ -510,11 +537,13 @@ const CostCalculation = () => {
                   min="8"
                   max="500"
                   required
-                /><br></br>
+                />
+                <br></br>
 
                 <label htmlFor="quantity">
                   <b>Quantity</b> (Number of copies):
-                </label><br></br>
+                </label>
+                <br></br>
                 <input
                   type="number"
                   id="quantity"
@@ -526,11 +555,13 @@ const CostCalculation = () => {
                 />
               </div>
             </div>
-
             <div className="cost-box-1">
               <p className="divider-p">Product Detail</p>
               <div className="cost-container">
-                <label htmlFor="binding-type">Binding Type</label><br></br>
+                <label htmlFor="binding-type">
+                  <b>Binding</b> Type
+                </label>
+                <br></br>
                 <select
                   id="binding-type"
                   name="binding-type"
@@ -545,20 +576,23 @@ const CostCalculation = () => {
                     </option>
                   ))}
                 </select>
-                
+
                 <br></br>
-                <label htmlFor="binding-type">Cover Treatment</label><br></br>
+                <label htmlFor="covertreatment-type">
+                  <b>Cover </b>Treatment
+                </label>
+                <br></br>
                 <select
-                  id="binding-type"
-                  name="binding-type"
-                  value={selectedBindingType}
-                  onChange={handleBindingTypeChange}
+                  id="covertreatment-type"
+                  name="covertreatment-type"
+                  value={covertreatmentType}
+                  onChange={handleCovertreatmentTypeChange}
                   required
                 >
-                  <option value="">Select Binding Type</option>
-                  {bindingType.map((binding, index) => (
-                    <option key={index} value={binding}>
-                      {binding}
+                  <option value="">Select Cover Treatment Type</option>
+                  {coverTreatmentTypes.map((coverTreatment, index) => (
+                    <option key={index} value={coverTreatment}>
+                      {coverTreatment}
                     </option>
                   ))}
                 </select>
@@ -567,16 +601,16 @@ const CostCalculation = () => {
             <br></br>
 
             <div className="cost-box-m">
-             
               <p className="divider-p">Material Detail</p>
 
-            
-         
               <div className="det">
                 <div className="det-col">
-                <br></br>
-                  <label htmlFor="paper-type">Inner Paper Type</label>
-                  <br></br><br></br>
+                  <br></br>
+                  <label htmlFor="paper-type">
+                    <b>Inner Paper</b> Type
+                  </label>
+                  <br></br>
+                  <br></br>
                   <select
                     id="paper-type"
                     name="paper-type"
@@ -591,13 +625,16 @@ const CostCalculation = () => {
                         {paper.type}
                       </option>
                     ))}
-                  </select><br></br>
-                </div><br></br>
+                  </select>
+                  <br></br>
+                </div>
+                <br></br>
                 <div className="det-col">
                   <label htmlFor="paper-thickness">
-                    Inner Paper Thickness (in GSM)
+                    <b>Inner Paper</b> Thickness (in GSM)
                   </label>
-                  <p> </p><br></br>
+                  <p> </p>
+                  <br></br>
                   <select
                     id="paper-thickness"
                     name="paper-thickness"
@@ -619,8 +656,12 @@ const CostCalculation = () => {
 
               <div className="det-1">
                 <div className="det-col-1">
-                  <label htmlFor="outer-paper-type">Cover Paper Type</label><br></br>
-                  <p> </p><br></br>
+                  <label htmlFor="outer-paper-type">
+                    <b>Cover Paper</b> Type
+                  </label>
+                  <br></br>
+                  <p> </p>
+                  <br></br>
                   <select
                     id="outer-paper-type"
                     name="outer-paper-type"
@@ -638,11 +679,12 @@ const CostCalculation = () => {
                   </select>
                 </div>
                 <div className="det-col-1">
-                <br></br>
+                  <br></br>
                   <label htmlFor="paper-thickness">
-                    Outer Paper Thickness (in GSM)
-                  </label> 
-                  <p> </p><br></br>
+                    <b>Outer Paper</b> Thickness (in GSM)
+                  </label>
+                  <p> </p>
+                  <br></br>
                   <select
                     id="paper-outer-thickness"
                     name="paper-outer-thickness"
@@ -659,9 +701,12 @@ const CostCalculation = () => {
                     ))}
                   </select>
                   <br></br>
-                </div><br></br>
+                </div>
+                <br></br>
                 <div className="l-container">
-                  <label htmlFor="lamination-type">Lamination Type   </label>
+                  <label htmlFor="lamination-type">
+                    <b>Lamination</b> Type{" "}
+                  </label>
                   <select
                     id="lamination-type"
                     name="lamination-type"
@@ -685,7 +730,12 @@ const CostCalculation = () => {
             <div className="cost-box-2">
               <div className="det-col">
                 <p className="divider-p">Process Detail</p>
-                <label htmlFor="plateSize">Plate Size:</label>
+                <br></br>
+                <label htmlFor="plateSize">
+                  <b>Plate </b>Size:
+                </label>
+                <br></br>
+                <br></br>
                 <select
                   id="plateSize"
                   value={plateSize}
@@ -699,7 +749,13 @@ const CostCalculation = () => {
                     </option>
                   ))}
                 </select>
-                <label htmlFor="ink-type">Ink Type:</label>
+                <br></br>
+                <br></br>
+                <label htmlFor="ink-type">
+                  <b>Ink </b> Type:
+                </label>
+                <br></br>
+                <br></br>
                 <select
                   id="ink-type"
                   name="ink-type"
@@ -714,6 +770,8 @@ const CostCalculation = () => {
                     </option>
                   ))}
                 </select>
+                <br></br>
+                <br></br>
 
                 {showPopup && (
                   <div className="popup">
@@ -758,7 +816,9 @@ const CostCalculation = () => {
           </form>
         </div>
       </div>
-    </>
+      </div>
+      <div />
+    </div>
   );
 };
 export default CostCalculation;

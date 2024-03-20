@@ -17,9 +17,14 @@
     font-weight: 400;
 }
 
+.rs-drawer-body{
+    /* background-image: linear-gradient(315deg, #57b644 0%, #35383f 74%); */
+    color: black;
+}
+
 .cost-heading{
     font-family: "Archivo", sans-serif;
-    color: #4886dd;
+    color: black;
 }
 
 .cost-container h1 {
@@ -35,9 +40,21 @@
     font-size: 20px;
 }
 
-.cost-t{
-    color: #4886dd;
+.rs-drawer-header{
+    /* background-image: linear-gradient(315deg, hsl(230, 74%, 55%) 0%, #c6cbd8 74%); */
+    color: black;
 }
+
+.rs-drawer-title{
+    font-size: 18px;
+    color: black;
+}
+
+.cost-t{
+    color: black;
+}
+
+
 
 @media only screen and (max-width: 480px) {
     .rs-drawer-open.rs-drawer-has-backdrop{
