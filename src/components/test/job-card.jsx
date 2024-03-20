@@ -46,14 +46,14 @@ export default function JobCard() {
             <Gap />
 
             <form action="" className="form">
-              <label htmlFor="fullName">Order Date / Time </label>
+              <label htmlFor="fullName"><b>Order </b>Date / <b>Time</b> </label>
               <input
                 type="date"
                 id="order-date"
                 name="order-date"
                 placeholder="Date"
               />
-              <label htmlFor="fullName">Deadline</label>
+              <label htmlFor="fullName"><b>Deadline</b></label>
               <input
                 type="date"
                 id="daedline-date"
@@ -61,7 +61,7 @@ export default function JobCard() {
                 placeholder="Date"
               />
 
-              <label htmlFor="email">Job Title</label>
+              <label htmlFor="email"><b>Job</b> Title</label>
               <input
                 type="text"
                 id="job-title"
@@ -78,7 +78,7 @@ export default function JobCard() {
                 placeholder="Street Address"
               />
 
-              <label htmlFor="aptNumber">Contact Person</label>
+              <label htmlFor="aptNumber"><b>Contact</b> Person</label>
               <input
                 className="text"
                 type="text"
@@ -87,7 +87,7 @@ export default function JobCard() {
                 placeholder="Contact Person"
               />
 
-              <label htmlFor="firstOption">Service Required</label>
+              <label htmlFor="firstOption"><b>Service </b>Required</label>
               <select id="firstOption" name="firstOption">
                 {options.serviceRequired.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -96,7 +96,7 @@ export default function JobCard() {
                 ))}
               </select>
 
-              <label htmlFor="deliveryOption">Delivery</label>
+              <label htmlFor="deliveryOption"><b>Delivery</b></label>
               <select id="deliveryOption" name="deliveryOption">
                 {options.deliveryOptions.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -108,7 +108,7 @@ export default function JobCard() {
               <p>
                 <i>If to be sent to</i>
               </p>
-              <label htmlFor="company">Company</label>
+              <label htmlFor="company"><b>Company</b></label>
               <input
                 className="text"
                 type="text"
@@ -116,7 +116,7 @@ export default function JobCard() {
                 name="company-name"
                 placeholder="Company"
               />
-              <label htmlFor="venue">Venue</label>
+              <label htmlFor="venue"><b>Venue</b></label>
               <input
                 className="text"
                 type="text"
@@ -124,7 +124,7 @@ export default function JobCard() {
                 name="venue-name"
                 placeholder="Venue"
               />
-              <label htmlFor="contactName">Contact Person Name</label>
+              <label htmlFor="contactName"><b>Contact Person</b> Name</label>
               <input
                 className="text"
                 type="text"
@@ -135,10 +135,10 @@ export default function JobCard() {
             </form>
             <br></br>
             <br></br>
-            <h2 className="title-h">Pre-press Unit</h2>
+            <h2 className="title-h"><b>Pre-press</b> Unit</h2>
             <section className="container">
               <form action="" className="form">
-                <label htmlFor="pre-press">Pre-press Unit</label>
+                <label htmlFor="pre-press"><b>Pre-press</b> Unit</label>
                 <select id="pre-press1">
                   {options.prePress.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -147,7 +147,7 @@ export default function JobCard() {
                   ))}
                 </select>
 
-                <label htmlFor="materialReceived">Material Received</label>
+                <label htmlFor="materialReceived"><b>Material</b> Received</label>
                 <select id="materialReceived">
                   {options.materialReceived.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -156,7 +156,7 @@ export default function JobCard() {
                   ))}
                 </select>
 
-                <label htmlFor="flapSize">Flap Size</label>
+                <label htmlFor="flapSize"><b>Flap</b> Size</label>
                 <select id="flapSize">
                   {options.flapSize.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -164,7 +164,7 @@ export default function JobCard() {
                     </option>
                   ))}
                 </select>
-                <label htmlFor="ManualflapSize">Manual Flap Size</label>
+                <label htmlFor="ManualflapSize"><b>Manual</b> Flap Size</label>
                 <input
                   type="text"
                   id="ManualflapSize"
@@ -241,7 +241,7 @@ export default function JobCard() {
               <Gap />
               <label htmlFor="plateDamage">
                 <b>
-                  <h3>Plate Damage</h3>
+                  <h2 className="s-1"><b>Plate</b> Damage</h2>
                 </b>
               </label>
               <br></br>

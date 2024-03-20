@@ -11,6 +11,10 @@
   height: 27px;
 }
 
+.s-1{
+  font-weight: 400;
+}
+
 .job-container{
   display: grid;
   margin: 0 auto;
@@ -157,6 +161,7 @@ input, textarea {
   flex: 1;
   margin-right: 15px;
   text-align: right;
+  
 }
 
 .r-form input{
