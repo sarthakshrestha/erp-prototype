@@ -270,12 +270,12 @@ select {
     margin-right: 10px;
   }
 
-  /* .cost-box-m{
-        margin-left: 10px;
-        margin-right: 10px;
-    } */
+  .cost-box-m{
+        margin-left: -60px;
+        margin-right: -60px;
+    }
 
-  .det {
+  /* .det {
     margin-left: 10px;
     margin-right: 10px;
   }
@@ -283,6 +283,10 @@ select {
   .det-1 {
     margin-left: 10px;
     margin-right: 10px;
+  } */
+  .empty-box{
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 
   .cost-box-m select {
