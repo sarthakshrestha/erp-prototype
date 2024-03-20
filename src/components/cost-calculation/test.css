@@ -8,7 +8,7 @@
     padding: 32px;
 }
 
-.cost-container{
+.c-container{
     font-family: "Archivo", sans-serif;
     font-variation-settings:
     "wdth" 107;
@@ -27,16 +27,16 @@
     color: black;
 }
 
-.cost-container h1 {
+.c-container h1 {
     font-size: 52px;
     width: 400px;
 }
 
-.cost-container h3{
+.c-container h3{
     font-size: 31px;
 }
 
-.cost-container p{
+.c-container p{
     font-size: 20px;
 }
 
@@ -58,23 +58,49 @@
 
 @media only screen and (max-width: 480px) {
     .rs-drawer-open.rs-drawer-has-backdrop{
-        margin-left: 220px;
+        margin-right: 220px;
         overflow: hidden;
         /* text-align: center; */
         justify-content: center;
     }
 
-    .cost-container h1 {
+    .rs-drawer-body{
+        margin-left: 7rem;
+    }
+
+    /* .cost-container{
+        margin-left: 150px;
+    } */
+
+    /* .cost-main{
+        margin-left: 2rem;
+    } */
+
+    .c-container h1 {
         font-size: 32px;
         width: 400px;
+    }
+
+    .cost-heading h2{
+        margin-left: 2rem;
+    }
+
+    .c-container{
+        margin-left: 3rem;
     }
 
     .quota-btn{
         margin-right: 140px;
     }
 
-    .cost-container h3{
+    .c-container h3{
         font-size: 24px;
+    }
+
+    
+
+    .rs-drawer-header{
+        margin-left: 290px;
     }
 
     .cost-container p{

@@ -259,15 +259,14 @@ select {
     width: 100%;
   }
 
-  .cost-container {
-    display: grid;
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-
   .cost-box-2 {
     margin-left: 10px;
     margin-right: 10px;
+  }
+  
+  .cost-box{
+    margin-left: -90px;
+    margin-right: -90px;
   }
 
   .cost-box-m{
@@ -287,6 +286,21 @@ select {
   .empty-box{
     padding-top: 10px;
     padding-bottom: 10px;
+  }
+
+  .cost-container{
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .cost-box{
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .cost-box-1{
+    margin-left: 10px;
+    margin-right: 10px;
   }
 
   .cost-box-m select {

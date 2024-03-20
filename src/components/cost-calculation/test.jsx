@@ -81,7 +81,7 @@ const DrawerOpen = ({
           <div className="cost-heading">
             <h2>Cost Breakdown</h2>
           </div>
-          <div className="cost-container">
+          <div className="c-container">
             <h3>Paper</h3>
             <br></br>
             <p>
