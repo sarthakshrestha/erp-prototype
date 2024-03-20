@@ -532,6 +532,7 @@ const CostCalculation = () => {
                 <input
                   type="number"
                   id="pages"
+                  placeholder="Enter number of pages"
                   value={pages}
                   onChange={handlePagesChange}
                   min="8"
@@ -706,7 +707,7 @@ const CostCalculation = () => {
                 <div className="l-container">
                   <label htmlFor="lamination-type">
                     <b>Lamination</b> Type{" "}
-                  </label>
+                  </label><br></br>
                   <select
                     id="lamination-type"
                     name="lamination-type"
@@ -776,7 +777,7 @@ const CostCalculation = () => {
                 {showPopup && (
                   <div className="popup">
                     <div className="popup-inner">
-                      <h3>Put up custom price for {selectedBindingType}</h3>
+                      <p>Put up <b>custom price</b> for {selectedBindingType}</p><br></br>
                       <input
                         type="number"
                         placeholder="Enter custom price"
