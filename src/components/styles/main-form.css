@@ -62,7 +62,17 @@
     color: blue;
 }
 
+.dropdown{
+  position: relative;
+  margin: 0 auto;
+  top: 50%;
+  left: 50%;
+  right: 50%;
+}
+
+
 .dropdown-menu{
+    
     bottom: 25px;
     position: relative;
     font-family: 'Rubik', sans-serif;

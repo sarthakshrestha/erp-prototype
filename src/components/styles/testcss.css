@@ -22,6 +22,7 @@
   /* background-size: contain;
     background-repeat: no-repeat; */
   background-color: rgb(246, 249, 253);
+  background-image: linear-gradient(to bottom, #303133, #80a6cc);
 }
 
 .det {
@@ -43,6 +44,13 @@
 .test-box select {
   border-color: gray;
   padding: 5px;
+  background-color: #f3f3f3;
+  color: darkslategray;
+}
+
+.test-box input{
+  background-color: #f3f3f3;
+  color: darkslategray;
 }
 
 .cost-main {
@@ -104,10 +112,15 @@
 }
 
 .cost-container {
+  font-family: "Archivo", sans-serif;
   padding: 15px;
   display: grid;
   margin-left: 80px;
+  border-radius: 20px;
+  
   margin-right: 80px;
+  
+  /* background-image: linear-gradient(to bottom, #5f74d0, #ffffff); */
 }
 
 .det-col select {
@@ -259,30 +272,26 @@ select {
     width: 100%;
   }
 
+  .open-box{
+    width: 100%;
+  }
+
   .cost-box-2 {
     margin-left: 10px;
     margin-right: 10px;
   }
   
-  .cost-box{
+  /* .cost-box{
     margin-left: -90px;
     margin-right: -90px;
-  }
+  } */
 
   .cost-box-m{
         margin-left: -60px;
         margin-right: -60px;
     }
 
-  /* .det {
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-
-  .det-1 {
-    margin-left: 10px;
-    margin-right: 10px;
-  } */
+  
   .empty-box{
     padding-top: 10px;
     padding-bottom: 10px;
