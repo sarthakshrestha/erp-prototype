@@ -170,8 +170,8 @@ export default function JobCard() {
                   ))}
                 </select>
                 <br />
-                <p>
-                  <i>If to be sent to</i>
+                <p className="ita">
+                  If to be sent to
                 </p>
                 <label htmlFor="company">
                   <b>Company</b>
@@ -206,7 +206,7 @@ export default function JobCard() {
               </form>
               <br></br>
               <br></br>
-              <h2 className="title-h">
+              <h2 className="s-1">
                 <b>Pre-press</b> Unit
               </h2>
               <section className="container">
@@ -318,9 +318,9 @@ export default function JobCard() {
                     name="plateScreentype"
                     placeholder="Plate Screen Type"
                   />
-                  <Gap />
+                  
                 </form>
-                <Gap />
+               
                 <label htmlFor="plateDamage">
                   <b>
                     <h2 className="s-1">
@@ -520,7 +520,7 @@ export default function JobCard() {
                 </tbody>
               </table>
               <br></br>
-              <table className="paper-table-1">
+              <table className="paper-table">
                 <thead>
                   <tr>
                     <th></th>
@@ -570,7 +570,7 @@ export default function JobCard() {
                 </tbody>
               </table>
               <Gap />
-              <div className="r-form">
+              <div className="r-form-1">
                 <label htmlFor="type">Paper Ready By</label>
                 <WGap />
                 <Gap />
@@ -649,7 +649,7 @@ export default function JobCard() {
               </section>
               <Gap />
               <section className="container-1">
-                <table className="paper-table-1">
+                <table className="paper-table">
                   <tbody>
                     <thead>
                       <tr>
@@ -726,7 +726,8 @@ export default function JobCard() {
                 </table>
               </section>
               <section className="b-container">
-                <h3>Bindery</h3>
+              <Gap/><Gap/>
+                <h2 className="s-1"><b>Bindery</b></h2>
                 <Gap />
                 <div className="bindery-container-1">
                   <Gap />
@@ -1049,7 +1050,7 @@ export default function JobCard() {
             onChange={submitUpload}
             className="submit-btn"
             id="upload-input"
-            placeholder="Upload Job Card" 
+            placeholder="     " 
           />
         </label>
        
