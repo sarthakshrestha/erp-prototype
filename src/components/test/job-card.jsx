@@ -5,6 +5,7 @@ import Gap from "../resuable-comps/gap";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import WGap from "../resuable-comps/wgap";
+import axios from "axios";
 
 const options = {
   serviceRequired: [
@@ -38,6 +39,7 @@ const options = {
 
 export default function JobCard() {
   const componentRef = useRef();
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const captureComponent = () => {
     html2canvas(componentRef.current).then((canvas) => {
@@ -49,9 +51,69 @@ export default function JobCard() {
     });
   };
 
+  const handleFileUpload = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+
+  const submitUpload = (event) => {
+    const file = event.target.files[0]; // Get the selected file
+
+    if (file) {
+      // Create a FormData object to send the image file to the server
+      const formData = new FormData();
+      formData.append("image", file);
+
+      // Send the image to the server using Axios
+      const apiUrl = "http://localhost:8081/jobCard"; // Replace with your API endpoint for image upload
+
+      axios
+        .post(apiUrl, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((response) => {
+          console.log("Avatar image updated successfully:", response.data);
+
+          // Set the uploadedImage state with the new avatar image URL
+          // setUploadedImage(response.data.avatarImageUrl);
+        })
+        .catch((error) => {
+          console.error("Error uploading avatar image:", error);
+          // Optionally, you can show an error message to the user.
+        });
+    }
+  };
+
+  const captureAndUpload = async () => {
+    html2canvas(componentRef.current).then((canvas) => {
+      const imgData = canvas
+        .toDataURL("image/png")
+        .replace(/^data:image\/\w+;base64,/, ""); // Remove leading part
+
+      const blob = new Blob([imgData], { type: "image/png" }); // Create a Blob from the base64 data
+
+      const data = new FormData();
+      data.append("image", blob, "jobCardScreenshot.png"); // Key 'image', filename 'jobCardScreenshot.png'
+
+      axios
+        .post("http://localhost:8081/jobCard", data, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((response) => {
+          console.log("Image uploaded successfully:", response.data);
+        })
+        .catch((error) => {
+          console.error("Error uploading image:", error);
+        });
+    });
+  };
+
   return (
-    <div className="screenshot-main" ref={componentRef}>
-      <div className="job-container">
+    <div className="screenshot-main">
+      <div className="job-container" ref={componentRef}>
         <div className="hero">
           <h1>Job Card</h1>
         </div>
@@ -535,15 +597,23 @@ export default function JobCard() {
               </table>
               <Gap />
               <div className="r-form">
-                <label htmlFor="type">Paper Ready By</label><WGap/>
+                <label htmlFor="type">Paper Ready By</label>
+                <WGap />
                 <Gap />
-                <input type="text" id="type" name="type" placeholder="Ready by" /><WGap/>
+                <input
+                  type="text"
+                  id="type"
+                  name="type"
+                  placeholder="Ready by"
+                />
+                <WGap />
                 <Gap />
                 <label htmlFor="type">Date</label>
                 <Gap />
                 <input type="date" id="type" name="type" placeholder="Type" />
-                <WGap/>
-                <WGap/><label htmlFor="time">Time</label>
+                <WGap />
+                <WGap />
+                <label htmlFor="time">Time</label>
                 <Gap />
                 <input type="text" id="type" name="type" placeholder="Time" />
                 <Gap />
@@ -562,12 +632,15 @@ export default function JobCard() {
                 <input type="text" id="type" name="type" placeholder="Type" />
                 <Gap />
                 <Gap />
-                <label htmlFor="size" className="size-l">Size</label>
+                <label htmlFor="size" className="size-l">
+                  Size
+                </label>
                 <Gap />
                 <input type="text" id="size" name="size" placeholder="Size" />
                 <Gap />
                 <Gap />
-              </div><Gap/>
+              </div>
+              <Gap />
               <div className="r-container">
                 <label htmlFor="number-page">No. of Page</label>
                 <Gap />
@@ -577,14 +650,14 @@ export default function JobCard() {
                   name="number-page"
                   placeholder="Number of Pages"
                 />
-              </div><Gap/>
+              </div>
+              <Gap />
               <label>
-                    <input type="radio" name="side" value="single" /> Single
-                    Side
-                  </label>
-                <label>
-                    <input type="radio" name="side" value="both" /> Both Sides
-                  </label>
+                <input type="radio" name="side" value="single" /> Single Side
+              </label>
+              <label>
+                <input type="radio" name="side" value="both" /> Both Sides
+              </label>
               <Gap />
             </section>
             <Gap />
@@ -594,12 +667,11 @@ export default function JobCard() {
                   <label htmlFor="type">Print Run</label>
                   <Gap />
                   <input type="text" id="type" name="type" placeholder="Type" />
-                  
+
                   <Gap />
-                  
                 </div>
-               
-                  <Gap />
+
+                <Gap />
               </section>
               <Gap />
               <section className="container-1">
@@ -980,7 +1052,6 @@ export default function JobCard() {
                       </div>
                     </td>
                   </tr>
-                  
                 </tbody>
               </table>
             </div>
@@ -989,10 +1060,25 @@ export default function JobCard() {
         {/* <button className="submit-btn" type="submit" onClick={handleDownload}>
         Submit
       </button> */}
-
         <button className="submit-btn" type="submit" onClick={captureComponent}>
-          Submit
+          Generate Screenshot
         </button>
+        <div className="upload-a">
+        <h3>Upload Screenshot to the Database</h3>
+        <Gap/>
+        
+        </div>
+        <label htmlFor="upload-input">
+          <input
+            type="file"
+            accept="image/*"
+            onChange={submitUpload}
+            className="submit-btn"
+            id="upload-input"
+            placeholder="Upload Job Card" 
+          />
+        </label>
+       
       </div>
     </div>
   );

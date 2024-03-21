@@ -52,13 +52,31 @@
   font-weight: 400;
 }
 
+
+.upload-a h3{
+  font-size: 18px;
+  color: black;
+ 
+}
+
+.upload-a{
+  margin: 0 auto;
+  position: relative;
+  left: 15%;
+}
+
+.upload-input{
+  border-color: 2px solid black;
+  color: black;
+}
+
 /* .screenshot-main{
   width: 100vw;
   height: 100vh;
 } */
 
 .screenshot-main {
-  width: 100vw;
+  width: 110vw;
 }
 
 .hero h1 {
