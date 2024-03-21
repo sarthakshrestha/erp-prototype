@@ -85,7 +85,6 @@ export default function JobCard() {
     }
   };
 
-
   return (
     <div className="screenshot-main"  ref={componentRef}>
       <div className="job-container" >
