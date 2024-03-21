@@ -85,35 +85,10 @@ export default function JobCard() {
     }
   };
 
-  const captureAndUpload = async () => {
-    html2canvas(componentRef.current).then((canvas) => {
-      const imgData = canvas
-        .toDataURL("image/png")
-        .replace(/^data:image\/\w+;base64,/, ""); // Remove leading part
-
-      const blob = new Blob([imgData], { type: "image/png" }); // Create a Blob from the base64 data
-
-      const data = new FormData();
-      data.append("image", blob, "jobCardScreenshot.png"); // Key 'image', filename 'jobCardScreenshot.png'
-
-      axios
-        .post("http://localhost:8081/jobCard", data, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .then((response) => {
-          console.log("Image uploaded successfully:", response.data);
-        })
-        .catch((error) => {
-          console.error("Error uploading image:", error);
-        });
-    });
-  };
 
   return (
-    <div className="screenshot-main">
-      <div className="job-container" ref={componentRef}>
+    <div className="screenshot-main"  ref={componentRef}>
+      <div className="job-container" >
         <div className="hero">
           <h1>Job Card</h1>
         </div>
