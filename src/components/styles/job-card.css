@@ -1,47 +1,55 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
 
-.form {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    grid-gap: 20px;
+.wgap {
+  width: 10px;
+  position: relative;
 }
 
-.job-container input{
+.form {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-gap: 20px;
+}
+
+.job-container input {
   height: 27px;
 }
 
-.s-1{
+.s-1 {
   font-weight: 400;
 }
 
-.job-container{
+.job-container {
   display: grid;
   margin: 0 auto;
   width: 100vw;
   margin-left: -18rem;
 }
 
-.title-h{
-    font-family: 'Archivo', sans-serif;
-    margin: 0 auto;
+.title-h {
+  font-family: "Archivo", sans-serif;
+  margin: 0 auto;
 }
 
-.bindery-container-last{
-    width: 100%; 
-    display: flex;
-    flex-wrap: wrap; 
-    
+.bindery-container-last {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.binder-container-last input{
+.binder-container-last input {
   margin-right: 40px;
 }
 
-.form label{
-    font-family: 'Rubik', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
+.size-l {
+  margin-left: 15px;
+}
+
+.form label {
+  font-family: "Rubik", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 /* .screenshot-main{
@@ -49,11 +57,11 @@
   height: 100vh;
 } */
 
-.screenshot-main{
+.screenshot-main {
   width: 100vw;
 }
 
-.hero h1{
+.hero h1 {
   margin: 0 auto;
   margin-top: 50px;
   margin-left: 50%;
@@ -62,49 +70,47 @@
 }
 
 .fullwidth {
-    grid-column: span 2;
+  grid-column: span 2;
 }
 .submit-btn {
-    width: 500px;
-    left: 50%;
-    right: 50%;
-    margin-bottom: 40px;
-    position: relative;
+  width: 500px;
+  left: 50%;
+  right: 50%;
+  margin-bottom: 40px;
+  position: relative;
 }
 
 .container {
-    margin: 2vw 4vw;
-    font-family: 'Archivo', sans-serif;
+  margin: 2vw 4vw;
+  font-family: "Archivo", sans-serif;
 }
 
-input, textarea {
-    padding: 5px;
+input,
+textarea {
+  padding: 5px;
 }
 
-.job-f-container{
+.job-f-container {
   width: 70vw;
   margin: 0 auto;
   display: flex;
 }
 
-
-
-
-.size-tbl{
-    width: 100%;
-    border-collapse: collapse;
+.size-tbl {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.size-tbl td{
-    padding: 5px 10px;
+.size-tbl td {
+  padding: 5px 10px;
 }
 
-.size-tbl th{
+.size-tbl th {
   font-size: 22px;
 }
 
-.container p{
-    font-size: 24px;
+.container p {
+  font-size: 24px;
 }
 
 .paper-table {
@@ -135,109 +141,130 @@ input, textarea {
 }
 
 .paper-table input[type="text"] {
-  width: 100%; 
+  width: 100%;
   box-sizing: border-box;
 }
 
-.gap{
+.gap {
   height: 20px;
 }
 
-.right-container{
+.right-container {
   display: flex;
   /* margin: 0.4rem 10rem; */
-  flex-direction: column; 
+  flex-direction: column;
   align-items: flex-start;
 }
 
-.job-f-container label{
-  font-size: 23px;
+.job-f-container label {
+  font-size: 20px;
   font-weight: 400;
   font-family: Archivo, sans-serif;
 }
 
-
-.r-form{
+.r-form {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.r-1-form{
+.r-1-form {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 5rem 0 5rem auto;
 }
 
-.r-form label{
+.r-form label {
   flex: 1;
   margin-right: 15px;
   text-align: right;
-  
 }
 
-.r-form input{
+.r-form input {
   flex: 2;
   margin-left: 15px;
-  
 }
 
 .paper-table-1 {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .paper-table-1 th,
-  .paper-table-1 td {
-    font-size: 20px;
-    padding: 8px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .paper-table-1 th {
-    background-color: #f2f2f2;
-  }
-  
-  .paper-table-1 tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  .paper-table-1 tbody tr:hover {
-    background-color: #ddd;
-  }
-  
-  .paper-table-1 input[type="text"] {
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .bindery-container{
-    width: 100%; 
-    display: flex;
-    /* flex-wrap: wrap;  */
-    margin-right: 50px;
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.bindery-container label{
+.paper-table-1 th,
+.paper-table-1 td {
+  font-size: 20px;
+  padding: 8px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.paper-table-1 th {
+  background-color: #f2f2f2;
+}
+
+.paper-table-1 tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.paper-table-1 tbody tr:hover {
+  background-color: #ddd;
+}
+
+.paper-table-1 input[type="text"] {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.c-container label {
+  font-size: 15px;
+}
+
+.bindery-container-1 {
+  width: 100%;
+  display: flex;
+  /* flex-wrap: wrap;  */
+  margin-right: 50px;
+}
+
+.bindery-container {
+  width: 100%;
+  display: flex;
+  /* flex-wrap: wrap;  */
+  margin-right: 50px;
+}
+
+.bindery-container label {
   font-size: 19px;
   flex: 1;
   margin-right: 10px;
 }
 
 
-.v-form{
+.bindery-container-1 label {
+  font-size: 14px;
+  flex: 1;
+  margin-right: 10px;
+}
+
+.bindery-container-1 input[type='radio']{
+  position: relative;
+  top: 10px;
+  margin-right: 4px;
+}
+
+.v-form {
   display: flex;
   flex-direction: column;
 }
 
-.left-side{
+.left-side {
   flex: 1;
   width: 940px;
+  margin-left: 2rem;
 }
 
-.right-side{
+.right-side {
   margin-top: 5rem;
   flex: 1;
   width: 900px;
@@ -246,40 +273,37 @@ input, textarea {
   position: relative;
 }
 
-
 /* .bindery-container label {
     flex: 1; 
     margin-right: 10px; 
 } */
 
-.job-container h1{
+.job-container h1 {
   text-align: center;
-  font-family: 'Archivo', sans-serif;
+  font-family: "Archivo", sans-serif;
   position: relative;
   font-weight: 400;
   font-size: 92px;
 }
 
-.job-container h2{
+.job-container h2 {
   text-align: center;
 }
 
-.job-container h3{
+.job-container h3 {
   text-align: center;
-  font-family: 'Archivo', sans-serif;
+  font-family: "Archivo", sans-serif;
 }
-
-
 
 .bindery-container input[type="radio"] {
-    margin-right: 5px; 
+  margin-right: 5px;
 }
 
 .paper-table {
-    padding: 20px; 
-  }
-  
-  .paper-table td input {
-    padding: 5px 10px;
-    margin: 7px;
-  }
+  padding: 20px;
+}
+
+.paper-table td input {
+  padding: 5px 10px;
+  margin: 7px;
+}

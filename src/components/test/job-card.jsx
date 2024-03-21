@@ -4,6 +4,7 @@ import "../styles/job-card.css";
 import Gap from "../resuable-comps/gap";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import WGap from "../resuable-comps/wgap";
 
 const options = {
   serviceRequired: [
@@ -534,19 +535,21 @@ export default function JobCard() {
               </table>
               <Gap />
               <div className="r-form">
-                <label htmlFor="type">Paper Ready By</label>
+                <label htmlFor="type">Paper Ready By</label><WGap/>
                 <Gap />
-                <input type="text" id="type" name="type" placeholder="Type" />
+                <input type="text" id="type" name="type" placeholder="Ready by" /><WGap/>
                 <Gap />
                 <label htmlFor="type">Date</label>
                 <Gap />
                 <input type="date" id="type" name="type" placeholder="Type" />
-                <Gap />
-                <label htmlFor="time">Time</label>
+                <WGap/>
+                <WGap/><label htmlFor="time">Time</label>
                 <Gap />
                 <input type="text" id="type" name="type" placeholder="Time" />
                 <Gap />
               </div>
+              <Gap />
+              <div className="r-form"></div>
               <form></form>
               <br></br>
             </section>
@@ -554,17 +557,18 @@ export default function JobCard() {
           <div className="right-side">
             <section className="right-container">
               <div className="r-form">
-              
                 <label htmlFor="type">Type</label>
                 <Gap />
                 <input type="text" id="type" name="type" placeholder="Type" />
                 <Gap />
-                <Gap/>
-                <label htmlFor="size">Size</label>
+                <Gap />
+                <label htmlFor="size" className="size-l">Size</label>
                 <Gap />
                 <input type="text" id="size" name="size" placeholder="Size" />
                 <Gap />
-                <Gap/>
+                <Gap />
+              </div><Gap/>
+              <div className="r-container">
                 <label htmlFor="number-page">No. of Page</label>
                 <Gap />
                 <input
@@ -574,6 +578,14 @@ export default function JobCard() {
                   placeholder="Number of Pages"
                 />
               </div><Gap/>
+              <label>
+                    <input type="radio" name="side" value="single" /> Single
+                    Side
+                  </label>
+                <label>
+                    <input type="radio" name="side" value="both" /> Both Sides
+                  </label>
+              <Gap />
             </section>
             <Gap />
             <div>
@@ -582,18 +594,15 @@ export default function JobCard() {
                   <label htmlFor="type">Print Run</label>
                   <Gap />
                   <input type="text" id="type" name="type" placeholder="Type" />
-                  <label>
-                    <input type="radio" name="side" value="single" /> Single
-                    Side
-                  </label>
+                  
                   <Gap />
-                  <label>
-                    <input type="radio" name="side" value="both" /> Both Sides
-                  </label>
-                  <Gap />
+                  
                 </div>
+               
+                  <Gap />
               </section>
-              <section className="container">
+              <Gap />
+              <section className="container-1">
                 <table className="paper-table-1">
                   <tbody>
                     <thead>
@@ -673,7 +682,7 @@ export default function JobCard() {
               <section className="b-container">
                 <h3>Bindery</h3>
                 <Gap />
-                <div className="bindery-container">
+                <div className="bindery-container-1">
                   <Gap />
                   <Gap />
                   <label>
@@ -698,7 +707,7 @@ export default function JobCard() {
                   </label>
                   <Gap />
                 </div>
-                <div className="bindery-container">
+                <div className="bindery-container-1">
                   <label>
                     <input type="radio" name="side" value="metalFoiling" />{" "}
                     Diecuting
@@ -719,7 +728,7 @@ export default function JobCard() {
                   </label>
                   <Gap />
                 </div>
-                <Gap/>
+                <Gap />
                 <div className="v-form">
                   <label htmlFor="type">
                     <b>Filled In</b> By
@@ -742,10 +751,12 @@ export default function JobCard() {
                     name="type"
                     placeholder="Approved By"
                   />
-                </div><Gap/><Gap/>
+                </div>
+                <Gap />
+                <Gap />
               </section>
               <div className="r-form">
-              <Gap/>
+                <Gap />
                 <h3>Press Unit</h3>
                 <Gap />
                 <input
@@ -948,6 +959,28 @@ export default function JobCard() {
                       </div>
                     </td>
                   </tr>
+                  <tr>
+                    <td>
+                      <input type="text" />
+                    </td>
+                    <td>
+                      <input type="text" />
+                    </td>
+                    <td>
+                      <input type="text" />
+                    </td>
+                    <td>
+                      <div>
+                        <span>Ordered:</span>
+                        <input type="text" />
+                      </div>
+                      <div>
+                        <span>Produced:</span>
+                        <input type="text" />
+                      </div>
+                    </td>
+                  </tr>
+                  
                 </tbody>
               </table>
             </div>
