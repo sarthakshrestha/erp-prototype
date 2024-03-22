@@ -86,7 +86,7 @@ const DrawerOpen = ({
       // Handle errors (e.g., show an error message)
     }
   };
-  
+
   const handleClickSendOrder = async () => {
     const orderData = {
       customerName: "Sarthak Shrestha", 

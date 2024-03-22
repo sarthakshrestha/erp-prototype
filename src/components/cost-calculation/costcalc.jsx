@@ -484,6 +484,7 @@ const CostCalculation = () => {
               laminationCost={Math.ceil(
                 calculateLamination(laminationPrice, quantity, pages)
               )}
+              quantity = {quantity}
               selectedInkType={selectedInkType}
               totalCost={totalCost}
               costReam={Math.ceil(
